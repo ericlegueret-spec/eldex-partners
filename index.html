@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELDEX Partners — Directeur Digital Externalisé PME & ETI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #1B2A4A;
+    --navy2:  #2A3F6A;
+    --gold:   #C9A84C;
+    --gold2:  #E8C96A;
+    --cream:  #F8F7F4;
+    --cream2: #F0EDE6;
+    --border: #E0D8CC;
+    --muted:  #6B7890;
+    --dimmed: #A8B0C0;
+    --success:#1E7A4E;
+    --warn:   #B86A00;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(248,247,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 700; color: var(--navy);
+    text-decoration: none; letter-spacing: 0.5px;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta {
+    background: var(--navy); color: #fff;
+    padding: 9px 20px; border-radius: 6px;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--navy2); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 40px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -100px;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 24px;
+    font-size: 12px; font-weight: 600; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 700; line-height: 1.1; letter-spacing: -0.5px;
+    color: var(--navy); margin-bottom: 20px;
+  }
+  h1 em { color: var(--gold); font-style: normal; }
+  .hero-sub {
+    font-size: 17px; color: var(--muted); line-height: 1.7;
+    max-width: 480px; margin-bottom: 36px;
+  }
+  .hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: var(--navy); font-weight: 700; font-size: 14px;
+    padding: 14px 28px; border-radius: 8px; text-decoration: none;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,0.4); }
+  .btn-outline {
+    border: 1.5px solid var(--border); color: var(--navy); font-size: 14px;
+    padding: 13px 24px; border-radius: 8px; text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--navy); background: var(--cream2); }
+
+  /* Hero card */
+  .hero-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px;
+    box-shadow: 0 20px 60px rgba(27,42,74,0.08);
+    position: relative;
+  }
+  .hero-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    border-radius: 16px 16px 0 0;
+    background: linear-gradient(90deg, var(--navy), var(--gold));
+  }
+  .card-label { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 20px; }
+  .score-circle {
+    width: 88px; height: 88px; border-radius: 50%;
+    background: var(--navy); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; margin: 0 auto 16px;
+  }
+  .score-circle span { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 700; color: #fff; line-height: 1; }
+  .score-circle small { font-size: 10px; color: var(--gold); }
+  .score-label { text-align: center; font-size: 11px; font-weight: 700; color: #C02A2A; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+  .mini-bars { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .mini-bar label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .mini-bar label span { font-weight: 600; color: var(--navy); }
+  .bar-track { height: 4px; background: var(--cream2); border-radius: 2px; }
+  .bar-fill { height: 4px; border-radius: 2px; }
+  .card-cta {
+    width: 100%; background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: var(--navy); font-weight: 700; font-size: 13px;
+    padding: 12px; border-radius: 8px; text-align: center;
+    text-decoration: none; display: block; transition: opacity 0.2s;
+  }
+  .card-cta:hover { opacity: 0.9; }
+
+  /* ── SECTIONS ── */
+  section { padding: 96px 40px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 11px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; font-weight: 600; margin-bottom: 12px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 4vw, 48px); font-weight: 700; line-height: 1.15; color: var(--navy); margin-bottom: 16px; }
+  h2 em { color: var(--gold); font-style: normal; }
+  .section-sub { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 560px; margin-bottom: 56px; }
+
+  /* ── PAIN POINTS ── */
+  .pain-section { background: var(--navy); }
+  .pain-section .section-label { color: var(--gold); }
+  .pain-section h2 { color: #fff; }
+  .pain-section .section-sub { color: rgba(255,255,255,0.6); }
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .pain-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 28px;
+    transition: background 0.2s;
+  }
+  .pain-card:hover { background: rgba(255,255,255,0.08); }
+  .pain-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(201,168,76,0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 20px; }
+  .pain-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 10px; }
+  .pain-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.65; }
+
+  /* ── OFFRES ── */
+  .offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .offer-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 14px; padding: 32px; position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .offer-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,42,74,0.1); }
+  .offer-card.featured {
+    border-color: var(--gold); border-width: 2px;
+    box-shadow: 0 8px 32px rgba(201,168,76,0.15);
+  }
+  .offer-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 700;
+    padding: 4px 14px; border-radius: 100px; letter-spacing: 1px; text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .offer-icon { font-size: 28px; margin-bottom: 16px; }
+  .offer-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .offer-card .offer-sub { font-size: 12px; color: var(--gold); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+  .offer-card p { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+  .offer-features { list-style: none; margin-bottom: 24px; }
+  .offer-features li { font-size: 13px; color: var(--navy); padding: 5px 0; border-bottom: 1px solid var(--cream2); display: flex; align-items: center; gap: 8px; }
+  .offer-features li::before { content: '→'; color: var(--gold); font-weight: 700; }
+  .offer-price { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .offer-price small { font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--muted); font-weight: 400; }
+
+  /* ── DIAGNOSTIC CTA ── */
+  .diag-section { background: var(--cream2); }
+  .diag-inner {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 20px; padding: 64px 56px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .diag-inner::after {
+    content: 'EL'; position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif; font-size: 200px; font-weight: 700;
+    color: rgba(201,168,76,0.04); pointer-events: none; line-height: 1;
+  }
+  .diag-items { display: flex; flex-direction: column; gap: 16px; }
+  .diag-item { display: flex; align-items: flex-start; gap: 14px; }
+  .diag-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 5px; }
+  .diag-item p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .diag-item strong { color: var(--navy); font-weight: 600; }
+
+  /* ── PORTAIL ── */
+  .portail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .portail-features { display: flex; flex-direction: column; gap: 20px; }
+  .portail-feature { display: flex; gap: 16px; align-items: flex-start; }
+  .portail-feature-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(27,42,74,0.06); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .portail-feature h4 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .portail-feature p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .portail-mockup {
+    background: var(--navy); border-radius: 16px; padding: 28px;
+    box-shadow: 0 24px 60px rgba(27,42,74,0.2);
+  }
+  .pm-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .pm-title { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; }
+  .pm-badge { font-size: 10px; background: rgba(201,168,76,0.2); color: var(--gold); padding: 3px 10px; border-radius: 100px; font-weight: 600; }
+  .pm-client { background: rgba(255,255,255,0.06); border-radius: 10px; padding: 16px; margin-bottom: 12px; }
+  .pm-client-name { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .pm-client-sub { font-size: 12px; color: rgba(255,255,255,0.4); }
+  .pm-progress { margin-top: 10px; }
+  .pm-progress-label { display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 5px; }
+  .pm-bar { height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+  .pm-bar-fill { height: 3px; background: var(--gold); border-radius: 2px; }
+  .pm-docs { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .pm-doc { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+  .pm-doc-name { font-size: 12px; color: rgba(255,255,255,0.7); }
+  .pm-doc-tag { font-size: 10px; color: var(--gold); font-weight: 600; }
+
+  /* ── BOUCLE CRÉDIBILITÉ ── */
+  .boucle-section { background: var(--navy); }
+  .boucle-section h2 { color: #fff; }
+  .boucle-section .section-sub { color: rgba(255,255,255,0.55); }
+  .boucle-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center; }
+  .boucle-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px; padding: 28px;
+  }
+  .boucle-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #fff; margin-bottom: 8px; }
+  .boucle-card p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.6; margin-bottom: 16px; }
+  .boucle-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .boucle-tag { font-size: 12px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: var(--gold); padding: 4px 12px; border-radius: 100px; }
+  .boucle-arrow { text-align: center; color: var(--gold); font-size: 28px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 56px 40px 32px;
+  }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 48px; }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+  .footer-brand span { color: var(--gold); }
+  .footer-tagline { font-size: 14px; color: rgba(255,255,255,0.4); font-style: italic; line-height: 1.6; }
+  .footer-col h4 { font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 16px; }
+  .footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+  .footer-made { font-size: 12px; color: var(--gold); font-style: italic; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .anim { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+  .anim-1 { animation-delay: 0.1s; }
+  .anim-2 { animation-delay: 0.25s; }
+  .anim-3 { animation-delay: 0.4s; }
+  .anim-4 { animation-delay: 0.55s; }
+
+  @media (max-width: 900px) {
+    .hero-inner, .portail-grid, .diag-inner { grid-template-columns: 1fr; }
+    .pain-grid, .offers-grid { grid-template-columns: 1fr; }
+    .boucle-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .boucle-arrow { transform: rotate(90deg); }
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    section, .hero { padding-left: 20px; padding-right: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">ELDEX <span>Partners</span></a>
+  <div class="nav-links">
+    <a href="#offres">Offres</a>
+    <a href="#diagnostic">Diagnostic</a>
+    <a href="#portail">Espace client</a>
+    <a href="#contact" class="nav-cta">Prendre contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge anim anim-1">Directeur Digital Externalisé PME & ETI</div>
+      <h1 class="anim anim-2">Moins de friction,<br><em>plus de croissance.</em></h1>
+      <p class="hero-sub anim anim-3">ELDEX Partners accompagne les PME & ETI dans leur transformation digitale. Automatisation, pilotage, et stratégie opérationnelle — sans les coûts d'un CDO à temps plein.</p>
+      <div class="hero-actions anim anim-4">
+        <a href="#diagnostic" class="btn-gold">Démarrer votre diagnostic →</a>
+        <a href="#offres" class="btn-outline">Découvrir les offres</a>
+      </div>
+      <p style="margin-top:28px;font-size:13px;color:var(--dimmed);" class="anim anim-4">
+        Fondé par <strong style="color:var(--navy);">Éric Legueret</strong> — ericlegueret.com
+      </p>
+    </div>
+    <div class="hero-card anim anim-3">
+      <div class="card-label">Aperçu — Diagnostic Digital</div>
+      <div class="score-circle">
+        <span>34</span>
+        <small>/100</small>
+      </div>
+      <div class="score-label">À transformer</div>
+      <div class="mini-bars">
+        <div class="mini-bar">
+          <label>⚙️ Processus & Opérations <span>22%</span></label>
+          <div class="bar-track"><div class="bar-fill" style="width:22%;background:#1B2A4A;"></div></div>
+        </div>
+        <div class="mini-bar">
+          <label>🛠️ Maturité des Outils <span>38%</span></label>
+          <div class="bar-track"><div class="bar-fill" style="width:38%;background:#2A5C9A;"></div></div>
+        </div>
+        <div class="mini-bar">
+          <label>📡 Communication & Marketing <span>45%</span></label>
+          <div class="bar-track"><div class="bar-fill" style="width:45%;background:#1E6B4A;"></div></div>
+        </div>
+        <div class="mini-bar">
+          <label>🤝 Relation Client & CRM <span>30%</span></label>
+          <div class="bar-track"><div class="bar-fill" style="width:30%;background:#8B5A00;"></div></div>
+        </div>
+      </div>
+      <a href="#diagnostic" class="card-cta">Obtenir votre rapport gratuit →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="pain-section" id="problemes">
+  <div class="section-inner">
+    <div class="section-label">Vous reconnaissez-vous ?</div>
+    <h2 style="color:#fff;margin-bottom:12px;">Les freins que rencontrent<br>la plupart des PME</h2>
+    <p class="section-sub">Sans Directeur Digital dédié, les mêmes blocages reviennent — coûteux en temps et en opportunités.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">⏳</div>
+        <h3>Tâches répétitives & manuelles</h3>
+        <p>Vos équipes passent des heures sur des saisies, relances et copier-coller qui pourraient être automatisés en quelques jours.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🔌</div>
+        <h3>Outils déconnectés</h3>
+        <p>CRM, comptabilité, marketing, support… chaque outil vit dans son silo. L'information se perd, les erreurs s'accumulent.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📊</div>
+        <h3>Pilotage dans le flou</h3>
+        <p>Impossible de voir en temps réel la performance commerciale, opérationnelle et marketing. Les décisions se prennent trop tard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFRES -->
+<section id="offres">
+  <div class="section-inner">
+    <div class="section-label">Nos offres</div>
+    <h2>Une formule <em>adaptée</em><br>à votre situation</h2>
+    <p class="section-sub">Du diagnostic flash à l'accompagnement continu, chaque formule est conçue pour créer un impact mesurable rapidement.</p>
+    <div class="offers-grid">
+      <div class="offer-card">
+        <div class="offer-icon">🔍</div>
+        <h3>Diagnostic Flash</h3>
+        <div class="offer-sub">One-shot · 5 jours</div>
+        <p>Analyse complète de votre maturité digitale, identification des priorités et plan d'action concret.</p>
+        <ul class="offer-features">
+          <li>Diagnostic digital complet (16 points)</li>
+          <li>Score de maturité + rapport détaillé</li>
+          <li>3 quick wins identifiés & chiffrés</li>
+          <li>Estimation ROI personnalisée</li>
+          <li>Session de restitution 2h</li>
+        </ul>
+        <div class="offer-price">990 € <small>HT · one-shot</small></div>
+        <a href="#contact" class="btn-gold" style="display:block;text-align:center;margin-top:16px;">Démarrer →</a>
+      </div>
+      <div class="offer-card featured">
+        <div class="offer-badge">⭐ Recommandé</div>
+        <div class="offer-icon">🚀</div>
+        <h3>Accompagnement</h3>
+        <div class="offer-sub">3 mois · Transformation</div>
+        <p>Mise en place complète : CRM, automatisations prioritaires, tableau de bord. Vous et vos équipes opèrent dès la fin.</p>
+        <ul class="offer-features">
+          <li>Diagnostic + plan de transformation</li>
+          <li>Déploiement CRM & intégrations</li>
+          <li>3 automatisations clés (Make/Zapier)</li>
+          <li>Tableau de bord de pilotage</li>
+          <li>Formation équipes incluse</li>
+          <li>Accès portail client dédié</li>
+        </ul>
+        <div class="offer-price">2 500 € <small>HT/mois · 3 mois</small></div>
+        <a href="#contact" class="btn-gold" style="display:block;text-align:center;margin-top:16px;">Démarrer →</a>
+      </div>
+      <div class="offer-card">
+        <div class="offer-icon">🤝</div>
+        <h3>Partenaire Digital</h3>
+        <div class="offer-sub">Ongoing · CDO externalisé</div>
+        <p>Votre Directeur Digital à temps partagé. Stratégie, pilotage, veille et évolution continue de votre infrastructure.</p>
+        <ul class="offer-features">
+          <li>2 jours/mois de présence dédiée</li>
+          <li>Comité de pilotage mensuel</li>
+          <li>Veille IA & automation continue</li>
+          <li>Évolutions & nouvelles automatisations</li>
+          <li>Accès portail client premium</li>
+        </ul>
+        <div class="offer-price">1 800 € <small>HT/mois</small></div>
+        <a href="#contact" class="btn-gold" style="display:block;text-align:center;margin-top:16px;">Démarrer →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIAGNOSTIC INTEGRE -->
+<section class="diag-section" id="diagnostic" style="background:var(--cream2);padding:80px 40px;">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="section-label">Gratuit · 10 minutes</div>
+      <h2 style="margin-bottom:12px;">Votre Diagnostic Digital <em>personnalisé</em></h2>
+      <p style="font-size:16px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7;">En 16 questions, obtenez votre score de maturité, vos 3 priorités d'action et une estimation ROI — générés par IA, sans engagement.</p>
+    </div>
+    <div id="diag-app" style="max-width:680px;margin:0 auto;"></div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var NAVY="#1B2A4A", NAVYL="#2A3F6A", GOLD="#C9A84C", GOLDL="#E8C96A";
+  var CREAM="#F8F7F4", CREAM2="#F0EDE6", BORDER="#E0D8CC";
+  var MUTED="#6B7890", DIMMED="#A8B0C0";
+  var SUCCESS="#1E7A4E", SUCCESSBG="#EBF7F0";
+  var WARN="#B86A00", WARNBG="#FFF4E0";
+  var DANGER="#C02A2A", DANGERBG="#FDEAEA";
+
+  var questions = [
+    { section:"Processus & Operations", icon:"⚙️", color:"#1B2A4A", items:[
+      {id:"q1",text:"Combien d'heures par semaine votre equipe passe-t-elle sur des taches repetitives ?",options:["Moins de 5h","5 a 15h","15 a 30h","Plus de 30h"],weight:[0,1,2,3]},
+      {id:"q2",text:"Vos processus internes sont-ils documentes et standardises ?",options:["Tout est dans les tetes","Quelques notes eparpillees","Partiellement documentes","Processus formalises"],weight:[3,2,1,0]},
+      {id:"q3",text:"Comment transmettez-vous les informations entre collaborateurs ?",options:["Email/telephone uniquement","WhatsApp + email","Outils collaboratifs basiques","Outils integres et automatises"],weight:[3,2,1,0]},
+      {id:"q4",text:"Avez-vous deja automatise un processus metier ?",options:["Jamais","On y a pense","1 ou 2 tentatives","Oui, regulierement"],weight:[3,2,1,0]}
+    ]},
+    { section:"Maturite des Outils", icon:"🛠️", color:"#2A5C9A", items:[
+      {id:"q5",text:"Quels outils utilisez-vous pour gerer vos clients et prospects ?",options:["Fichier Excel/papier","Google Sheets partage","CRM basique","CRM avance et connecte"],weight:[3,2,1,0]},
+      {id:"q6",text:"Votre pile d'outils digitaux est-elle interconnectee ?",options:["Chaque outil est isole","Exports/imports manuels","Connexions natives","Integrations API et automatisations"],weight:[3,2,1,0]},
+      {id:"q7",text:"Utilisez-vous des outils IA dans votre quotidien ?",options:["Jamais","Occasionnellement","Regulierement","IA integree dans les process"],weight:[3,2,1,0]},
+      {id:"q8",text:"Vos donnees clients sont-elles accessibles en temps reel ?",options:["Non, souvent obsoletes","Avec delai (24-48h)","Quasi temps reel","Tableaux de bord live"],weight:[3,2,1,0]}
+    ]},
+    { section:"Communication & Marketing", icon:"📡", color:"#1E6B4A", items:[
+      {id:"q9",text:"Comment gerez-vous votre presence sur les reseaux sociaux ?",options:["Pas de presence","Publications irregulieres","Planning editorial basique","Strategie et planification automatisee"],weight:[3,2,1,0]},
+      {id:"q10",text:"Utilisez-vous l'email marketing ?",options:["Jamais","Envois ponctuels manuels","Newsletters regulieres","Sequences automatisees et segmentees"],weight:[3,2,1,0]},
+      {id:"q11",text:"Comment mesurez-vous vos actions marketing ?",options:["Pas de suivi","Intuition + retours clients","Quelques metriques de base","Analytics et ROI precis"],weight:[3,2,1,0]},
+      {id:"q12",text:"Votre site web genere-t-il des leads automatiquement ?",options:["Pas de site ou vitrine statique","Formulaire de contact basique","Formulaires + CRM connecte","Tunnel de conversion optimise"],weight:[3,2,1,0]}
+    ]},
+    { section:"Relation Client & CRM", icon:"🤝", color:"#8B5A00", items:[
+      {id:"q13",text:"Comment gerez-vous le suivi clients apres une vente ?",options:["Pas de suivi systematique","Relances manuelles","Planning de suivi basique","Suivi automatise et personnalise"],weight:[3,2,1,0]},
+      {id:"q14",text:"Vos devis et contrats sont-ils generes manuellement ?",options:["Tout a la main","Templates + saisie manuelle","Semi-automatise","Generation automatique et e-signature"],weight:[3,2,1,0]},
+      {id:"q15",text:"Collectez-vous les retours clients ?",options:["Jamais formellement","Occasionnellement","Enquetes ponctuelles","Systeme de feedback automatise"],weight:[3,2,1,0]},
+      {id:"q16",text:"Quel est votre delai moyen de reponse client ?",options:["Plus de 48h","24 a 48h","Quelques heures","Quasi immediat"],weight:[3,2,1,0]}
+    ]}
+  ];
+
+  var allQ = [];
+  questions.forEach(function(s){ s.items.forEach(function(i){ allQ.push(Object.assign({},i,{section:s.section,sectionColor:s.color,sectionIcon:s.icon})); }); });
+
+  var state = { step:"intro", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:""}, results:null, loadingText:"Analyse en cours..." };
+  var loadingMsgs = ["Analyse de vos reponses...","Calcul du score de maturite...","Identification des quick wins...","Estimation du ROI...","Generation de la recommandation...","Finalisation du rapport..."];
+
+  function getSectionScores() {
+    return questions.map(function(s){
+      var raw = s.items.reduce(function(acc,item){ return acc + (state.answers[item.id]!==undefined ? item.weight[state.answers[item.id]] : 0); },0);
+      return { section:s.section, icon:s.icon, color:s.color, score:Math.round(((s.items.length*3-raw)/(s.items.length*3))*100) };
+    });
+  }
+
+  function getGlobalScore() {
+    var totalRaw = Object.keys(state.answers).reduce(function(acc,id){
+      var q = allQ.find(function(q){return q.id===id;});
+      return acc + (q ? q.weight[state.answers[id]] : 0);
+    },0);
+    return Math.round(((allQ.length*3-totalRaw)/(allQ.length*3))*100);
+  }
+
+  var card = "background:#fff;border:1px solid "+BORDER+";border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(27,42,74,0.06);";
+  var btnGold = "background:linear-gradient(135deg,"+GOLD+","+GOLDL+");color:"+NAVY+";border:none;border-radius:8px;padding:13px 26px;font-size:14px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;";
+  var btnNavy = "background:"+NAVY+";color:#fff;border:none;border-radius:8px;padding:13px 26px;font-size:14px;font-weight:600;cursor:pointer;font-family:Arial,sans-serif;";
+  var btnGhost = "background:transparent;border:1px solid "+BORDER+";border-radius:8px;padding:10px 18px;font-size:13px;color:"+MUTED+";cursor:pointer;font-family:Arial,sans-serif;";
+
+  function e(tag, attrs, content) {
+    var a = Object.keys(attrs||{}).map(function(k){ return k+"=\""+attrs[k]+"\""; }).join(" ");
+    return "<"+tag+(a?" "+a:"")+">"+( content||"")+"</"+tag+">";
+  }
+
+  function render() {
+    var el = document.getElementById("diag-app");
+    if (!el) return;
+    var progress = Math.round((Object.keys(state.answers).length / allQ.length)*100);
+    var cq = allQ[state.currentQ];
+    var si = questions.findIndex(function(s){return cq && s.section===cq.section;});
+    var html = "";
+
+    if (state.step==="intro") {
+      html = '<div style="'+card+'">';
+      html += '<div style="font-size:11px;color:'+GOLD+';letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:14px;font-family:Arial,sans-serif;">Diagnostic Maturite Digitale</div>';
+      html += '<h3 style="font-family:Georgia,serif;font-size:22px;color:'+NAVY+';margin-bottom:10px;">Revelez le potentiel digital de votre entreprise</h3>';
+      html += '<p style="font-size:14px;color:'+MUTED+';line-height:1.7;margin-bottom:20px;font-family:Arial,sans-serif;">16 questions · 10 minutes · Rapport IA personnalise · Gratuit</p>';
+      html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">';
+      questions.forEach(function(s){
+        html += '<div style="background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:12px;display:flex;gap:8px;">';
+        html += '<span style="font-size:16px;">'+s.icon+'</span>';
+        html += '<div><div style="font-size:12px;font-weight:600;color:'+NAVY+';font-family:Arial,sans-serif;">'+s.section+'</div>';
+        html += '<div style="font-size:11px;color:'+DIMMED+';font-family:Arial,sans-serif;">'+s.items.length+' questions</div></div></div>';
+      });
+      html += '</div>';
+      html += '<div style="background:'+CREAM2+';border-radius:8px;padding:12px;margin-bottom:20px;display:flex;gap:20px;flex-wrap:wrap;">';
+      [["🎯","Score maturite"],["⚡","Quick wins"],["💰","ROI estime"],["🗺️","Plan action"]].forEach(function(item){
+        html += '<span style="font-size:12px;color:'+MUTED+';font-family:Arial,sans-serif;">'+item[0]+' '+item[1]+'</span>';
+      });
+      html += '</div>';
+      html += '<button style="'+btnGold+'" id="diag-start-btn">Demarrer le diagnostic &rarr;</button>';
+      html += '</div>';
+    }
+
+    else if (state.step==="info") {
+      html = '<div style="'+card+'">';
+      html += '<h3 style="font-family:Georgia,serif;font-size:18px;color:'+NAVY+';margin-bottom:6px;">Votre entreprise</h3>';
+      html += '<p style="font-size:13px;color:'+MUTED+';margin-bottom:18px;font-family:Arial,sans-serif;">Ces informations personnalisent votre rapport.</p>';
+      var fields = [{key:"name",label:"Nom de l entreprise",ph:"Ex : Dupont et Associes"},{key:"sector",label:"Secteur d activite",ph:"Ex : Conseil, Commerce, BTP..."},{key:"size",label:"Taille de l equipe",ph:"Ex : 5 personnes, 20 salaries..."},{key:"contact",label:"Votre nom (optionnel)",ph:"Ex : Marie Dupont"}];
+      fields.forEach(function(f){
+        html += '<div style="margin-bottom:14px;">';
+        html += '<label style="display:block;font-size:11px;color:'+MUTED+';margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-family:Arial,sans-serif;">'+f.label+'</label>';
+        html += '<input type="text" placeholder="'+f.ph+'" id="info_'+f.key+'" value="'+state.info[f.key]+'" ';
+        html += 'style="width:100%;background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:10px 12px;color:'+NAVY+';font-size:14px;font-family:Arial,sans-serif;outline:none;" ';
+        html += 'data-key="'+f.key+'" oninput="window.diagInfoUpdate(this.dataset.key,this.value)">';
+        html += '</div>';
+      });
+      html += '<button style="'+btnNavy+';width:100%;margin-top:8px;" id="diag-next-btn">Commencer &rarr;</button>';
+      html += '</div>';
+    }
+
+    else if (state.step==="questions") {
+      html += '<div style="margin-bottom:18px;">';
+      html += '<div style="display:flex;justify-content:space-between;margin-bottom:6px;">';
+      html += '<span style="font-size:12px;color:'+MUTED+';font-family:Arial,sans-serif;">Question '+(state.currentQ+1)+' / '+allQ.length+'</span>';
+      html += '<span style="font-size:12px;color:'+GOLD+';font-weight:600;font-family:Arial,sans-serif;">'+progress+'%</span>';
+      html += '</div>';
+      html += '<div style="height:3px;background:'+BORDER+';border-radius:2px;overflow:hidden;">';
+      html += '<div style="height:3px;width:'+progress+'%;background:linear-gradient(90deg,'+NAVY+','+GOLD+');border-radius:2px;transition:width 0.4s;"></div>';
+      html += '</div></div>';
+
+      html += '<div style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;">';
+      questions.forEach(function(s,i){
+        var active = i===si;
+        html += '<div style="flex-shrink:0;padding:4px 10px;border-radius:100px;background:'+(active?NAVY:CREAM2)+';border:1px solid '+(active?NAVY:BORDER)+';font-size:11px;color:'+(active?"#fff":DIMMED)+';font-weight:'+(active?"600":"400")+';white-space:nowrap;font-family:Arial,sans-serif;">'+s.icon+' '+s.section+'</div>';
+      });
+      html += '</div>';
+
+      html += '<div style="'+card+'border-left:4px solid '+cq.sectionColor+';">';
+      html += '<p style="font-size:15px;line-height:1.6;margin-bottom:18px;color:'+NAVY+';font-family:Arial,sans-serif;">'+cq.text+'</p>';
+      html += '<div style="display:flex;flex-direction:column;gap:8px;">';
+      cq.options.forEach(function(opt,i){
+        var sel = state.answers[cq.id]===i;
+        html += '<button onclick="window.diagAnswer('+i+')" style="background:'+(sel?cq.sectionColor+"18":CREAM2)+';border:1px solid '+(sel?cq.sectionColor:BORDER)+';border-radius:8px;padding:11px 14px;color:'+(sel?cq.sectionColor:NAVY)+';font-size:13px;text-align:left;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:10px;font-family:Arial,sans-serif;">';
+        html += '<span style="width:22px;height:22px;border-radius:50%;border:1px solid '+(sel?cq.sectionColor:BORDER)+';display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;background:'+(sel?cq.sectionColor:"transparent")+';color:'+(sel?"#fff":DIMMED)+';font-weight:700;">'+String.fromCharCode(65+i)+'</span>';
+        html += opt+'</button>';
+      });
+      html += '</div></div>';
+
+      html += '<div style="display:flex;gap:10px;justify-content:space-between;align-items:center;">';
+      html += '<button style="'+btnGhost+'" onclick="window.diagPrev()">← Precedent</button>';
+      if (Object.keys(state.answers).length===allQ.length) {
+        html += '<button style="'+btnGold+'" onclick="window.diagGenerate()">Generer mon rapport ✨</button>';
+      } else if (state.currentQ < allQ.length-1 && state.answers[cq.id]!==undefined) {
+        html += '<button style="'+btnNavy+'" onclick="window.diagGoTo(null)">Suivant &rarr;</button>';
+      }
+      html += '</div>';
+    }
+
+    else if (state.step==="loading") {
+      html = '<div style="text-align:center;padding:60px 20px;">';
+      html += '<div id="diag-spinner" style="width:44px;height:44px;border:3px solid '+BORDER+';border-top:3px solid '+NAVY+';border-radius:50%;margin:0 auto 22px;animation:diagSpin 1s linear infinite;"></div>';
+      html += '<h3 style="font-family:Georgia,serif;font-size:20px;color:'+NAVY+';margin-bottom:8px;">Analyse IA en cours</h3>';
+      html += '<p id="diag-loading-txt" style="font-size:14px;color:'+MUTED+';font-family:Arial,sans-serif;">'+state.loadingText+'</p>';
+      html += '</div>';
+    }
+
+    else if (state.step==="results" && state.results) {
+      var r = state.results;
+      var score = getGlobalScore();
+      var ss = getSectionScores();
+      var scoreColor = score>=70?SUCCESS:score>=40?WARN:DANGER;
+      var scoreLabel = score>=70?"Mature":score>=40?"En developpement":"A transformer";
+
+      html = '<div style="'+card+'text-align:center;border-top:4px solid '+GOLD+';">';
+      html += '<div style="font-size:11px;color:'+GOLD+';letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:10px;font-family:Arial,sans-serif;">Score de Maturite Digitale</div>';
+      if (state.info.name) html += '<p style="font-size:13px;color:'+MUTED+';margin-bottom:10px;font-family:Arial,sans-serif;">'+state.info.name+(state.info.sector?" · "+state.info.sector:"")+"</p>";
+      html += '<div style="width:100px;height:100px;border-radius:50%;background:'+NAVY+';display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 12px;">';
+      html += '<span style="font-family:Georgia,serif;font-size:36px;font-weight:700;color:#fff;line-height:1;">'+score+'</span>';
+      html += '<span style="font-size:10px;color:'+GOLD+';">/100</span></div>';
+      html += '<div style="font-size:12px;font-weight:700;color:'+scoreColor+';letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;font-family:Arial,sans-serif;">'+scoreLabel+'</div>';
+      html += '<p style="font-size:14px;color:'+MUTED+';line-height:1.7;font-style:italic;max-width:480px;margin:0 auto;font-family:Arial,sans-serif;">'+r.synthese+'</p>';
+      html += '</div>';
+
+      html += '<div style="'+card+'">';
+      html += '<h4 style="font-family:Georgia,serif;font-size:16px;color:'+NAVY+';margin-bottom:16px;">Analyse par dimension</h4>';
+      ss.forEach(function(s){
+        html += '<div style="margin-bottom:12px;">';
+        html += '<div style="display:flex;justify-content:space-between;margin-bottom:5px;">';
+        html += '<span style="font-size:12px;color:'+MUTED+';font-family:Arial,sans-serif;">'+s.icon+' '+s.section+'</span>';
+        html += '<span style="font-size:12px;font-weight:600;color:'+s.color+';font-family:Arial,sans-serif;">'+s.score+'%</span></div>';
+        html += '<div style="height:5px;background:'+BORDER+';border-radius:3px;overflow:hidden;">';
+        html += '<div style="height:5px;width:'+s.score+'%;background:'+s.color+';border-radius:3px;transition:width 1.5s;"></div></div></div>';
+      });
+      html += '</div>';
+
+      html += '<div style="'+card+'">';
+      html += '<h4 style="font-family:Georgia,serif;font-size:16px;color:'+NAVY+';margin-bottom:6px;">⚡ Quick Wins Prioritaires</h4>';
+      html += '<p style="font-size:12px;color:'+DIMMED+';margin-bottom:14px;font-style:italic;font-family:Arial,sans-serif;">Actions a fort impact, deployables rapidement</p>';
+      html += '<div style="display:flex;flex-direction:column;gap:10px;">';
+      (r.quickWins||[]).forEach(function(qw,i){
+        var dc = qw.difficulte==="Facile"?SUCCESS:qw.difficulte==="Moyen"?WARN:DANGER;
+        var db = qw.difficulte==="Facile"?SUCCESSBG:qw.difficulte==="Moyen"?WARNBG:DANGERBG;
+        html += '<div style="background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:10px;padding:16px;">';
+        html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px;">';
+        html += '<h5 style="font-family:Georgia,serif;font-size:15px;color:'+NAVY+';margin:0;"><span style="color:'+GOLD+';">#'+(i+1)+'</span> '+qw.titre+'</h5>';
+        html += '<span style="flex-shrink:0;font-size:10px;background:'+db+';color:'+dc+';padding:3px 8px;border-radius:100px;font-weight:700;font-family:Arial,sans-serif;">'+qw.difficulte+'</span></div>';
+        html += '<p style="font-size:12px;color:'+MUTED+';line-height:1.6;margin-bottom:8px;font-family:Arial,sans-serif;">'+qw.description+'</p>';
+        html += '<div style="display:flex;gap:14px;">';
+        html += '<span style="font-size:11px;color:'+GOLD+';font-weight:600;font-family:Arial,sans-serif;">💰 '+qw.impact+'</span>';
+        html += '<span style="font-size:11px;color:'+DIMMED+';font-family:Arial,sans-serif;">⏱ '+qw.delai+'</span></div></div>';
+      });
+      html += '</div></div>';
+
+      var roi = r.roiEstimation||{};
+      html += '<div style="'+card+'border-left:4px solid '+GOLD+';">';
+      html += '<h4 style="font-family:Georgia,serif;font-size:16px;color:'+NAVY+';margin-bottom:14px;">💰 Estimation du ROI</h4>';
+      html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">';
+      [{label:"Heures gagnees/sem.",value:(roi.heuresGagneesParSemaine||"—")+"h",color:SUCCESS},{label:"Gain annuel estime",value:roi.gainAnnuelEstime||"—",color:GOLD},{label:"Retour investissement",value:roi.delaiRetourInvestissement||"—",color:NAVY}].forEach(function(it){
+        html += '<div style="background:'+CREAM2+';border-radius:8px;padding:12px;text-align:center;">';
+        html += '<div style="font-family:Georgia,serif;font-size:clamp(13px,2.5vw,18px);font-weight:700;color:'+it.color+';margin-bottom:4px;">'+it.value+'</div>';
+        html += '<div style="font-size:10px;color:'+DIMMED+';line-height:1.4;font-family:Arial,sans-serif;">'+it.label+'</div></div>';
+      });
+      html += '</div></div>';
+
+      var m = r.recommandationMission||{};
+      html += '<div style="'+card+'border-top:4px solid '+NAVY+';">';
+      html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;"><span>🗺️</span>';
+      html += '<h4 style="font-family:Georgia,serif;font-size:16px;color:'+NAVY+';margin:0;">Recommandation de mission</h4></div>';
+      html += '<h5 style="font-family:Georgia,serif;font-size:16px;color:'+NAVY+';margin-bottom:8px;">'+(m.titre||"")+'</h5>';
+      html += '<p style="font-size:13px;color:'+MUTED+';line-height:1.7;margin-bottom:12px;font-style:italic;font-family:Arial,sans-serif;">'+(m.description||"")+'</p>';
+      html += '<div style="margin-bottom:12px;">';
+      (m.priorites||[]).forEach(function(p){
+        html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">';
+        html += '<div style="width:5px;height:5px;border-radius:50%;background:'+GOLD+';flex-shrink:0;"></div>';
+        html += '<span style="font-size:13px;color:'+NAVY+';font-family:Arial,sans-serif;">'+p+'</span></div>';
+      });
+      html += '</div>';
+      html += '<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:18px;">';
+      html += '<span style="font-size:12px;color:'+MUTED+';font-family:Arial,sans-serif;">⏱ '+(m.dureeEstimee||"—")+'</span>';
+      html += '<span style="font-size:12px;color:'+GOLD+';font-weight:600;font-family:Arial,sans-serif;">💼 '+(m.investissement||"—")+'</span></div>';
+      html += '<a href="#contact" style="'+btnGold+'display:inline-block;text-decoration:none;text-align:center;">Discutons de votre transformation &rarr;</a>';
+      html += '</div>';
+
+      html += '<div style="text-align:center;margin-top:8px;">';
+      html += '<button style="'+btnGhost+'" onclick="window.diagReset()">↺ Nouveau diagnostic</button></div>';
+    }
+
+    else if (state.step==="error") {
+      html = '<div style="'+card+'text-align:center;">';
+      html += '<p style="color:'+DANGER+';margin-bottom:16px;font-family:Arial,sans-serif;">Une erreur est survenue. Veuillez reessayer.</p>';
+      html += '<button style="'+btnNavy+'" onclick="window.diagReset()">← Recommencer</button></div>';
+    }
+
+    el.innerHTML = html;
+  }
+
+  window.diagGoTo = function(s) {
+    if (s) state.step = s;
+    else if (state.currentQ < allQ.length-1) state.currentQ++;
+    render();
+  };
+  window.diagPrev = function() {
+    if (state.currentQ > 0) { state.currentQ--; render(); }
+  };
+  window.diagInfoUpdate = function(k,v) { state.info[k]=v; };
+  window.diagAnswer = function(idx) {
+    state.answers[allQ[state.currentQ].id] = idx;
+    if (state.currentQ < allQ.length-1) { state.currentQ++; }
+    render();
+  };
+  window.diagReset = function() {
+    state = { step:"intro", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:""}, results:null, loadingText:"Analyse en cours..." };
+    render();
+  };
+
+  window.diagGenerate = async function() {
+    state.step = "loading";
+    render();
+    var msgIdx = 0;
+    var interval = setInterval(function(){
+      msgIdx = (msgIdx+1) % loadingMsgs.length;
+      var t = document.getElementById("diag-loading-txt");
+      if (t) t.textContent = loadingMsgs[msgIdx];
+    }, 1400);
+
+    var ss = getSectionScores();
+    var summaryLines = questions.map(function(section){
+      var sData = ss.find(function(s){return s.section===section.section;});
+      return "## "+section.section+" (Score: "+(sData?sData.score:0)+"/100)\n"
+        + section.items.map(function(item){
+            var ai = state.answers[item.id];
+            return "- "+item.text+" -> "+(ai!==undefined ? item.options[ai] : "Non repondu");
+          }).join("\n");
+    }).join("\n\n");
+
+    var info = state.info;
+    var prompt = "Tu es un expert en transformation digitale pour PME francaises. Voici les resultats du diagnostic digital de "+(info.name||"cette PME")+" (secteur: "+(info.sector||"non precise")+", taille: "+(info.size||"non precisee")+").\n\nScore global: "+getGlobalScore()+"/100\n\n"+summaryLines+"\n\nGenere une analyse avec EXACTEMENT ce format JSON (UNIQUEMENT du JSON brut, sans markdown ni backticks):\n{\"synthese\":\"2-3 phrases percutantes\",\"quickWins\":[{\"titre\":\"Titre\",\"description\":\"Description\",\"impact\":\"Gain\",\"difficulte\":\"Facile\",\"delai\":\"Delai\"}],\"roiEstimation\":{\"heuresGagneesParSemaine\":\"8\",\"gainAnnuelEstime\":\"15000-25000 euro\",\"delaiRetourInvestissement\":\"3-6 mois\"},\"recommandationMission\":{\"titre\":\"Titre\",\"description\":\"Description\",\"priorites\":[\"p1\",\"p2\",\"p3\"],\"dureeEstimee\":\"3 mois\",\"investissement\":\"2500-4500 euro/mois\"},\"pointsForts\":[\"fort 1\"],\"pointsVigilance\":[\"vigilance 1\"]}\n\nGenere exactement 3 quick wins. N\'utilise jamais le mot audit, utilise toujours diagnostic.";
+
+    try {
+      var response = await fetch("https://api.anthropic.com/v1/messages", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",content:prompt}]})
+      });
+      var data = await response.json();
+      var text = data.content.map(function(i){return i.text||"";}).join("");
+      var clean = text.replace(/```json|```/g,"").trim();
+      var parsed = JSON.parse(clean);
+      clearInterval(interval);
+      state.results = parsed;
+      state.step = "results";
+      render();
+    } catch(e) {
+      clearInterval(interval);
+      state.step = "error";
+      render();
+    }
+  };
+
+  var style = document.createElement("style");
+  style.textContent = "@keyframes diagSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}";
+  document.head.appendChild(style);
+
+  render();
+
+  // Event delegation - no inline string params needed
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'diag-start-btn') { window.diagGoTo('info'); }
+    if (e.target && e.target.id === 'diag-next-btn') { window.diagGoTo('questions'); }
+  });
+})();
+</script>
+
+<!-- PORTAIL CLIENT -->
+<section id="portail">
+  <div class="section-inner">
+    <div class="portail-grid">
+      <div>
+        <div class="section-label">Espace client privé</div>
+        <h2>Votre mission,<br><em>centralisée.</em></h2>
+        <p class="section-sub" style="margin-bottom:32px;">Fini les PDF par email et les échanges dispersés. Chaque client accède à un portail dédié pour suivre sa transformation en temps réel.</p>
+        <div class="portail-features">
+          <div class="portail-feature">
+            <div class="portail-feature-icon">📋</div>
+            <div>
+              <h4>Livrables centralisés</h4>
+              <p>Rapports de diagnostic, plans d'action, comptes-rendus — tout au même endroit, toujours à jour.</p>
+            </div>
+          </div>
+          <div class="portail-feature">
+            <div class="portail-feature-icon">📈</div>
+            <div>
+              <h4>Suivi d'avancement</h4>
+              <p>Visualisez la progression de votre transformation en temps réel, étape par étape.</p>
+            </div>
+          </div>
+          <div class="portail-feature">
+            <div class="portail-feature-icon">💬</div>
+            <div>
+              <h4>Communication directe</h4>
+              <p>Échangez avec Éric directement depuis votre espace. Réactivité garantie.</p>
+            </div>
+          </div>
+          <div class="portail-feature">
+            <div class="portail-feature-icon">🔒</div>
+            <div>
+              <h4>Accès sécurisé</h4>
+              <p>Connexion par lien magique — aucun mot de passe à retenir. Votre espace, uniquement pour vous.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="portail-mockup">
+        <div class="pm-header">
+          <div class="pm-title">Portail Client</div>
+          <div class="pm-badge">En cours</div>
+        </div>
+        <div class="pm-client">
+          <div class="pm-client-name">Dupont & Associés</div>
+          <div class="pm-client-sub">Mission Transformation — Phase 1</div>
+          <div class="pm-progress">
+            <div class="pm-progress-label"><span>Avancement</span><span style="color:var(--gold);">67%</span></div>
+            <div class="pm-bar"><div class="pm-bar-fill" style="width:67%;"></div></div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Derniers livrables</div>
+        <div class="pm-docs">
+          <div class="pm-doc">
+            <div class="pm-doc-name">📊 Rapport de diagnostic</div>
+            <div class="pm-doc-tag">Livré</div>
+          </div>
+          <div class="pm-doc">
+            <div class="pm-doc-name">🗺 Plan de transformation</div>
+            <div class="pm-doc-tag">Livré</div>
+          </div>
+          <div class="pm-doc">
+            <div class="pm-doc-name">⚡ Automatisation #1 — Relances</div>
+            <div class="pm-doc-tag" style="color:var(--gold);">En cours</div>
+          </div>
+          <div class="pm-doc">
+            <div class="pm-doc-name">🛠 Déploiement CRM</div>
+            <div class="pm-doc-tag" style="color:rgba(255,255,255,0.3);">À venir</div>
+          </div>
+        </div>
+        <a href="#contact" style="display:block;text-align:center;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);color:var(--gold);font-size:13px;font-weight:600;padding:10px;border-radius:8px;text-decoration:none;">Accéder à mon espace →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOUCLE CRÉDIBILITÉ -->
+<section class="boucle-section">
+  <div class="section-inner">
+    <div class="section-label">Architecture de crédibilité</div>
+    <h2 style="color:#fff;margin-bottom:12px;">Deux marques,<br>une boucle puissante.</h2>
+    <p class="section-sub" style="margin-bottom:48px;">La combinaison personal brand + marque conseil crée un effet de crédibilité que très peu d'indépendants exploitent.</p>
+    <div class="boucle-grid">
+      <div class="boucle-card">
+        <h3>ericlegueret.com</h3>
+        <p>La marque personnelle. Le <em>why</em> et le <em>who</em>. Vision, parcours, méthodes, contenus. L'autorité qui nourrit la confiance.</p>
+        <div class="boucle-tags">
+          <span class="boucle-tag">Thought leadership</span>
+          <span class="boucle-tag">Personal brand</span>
+          <span class="boucle-tag">Contenus & vision</span>
+        </div>
+        <div style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.3);font-style:italic;">"Interventions opérées via ELDEX Partners →"</div>
+      </div>
+      <div class="boucle-arrow">⇄</div>
+      <div class="boucle-card">
+        <h3>ELDEX Partners</h3>
+        <p>La marque commerciale. Le <em>what</em> et l'<em>offer</em>. Offres structurées, outils clients, acquisition. La structure qui crédibilise.</p>
+        <div class="boucle-tags">
+          <span class="boucle-tag">Cabinet digital</span>
+          <span class="boucle-tag">Offres structurées</span>
+          <span class="boucle-tag">Portail client</span>
+        </div>
+        <div style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.3);font-style:italic;">"Founded by Éric Legueret →"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner" style="max-width:640px;">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div class="section-label">Contact</div>
+      <h2>Prêt à réduire la friction<br>dans votre entreprise ?</h2>
+      <p style="font-size:16px;color:var(--muted);line-height:1.7;margin-top:12px;">Laissez vos coordonnées — Éric vous répond sous 24h pour échanger sur votre situation.</p>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:16px;padding:40px;box-shadow:0 4px 24px rgba(27,42,74,0.07);position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--navy),var(--gold));"></div>
+      <div id="contact-form">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div>
+            <label style="display:block;font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Votre nom *</label>
+            <input type="text" id="cf-name" placeholder="Marie Dupont" style="width:100%;background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--navy);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#1B2A4A'" onblur="this.style.borderColor='#E0D8CC'">
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Email *</label>
+            <input type="email" id="cf-email" placeholder="marie@entreprise.fr" style="width:100%;background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--navy);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#1B2A4A'" onblur="this.style.borderColor='#E0D8CC'">
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div>
+            <label style="display:block;font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Entreprise</label>
+            <input type="text" id="cf-company" placeholder="Dupont & Associés" style="width:100%;background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--navy);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#1B2A4A'" onblur="this.style.borderColor='#E0D8CC'">
+          </div>
+          <div>
+            <label style="display:block;font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Téléphone</label>
+            <input type="tel" id="cf-phone" placeholder="06 12 34 56 78" style="width:100%;background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--navy);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#1B2A4A'" onblur="this.style.borderColor='#E0D8CC'">
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block;font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Votre besoin</label>
+          <select id="cf-need" style="width:100%;background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--navy);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;appearance:none;">
+            <option value="">Sélectionnez une option...</option>
+            <option value="diagnostic">Diagnostic Flash (one-shot)</option>
+            <option value="accompagnement">Accompagnement 3 mois</option>
+            <option value="partenaire">Partenaire Digital (ongoing)</option>
+            <option value="info">Juste des informations</option>
+          </select>
+        </div>
+        <div style="margin-bottom:24px;">
+          <label style="display:block;font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Message (optionnel)</label>
+          <textarea id="cf-message" rows="3" placeholder="Décrivez brièvement votre situation..." style="width:100%;background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--navy);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='#1B2A4A'" onblur="this.style.borderColor='#E0D8CC'"></textarea>
+        </div>
+        <div id="cf-error" style="display:none;background:#FDEAEA;border:1px solid #F7C1C1;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:13px;color:#C02A2A;"></div>
+        <button onclick="submitContact()" style="width:100%;background:linear-gradient(135deg,#C9A84C,#E8C96A);color:#1B2A4A;border:none;border-radius:8px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity 0.2s;" id="cf-btn">
+          Envoyer ma demande →
+        </button>
+        <p style="text-align:center;font-size:12px;color:var(--dimmed);margin-top:12px;">Réponse garantie sous 24h · Aucun engagement</p>
+      </div>
+      <div id="contact-success" style="display:none;text-align:center;padding:20px 0;">
+        <div style="width:60px;height:60px;border-radius:50%;background:#EBF7F0;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;">✅</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy);margin-bottom:8px;">Message envoyé !</h3>
+        <p style="font-size:14px;color:var(--muted);line-height:1.7;">Éric reviendra vers vous sous 24h.<br>Un email de confirmation vient de vous être envoyé.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+async function submitContact() {
+  var name    = document.getElementById('cf-name').value.trim();
+  var email   = document.getElementById('cf-email').value.trim();
+  var company = document.getElementById('cf-company').value.trim();
+  var phone   = document.getElementById('cf-phone').value.trim();
+  var need    = document.getElementById('cf-need').value;
+  var message = document.getElementById('cf-message').value.trim();
+  var errEl   = document.getElementById('cf-error');
+  var btn     = document.getElementById('cf-btn');
+
+  errEl.style.display = 'none';
+
+  if (!name) { errEl.textContent = 'Merci de renseigner votre nom.'; errEl.style.display='block'; return; }
+  if (!email || !email.includes('@')) { errEl.textContent = 'Merci de renseigner un email valide.'; errEl.style.display='block'; return; }
+
+  btn.textContent = 'Envoi en cours...';
+  btn.style.opacity = '0.7';
+  btn.disabled = true;
+
+  var payload = {
+    nom: name,
+    email: email,
+    entreprise: company || 'Non renseignee',
+    telephone: phone || 'Non renseigne',
+    besoin: need || 'Non precise',
+    message: message || 'Aucun message',
+    source: 'ELDEX Partners - Formulaire contact',
+    date: new Date().toLocaleDateString('fr-FR', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'})
+  };
+
+  try {
+    await fetch('https://hook.eu2.make.com/6xwhlm49li449aicj371qoqe51ksr9ta', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      mode: 'no-cors'
+    });
+    document.getElementById('contact-form').style.display = 'none';
+    document.getElementById('contact-success').style.display = 'block';
+  } catch(e) {
+    btn.textContent = 'Envoyer ma demande →';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+    errEl.textContent = 'Une erreur est survenue. Veuillez réessayer ou contacter eric@eric-legueret.fr';
+    errEl.style.display = 'block';
+  }
+}
+</script>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">ELDEX <span>Partners</span></div>
+        <p class="footer-tagline">Moins de friction, plus de croissance.<br>Votre Directeur Digital Externalisé.</p>
+        <p style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.3);">Fondé par Éric Legueret — ericlegueret.com</p>
+      </div>
+      <div class="footer-col">
+        <h4>Offres</h4>
+        <a href="#offres">Diagnostic Flash</a>
+        <a href="#offres">Accompagnement 3 mois</a>
+        <a href="#offres">Partenaire Digital</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ressources</h4>
+        <a href="#diagnostic">Diagnostic gratuit</a>
+        <a href="#portail">Espace client</a>
+        <a href="mailto:eric@eric-legueret.fr">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 ELDEX Partners · Éric Legueret · Tous droits réservés</div>
+      <div class="footer-made">Moins de friction, plus de croissance.</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
