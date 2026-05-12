@@ -740,10 +740,10 @@
     var prompt = "Tu es un expert en transformation digitale pour PME francaises. Voici les resultats du diagnostic digital de "+(info.name||"cette PME")+" (secteur: "+(info.sector||"non precise")+", taille: "+(info.size||"non precisee")+").\n\nScore global: "+getGlobalScore()+"/100\n\n"+summaryLines+"\n\nGenere une analyse avec EXACTEMENT ce format JSON (UNIQUEMENT du JSON brut, sans markdown ni backticks):\n{\"synthese\":\"2-3 phrases percutantes\",\"quickWins\":[{\"titre\":\"Titre\",\"description\":\"Description\",\"impact\":\"Gain\",\"difficulte\":\"Facile\",\"delai\":\"Delai\"}],\"roiEstimation\":{\"heuresGagneesParSemaine\":\"8\",\"gainAnnuelEstime\":\"15000-25000 euro\",\"delaiRetourInvestissement\":\"3-6 mois\"},\"recommandationMission\":{\"titre\":\"Titre\",\"description\":\"Description\",\"priorites\":[\"p1\",\"p2\",\"p3\"],\"dureeEstimee\":\"3 mois\",\"investissement\":\"2500-4500 euro/mois\"},\"pointsForts\":[\"fort 1\"],\"pointsVigilance\":[\"vigilance 1\"]}\n\nGenere exactement 3 quick wins. N\'utilise jamais le mot audit, utilise toujours diagnostic.";
 
     try {
-      var response = await fetch("https://api.anthropic.com/v1/messages", {
+      var response = await fetch("/.netlify/functions/claude-proxy", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",content:prompt}]})
+        body:JSON.stringify({messages:[{role:"user",content:prompt}]})
       });
       var data = await response.json();
       var text = data.content.map(function(i){return i.text||"";}).join("");
