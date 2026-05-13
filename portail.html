@@ -444,8 +444,7 @@ async function loginWithToken() {
   showMsg(msg, '⏳ Vérification...', '');
   
   try {
-    const resp = await callProxy(`Cherche dans la base Notion (collection ID: ${NOTION_DB.clients}) le client dont le champ "Token accès" correspond exactement à "${token}". Retourne en JSON: {found: bool, nom: string, entreprise: string, email: string, formule: string, missionId: string ou null}. Si non trouvé retourne {found: false}.`);
-    const data = JSON.parse(extractJSON(resp));
+    const data = await notionAPI('find_client_by_token', { token });
     
     if (data.found) {
       STATE.clientData = data;
@@ -457,7 +456,6 @@ async function loginWithToken() {
       showMsg(msg, '❌ Code invalide. Contactez ELDEX Partners.', 'error');
     }
   } catch(e) {
-    // Mode démo si erreur API
     demoLogin(token, msg);
   }
 }
@@ -566,7 +564,101 @@ function loadClientViewDemo() {
 }
 
 async function loadClientView() {
-  loadClientViewDemo(); // Pour l'instant mode démo
+  const container = document.getElementById('client-content');
+  container.innerHTML = '<div class="loading-center"><div class="spinner"></div></div>';
+  
+  try {
+    const client = STATE.clientData;
+    // Récupérer les missions du client
+    const { missions } = await notionAPI('get_missions', { client_id: client.id });
+    const mission = missions[0] || null;
+    
+    let livrables = [];
+    if (mission) {
+      const resp = await notionAPI('get_livrables', { mission_id: mission.id });
+      livrables = resp.livrables || [];
+    }
+    
+    const avancement = mission?.avancement || 0;
+    const statutBadge = mission?.statut === 'En cours' ? 'active' : mission?.statut === 'Terminée' ? 'done' : 'pending';
+    
+    const typeIcons = {
+      'Rapport PDF': '📊', 'Plan action': '📋', 'Présentation': '🎯',
+      'Vidéo': '🎓', 'Accès outil': '⚙️', 'Autre': '📄'
+    };
+    
+    container.innerHTML = `
+      <div class="client-header">
+        <h2>Bonjour, ${client.nom.split(' ')[0]} 👋</h2>
+        <p>${client.entreprise} · Formule ${client.formule}</p>
+      </div>
+      
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-label">Avancement mission</div>
+          <div class="card-value">${avancement}%</div>
+          <div class="card-sub">${mission?.titre || 'Aucune mission active'}</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Livrables remis</div>
+          <div class="card-value">${livrables.filter(l => l.statut === 'Remis au client').length}</div>
+          <div class="card-sub">sur ${livrables.length} prévus</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Prochaine étape</div>
+          <div class="card-value" style="font-size:14px;margin-top:4px;">${mission?.prochaine_etape || '—'}</div>
+          <div class="card-sub">${mission?.statut || '—'}</div>
+        </div>
+      </div>
+      
+      ${mission ? `
+      <div class="progress-section">
+        <div class="progress-header">
+          <h3>Suivi de mission — ${mission.titre}</h3>
+          <span class="badge ${statutBadge}">${mission.statut}</span>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: ${avancement}%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:16px;">
+          <span>Démarrage</span><span>${avancement}% complété</span><span>Finalisation</span>
+        </div>
+      </div>
+      
+      ${mission.prochaine_etape ? `
+      <div class="next-step">
+        <div class="next-step-icon">🎯</div>
+        <div class="next-step-content">
+          <h4>Prochaine étape</h4>
+          <p>${mission.prochaine_etape}</p>
+        </div>
+      </div>` : ''}` : ''}
+      
+      <h3 class="section-title">Vos livrables</h3>
+      ${livrables.length > 0 ? `
+      <div class="livrables-list">
+        ${livrables.map(l => `
+          <div class="livrable-item">
+            <div class="livrable-icon">${typeIcons[l.type] || '📄'}</div>
+            <div class="livrable-info">
+              <div class="livrable-title">${l.titre}</div>
+              <div class="livrable-date">${l.date ? new Date(l.date).toLocaleDateString('fr-FR') : l.statut}</div>
+            </div>
+            <div class="livrable-status">
+              ${l.url && l.statut === 'Remis au client' 
+                ? `<a href="${l.url}" target="_blank" class="btn-download">Télécharger</a>` 
+                : `<span class="badge ${l.statut === 'Prêt' ? 'active' : l.statut === 'En préparation' ? 'pending' : 'done'}">${l.statut}</span>`}
+            </div>
+          </div>`).join('')}
+      </div>` : `
+      <div class="empty-state">
+        <div class="icon">📭</div>
+        <p>Aucun livrable disponible pour le moment.<br>Votre espace sera mis à jour dès que des documents seront prêts.</p>
+      </div>`}`;
+  } catch(e) {
+    // Fallback mode démo si erreur Notion
+    loadClientViewDemo();
+  }
 }
 
 // ── Vue Admin ─────────────────────────────────────────────────
@@ -581,7 +673,31 @@ async function loadAdminView(tab) {
   const container = document.getElementById('admin-content');
   container.innerHTML = '<div class="loading-center"><div class="spinner"></div></div>';
   
-  // Mode démo admin
+  try {
+    if (tab === 'clients') {
+      const { clients } = await notionAPI('list_clients', {});
+      container.innerHTML = `
+        <div class="clients-table">
+          <div class="table-header">
+            <div>Client</div><div>Email</div><div>Formule</div><div>Statut</div><div>Token</div>
+          </div>
+          ${clients.length === 0 ? '<div style="padding:40px;text-align:center;color:var(--muted)">Aucun client</div>' :
+          clients.map(c => `
+            <div class="table-row">
+              <div><div class="client-name">${c.nom}</div><div class="client-company">${c.entreprise}</div></div>
+              <div style="font-size:13px;color:var(--muted)">${c.email}</div>
+              <div><span class="badge active" style="font-size:11px;">${c.formule || '—'}</span></div>
+              <div><span class="badge ${c.statut === 'Client actif' ? 'active' : 'done'}">${c.statut || '—'}</span></div>
+              <div style="font-size:11px;color:var(--muted);font-family:monospace">${c.token || '—'}</div>
+            </div>`).join('')}
+        </div>`;
+      return;
+    }
+  } catch(e) {
+    // Fallback démo
+  }
+  
+  // Mode démo fallback
   if (tab === 'clients') {
     container.innerHTML = `
       <div class="clients-table">
@@ -672,24 +788,23 @@ async function createClient() {
   
   try {
     const tel = document.getElementById('nc-tel').value.trim();
-    // Appel Notion via proxy Claude
-    const prompt = `Crée une page dans la base Notion Clients (data source: ${NOTION_DB.clients}) avec ces propriétés:
-    - Nom: "${nom}"
-    - Entreprise: "${entreprise}"  
-    - Email: "${email}"
-    - Téléphone: "${tel}"
-    - Formule: "${formule}"
-    - Secteur: "${secteur}"
-    - Statut: "Client actif"
-    - Token accès: "${token}"
-    Confirme avec {success: true, token: "${token}"}`;
-    
-    await callProxy(prompt);
-    showMsg(msg, `✅ Client créé ! Token d'accès : ${token}`, 'success');
-    setTimeout(() => { closeModal(); loadAdminView('clients'); }, 2000);
+    const result = await notionAPI('create_client', {
+      nom, entreprise, email, telephone: tel, formule, secteur, token
+    });
+    // Envoyer le token par email via Make
+    try {
+      await fetch('https://hook.eu2.make.com/24j3x84mgd9tkq8ib3xku89oy4o0pexg', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ nom, email, token })
+      });
+      showMsg(msg, `✅ Client créé ! Token envoyé par email à ${email}.`, 'success');
+    } catch(e) {
+      showMsg(msg, `✅ Client créé ! Token : <strong>${token}</strong><br>Envoi email en cours...`, 'success');
+    }
+    setTimeout(() => { closeModal(); loadAdminView('clients'); }, 3000);
   } catch(e) {
-    showMsg(msg, `✅ Client créé (démo) ! Token : ${token}`, 'success');
-    setTimeout(() => closeModal(), 2000);
+    showMsg(msg, `❌ Erreur: ${e.message}`, 'error');
   }
 }
 
@@ -700,19 +815,15 @@ function showMsg(el, text, type) {
   el.style.display = 'block';
 }
 
-async function callProxy(message) {
-  const resp = await fetch('/.netlify/functions/claude-proxy', {
+// ── API Notion via proxy sécurisé ─────────────────────────────────────
+async function notionAPI(action, payload) {
+  const resp = await fetch('/.netlify/functions/notion-proxy', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ messages: [{ role: 'user', content: message }] })
+    body: JSON.stringify({ action, payload })
   });
-  const data = await resp.json();
-  return data.content[0].text;
-}
-
-function extractJSON(str) {
-  const match = str.match(/\{[\s\S]*\}/);
-  return match ? match[0] : '{}';
+  if (!resp.ok) throw new Error('Erreur API: ' + resp.status);
+  return await resp.json();
 }
 
 // ── Init ──────────────────────────────────────────────────────
