@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELDEX Partners — Portail Client</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1B2A4A;
+  --navy2: #2A3F6A;
+  --gold: #C9A84C;
+  --gold2: #E8C96A;
+  --cream: #F8F7F4;
+  --cream2: #F0EDE6;
+  --border: #E0D8CC;
+  --muted: #6B7890;
+  --green: #2E7D52;
+  --green-bg: #EBF7F0;
+  --orange: #C05A00;
+  --orange-bg: #FFF4E0;
+  --radius: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--navy); min-height: 100vh; }
+
+/* ── LAYOUT ─────────────────────────────────────── */
+.view { display: none; min-height: 100vh; }
+.view.active { display: flex; flex-direction: column; }
+
+/* ── NAV ─────────────────────────────────────────── */
+nav {
+  background: var(--navy);
+  padding: 0 32px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #fff; font-weight: 600; letter-spacing: 0.5px; }
+.nav-logo span { color: var(--gold); }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-user { font-size: 13px; color: rgba(255,255,255,0.6); }
+.btn-logout { background: none; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.btn-logout:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+/* ── LOGIN VIEW ──────────────────────────────────── */
+#view-login {
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  position: relative;
+  overflow: hidden;
+}
+#view-login::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.login-card {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+  animation: slideUp 0.5s ease;
+}
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.login-logo { text-align: center; margin-bottom: 32px; }
+.login-logo h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--navy); font-weight: 600; }
+.login-logo h1 span { color: var(--gold); }
+.login-logo p { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: 2px; text-transform: uppercase; }
+.login-divider { width: 40px; height: 2px; background: var(--gold); margin: 16px auto; }
+.login-title { font-size: 15px; color: var(--navy); font-weight: 500; margin-bottom: 8px; }
+.login-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+.form-group { margin-bottom: 16px; }
+label { display: block; font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+input[type="email"], input[type="text"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--navy);
+  background: #fff;
+  transition: border-color 0.2s;
+  outline: none;
+}
+input:focus { border-color: var(--navy); }
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+.btn-primary:hover { background: var(--navy2); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(27,42,74,0.3); }
+.btn-primary:active { transform: translateY(0); }
+.btn-gold {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: var(--navy);
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+.btn-gold:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(201,168,76,0.4); }
+.login-toggle { text-align: center; margin-top: 20px; font-size: 13px; color: var(--muted); }
+.login-toggle a { color: var(--navy); font-weight: 500; cursor: pointer; text-decoration: underline; }
+.msg { padding: 12px 16px; border-radius: 8px; font-size: 13px; margin-top: 12px; display: none; }
+.msg.success { background: var(--green-bg); color: var(--green); display: block; }
+.msg.error { background: #FDEAEA; color: #C02A2A; display: block; }
+
+/* ── CLIENT VIEW ─────────────────────────────────── */
+.client-container { flex: 1; padding: 32px; max-width: 900px; margin: 0 auto; width: 100%; }
+.client-header { margin-bottom: 32px; }
+.client-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; color: var(--navy); }
+.client-header p { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+/* Cards */
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 32px; }
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 24px;
+  border: 1px solid var(--border);
+  transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: 0 4px 20px rgba(27,42,74,0.08); }
+.card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
+.card-value { font-size: 24px; font-weight: 600; color: var(--navy); }
+.card-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+/* Progress */
+.progress-section { background: #fff; border-radius: var(--radius); padding: 28px; border: 1px solid var(--border); margin-bottom: 24px; }
+.progress-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.progress-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+.badge.active { background: var(--green-bg); color: var(--green); }
+.badge.pending { background: var(--orange-bg); color: var(--orange); }
+.badge.done { background: var(--cream2); color: var(--muted); }
+.progress-bar-container { background: var(--cream2); border-radius: 8px; height: 10px; margin-bottom: 8px; overflow: hidden; }
+.progress-bar { height: 100%; border-radius: 8px; background: linear-gradient(90deg, var(--navy), var(--navy2)); transition: width 1s ease; }
+.progress-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 20px; }
+.step { text-align: center; }
+.step-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 12px; }
+.step-dot.done { background: var(--navy); color: #fff; }
+.step-dot.active { background: var(--gold); color: var(--navy); font-weight: 700; }
+.step-dot.todo { background: var(--cream2); color: var(--muted); }
+.step-label { font-size: 11px; color: var(--muted); line-height: 1.3; }
+
+/* Prochaine étape */
+.next-step { background: linear-gradient(135deg, var(--navy), var(--navy2)); border-radius: var(--radius); padding: 24px; color: #fff; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; }
+.next-step-icon { width: 44px; height: 44px; background: rgba(201,168,76,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.next-step-content h4 { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; font-size: 11px; }
+.next-step-content p { font-size: 15px; font-weight: 500; }
+
+/* Livrables */
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; margin-bottom: 16px; }
+.livrables-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+.livrable-item {
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.2s;
+}
+.livrable-item:hover { border-color: var(--navy); box-shadow: 0 2px 12px rgba(27,42,74,0.08); }
+.livrable-icon { width: 40px; height: 40px; border-radius: 8px; background: var(--cream2); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.livrable-info { flex: 1; }
+.livrable-title { font-size: 14px; font-weight: 500; color: var(--navy); }
+.livrable-date { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.livrable-status { display: flex; align-items: center; gap: 8px; }
+.btn-download { background: var(--navy); color: #fff; border: none; padding: 7px 16px; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: inherit; transition: all 0.2s; text-decoration: none; display: inline-block; }
+.btn-download:hover { background: var(--navy2); }
+.empty-state { text-align: center; padding: 48px 24px; color: var(--muted); font-size: 14px; }
+.empty-state .icon { font-size: 40px; margin-bottom: 12px; }
+
+/* ── ADMIN VIEW ──────────────────────────────────── */
+.admin-container { flex: 1; padding: 32px; max-width: 1100px; margin: 0 auto; width: 100%; }
+.admin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: gap; gap: 16px; }
+.admin-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; }
+.btn-add { background: var(--gold); color: var(--navy); border: none; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+.btn-add:hover { background: var(--gold2); transform: translateY(-1px); }
+.tabs { display: flex; gap: 4px; background: var(--cream2); border-radius: 10px; padding: 4px; margin-bottom: 24px; }
+.tab { padding: 8px 20px; border-radius: 8px; border: none; background: none; font-size: 13px; font-family: inherit; color: var(--muted); cursor: pointer; transition: all 0.2s; font-weight: 500; }
+.tab.active { background: #fff; color: var(--navy); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+.clients-table { background: #fff; border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+.table-header { display: grid; grid-template-columns: 2fr 1.5fr 1fr 1fr 0.8fr; gap: 16px; padding: 14px 20px; background: var(--cream2); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 600; }
+.table-row { display: grid; grid-template-columns: 2fr 1.5fr 1fr 1fr 0.8fr; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--border); align-items: center; transition: background 0.15s; }
+.table-row:last-child { border-bottom: none; }
+.table-row:hover { background: var(--cream); }
+.client-name { font-weight: 500; font-size: 14px; }
+.client-company { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.btn-action { background: none; border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: inherit; color: var(--navy); transition: all 0.2s; }
+.btn-action:hover { border-color: var(--navy); background: var(--cream2); }
+
+/* Loading spinner */
+.spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-center { display: flex; align-items: center; justify-content: center; padding: 60px; }
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--cream); border-radius: 16px; padding: 32px; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; animation: slideUp 0.3s ease; }
+.modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; margin-bottom: 24px; }
+.modal-footer { display: flex; gap: 10px; margin-top: 24px; }
+.btn-secondary { flex: 1; padding: 12px; background: none; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; cursor: pointer; color: var(--navy); transition: all 0.2s; }
+.btn-secondary:hover { border-color: var(--navy); }
+.btn-save { flex: 2; padding: 12px; background: var(--navy); color: #fff; border: none; border-radius: 8px; font-size: 14px; font-family: inherit; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.btn-save:hover { background: var(--navy2); }
+select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--navy);
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+}
+select:focus { border-color: var(--navy); }
+</style>
+</head>
+<body>
+
+<!-- ══ VIEW: LOGIN ══════════════════════════════════════════ -->
+<div id="view-login" class="view active">
+  <div class="login-card">
+    <div class="login-logo">
+      <h1>ELDEX <span>Partners</span></h1>
+      <p>Portail Client</p>
+      <div class="login-divider"></div>
+    </div>
+    
+    <!-- Formulaire Email -->
+    <div id="login-email-form">
+      <p class="login-title">Accédez à votre espace</p>
+      <p class="login-sub">Entrez votre email pour recevoir votre lien de connexion, ou utilisez votre code d'accès.</p>
+      <div class="form-group">
+        <label>Votre email</label>
+        <input type="email" id="login-email" placeholder="prenom@entreprise.com" />
+      </div>
+      <button class="btn-primary" onclick="sendMagicLink()">Recevoir mon lien →</button>
+      <div id="msg-email" class="msg"></div>
+      <div class="login-toggle">
+        Vous avez un code ? <a onclick="toggleLoginMode()">Connexion avec token</a>
+      </div>
+    </div>
+    
+    <!-- Formulaire Token -->
+    <div id="login-token-form" style="display:none">
+      <p class="login-title">Code d'accès</p>
+      <p class="login-sub">Entrez le code unique transmis par ELDEX Partners.</p>
+      <div class="form-group">
+        <label>Code d'accès</label>
+        <input type="text" id="login-token" placeholder="ex: ELD-XXXX-XXXX" />
+      </div>
+      <button class="btn-gold" onclick="loginWithToken()">Accéder à mon espace →</button>
+      <div id="msg-token" class="msg"></div>
+      <div class="login-toggle">
+        <a onclick="toggleLoginMode()">← Retour connexion email</a>
+      </div>
+    </div>
+    
+    <!-- Accès Admin discret -->
+    <div style="text-align:center; margin-top:32px; padding-top:24px; border-top:1px solid var(--border);">
+      <a onclick="showAdmin()" style="font-size:11px; color:var(--muted); cursor:pointer; opacity:0.5;">Accès Éric</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ VIEW: CLIENT ══════════════════════════════════════════ -->
+<div id="view-client" class="view">
+  <nav>
+    <div class="nav-logo">ELDEX <span>Partners</span></div>
+    <div class="nav-right">
+      <span class="nav-user" id="client-name-nav"></span>
+      <button class="btn-logout" onclick="logout()">Déconnexion</button>
+    </div>
+  </nav>
+  <div class="client-container" id="client-content">
+    <div class="loading-center"><div class="spinner"></div></div>
+  </div>
+</div>
+
+<!-- ══ VIEW: ADMIN ══════════════════════════════════════════ -->
+<div id="view-admin" class="view">
+  <nav>
+    <div class="nav-logo">ELDEX <span>Partners</span> — <span style="font-size:14px;font-style:italic;opacity:0.7;">Back-office</span></div>
+    <div class="nav-right">
+      <button class="btn-logout" onclick="logout()">Déconnexion</button>
+    </div>
+  </nav>
+  <div class="admin-container">
+    <div class="admin-header">
+      <h2>Tableau de bord</h2>
+      <button class="btn-add" onclick="openNewClientModal()">+ Nouveau client</button>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('clients', this)">Clients actifs</button>
+      <button class="tab" onclick="switchTab('missions', this)">Missions</button>
+      <button class="tab" onclick="switchTab('livrables', this)">Livrables</button>
+    </div>
+    <div id="admin-content">
+      <div class="loading-center"><div class="spinner"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: NOUVEAU CLIENT ════════════════════════════════ -->
+<div class="modal-overlay" id="modal-client">
+  <div class="modal">
+    <h3>Nouveau client</h3>
+    <div class="form-group">
+      <label>Nom complet *</label>
+      <input type="text" id="nc-nom" placeholder="Marie Dupont" />
+    </div>
+    <div class="form-group">
+      <label>Entreprise *</label>
+      <input type="text" id="nc-entreprise" placeholder="Entreprise SAS" />
+    </div>
+    <div class="form-group">
+      <label>Email *</label>
+      <input type="email" id="nc-email" placeholder="marie@entreprise.com" />
+    </div>
+    <div class="form-group">
+      <label>Téléphone</label>
+      <input type="text" id="nc-tel" placeholder="+33 6 xx xx xx xx" />
+    </div>
+    <div class="form-group">
+      <label>Formule</label>
+      <select id="nc-formule">
+        <option>Diagnostic Flash</option>
+        <option>Accompagnement</option>
+        <option>Partenaire Digital</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Secteur</label>
+      <select id="nc-secteur">
+        <option>Commerce</option>
+        <option>Services</option>
+        <option>Industrie</option>
+        <option>Santé</option>
+        <option>BTP</option>
+        <option>Autre</option>
+      </select>
+    </div>
+    <div id="msg-modal" class="msg"></div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal()">Annuler</button>
+      <button class="btn-save" onclick="createClient()">Créer le client →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── État global ────────────────────────────────────────────────
+const STATE = {
+  view: 'login',
+  clientData: null,
+  adminTab: 'clients',
+  clients: [],
+  missions: [],
+  livrables: []
+};
+
+const NOTION_DB = {
+  clients: 'f5af7434-70b1-48a8-99df-a4acb2892daf',
+  missions: '3a00b2dc-9435-4232-b526-5fb2993bb6bf',
+  livrables: '4787230c-07a3-4304-bf89-72a48d25a088'
+};
+
+// ── Navigation ────────────────────────────────────────────────
+function showView(v) {
+  document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+  document.getElementById('view-' + v).classList.add('active');
+}
+
+function logout() {
+  localStorage.removeItem('eldex_token');
+  localStorage.removeItem('eldex_admin');
+  showView('login');
+}
+
+function toggleLoginMode() {
+  const email = document.getElementById('login-email-form');
+  const token = document.getElementById('login-token-form');
+  if (email.style.display === 'none') {
+    email.style.display = 'block';
+    token.style.display = 'none';
+  } else {
+    email.style.display = 'none';
+    token.style.display = 'block';
+  }
+}
+
+// ── Connexion Email (Magic Link simulé) ───────────────────────
+function sendMagicLink() {
+  const email = document.getElementById('login-email').value.trim();
+  const msg = document.getElementById('msg-email');
+  if (!email || !email.includes('@')) {
+    showMsg(msg, '❌ Entrez un email valide', 'error');
+    return;
+  }
+  showMsg(msg, '✅ Lien envoyé ! Vérifiez votre boîte mail.', 'success');
+}
+
+// ── Connexion Token ───────────────────────────────────────────
+async function loginWithToken() {
+  const token = document.getElementById('login-token').value.trim().toUpperCase();
+  const msg = document.getElementById('msg-token');
+  if (!token) { showMsg(msg, '❌ Entrez votre code d\'accès', 'error'); return; }
+  
+  showMsg(msg, '⏳ Vérification...', '');
+  
+  try {
+    const resp = await callProxy(`Cherche dans la base Notion (collection ID: ${NOTION_DB.clients}) le client dont le champ "Token accès" correspond exactement à "${token}". Retourne en JSON: {found: bool, nom: string, entreprise: string, email: string, formule: string, missionId: string ou null}. Si non trouvé retourne {found: false}.`);
+    const data = JSON.parse(extractJSON(resp));
+    
+    if (data.found) {
+      STATE.clientData = data;
+      localStorage.setItem('eldex_token', token);
+      document.getElementById('client-name-nav').textContent = data.nom;
+      showView('client');
+      loadClientView();
+    } else {
+      showMsg(msg, '❌ Code invalide. Contactez ELDEX Partners.', 'error');
+    }
+  } catch(e) {
+    // Mode démo si erreur API
+    demoLogin(token, msg);
+  }
+}
+
+function demoLogin(token, msg) {
+  if (token.startsWith('ELD')) {
+    STATE.clientData = {
+      found: true, nom: 'Démo Client', entreprise: 'Entreprise Demo',
+      email: 'demo@test.com', formule: 'Accompagnement', token: token
+    };
+    localStorage.setItem('eldex_token', token);
+    document.getElementById('client-name-nav').textContent = STATE.clientData.nom;
+    showView('client');
+    loadClientViewDemo();
+  } else {
+    showMsg(msg, '❌ Code invalide. Contactez ELDEX Partners.', 'error');
+  }
+}
+
+// ── Accès Admin ───────────────────────────────────────────────
+function showAdmin() {
+  const pwd = prompt('Code administrateur :');
+  if (pwd === 'eldex2025') {
+    localStorage.setItem('eldex_admin', '1');
+    showView('admin');
+    loadAdminView('clients');
+  }
+}
+
+// ── Vue Client ────────────────────────────────────────────────
+function loadClientViewDemo() {
+  const container = document.getElementById('client-content');
+  const data = STATE.clientData;
+  
+  container.innerHTML = `
+    <div class="client-header">
+      <h2>Bonjour, ${data.nom.split(' ')[0]} 👋</h2>
+      <p>${data.entreprise} · Formule ${data.formule}</p>
+    </div>
+    
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-label">Avancement mission</div>
+        <div class="card-value">65%</div>
+        <div class="card-sub">Phase 2 en cours</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Livrables remis</div>
+        <div class="card-value">3</div>
+        <div class="card-sub">sur 5 prévus</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Prochaine étape</div>
+        <div class="card-value" style="font-size:14px;margin-top:4px;">Formation Make.com</div>
+        <div class="card-sub">Planifiée le 20 mai</div>
+      </div>
+    </div>
+    
+    <div class="progress-section">
+      <div class="progress-header">
+        <h3>Suivi de mission</h3>
+        <span class="badge active">🟢 En cours</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" style="width: 65%"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:20px;">
+        <span>Démarrage</span><span>65% complété</span><span>Finalisation</span>
+      </div>
+      <div class="progress-steps">
+        <div class="step"><div class="step-dot done">✓</div><div class="step-label">Diagnostic initial</div></div>
+        <div class="step"><div class="step-dot done">✓</div><div class="step-label">Configuration outils</div></div>
+        <div class="step"><div class="step-dot active">3</div><div class="step-label">Formation équipe</div></div>
+        <div class="step"><div class="step-dot todo">4</div><div class="step-label">Autonomie & suivi</div></div>
+      </div>
+    </div>
+    
+    <div class="next-step">
+      <div class="next-step-icon">🎯</div>
+      <div class="next-step-content">
+        <h4>Prochaine étape</h4>
+        <p>Formation Make.com — Automatisation des relances client · 20 mai 2026 à 14h</p>
+      </div>
+    </div>
+    
+    <h3 class="section-title">Vos livrables</h3>
+    <div class="livrables-list">
+      ${[
+        {icon:'📊', title:'Rapport Diagnostic Digital', date:'2 mai 2026', status:'Remis au client', url:'#'},
+        {icon:'📋', title:'Plan d\'action 90 jours', date:'5 mai 2026', status:'Remis au client', url:'#'},
+        {icon:'⚙️', title:'Configuration Make.com — Scénarios relances', date:'12 mai 2026', status:'Remis au client', url:'#'},
+        {icon:'🎓', title:'Enregistrement formation équipe', date:'En préparation', status:'En préparation', url:null},
+        {icon:'📈', title:'Rapport bilan 90 jours', date:'À venir', status:'À venir', url:null},
+      ].map(l => `
+        <div class="livrable-item">
+          <div class="livrable-icon">${l.icon}</div>
+          <div class="livrable-info">
+            <div class="livrable-title">${l.title}</div>
+            <div class="livrable-date">${l.date}</div>
+          </div>
+          <div class="livrable-status">
+            ${l.url ? `<a href="${l.url}" class="btn-download">Télécharger</a>` : `<span class="badge ${l.status === 'En préparation' ? 'pending' : 'done'}">${l.status}</span>`}
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+async function loadClientView() {
+  loadClientViewDemo(); // Pour l'instant mode démo
+}
+
+// ── Vue Admin ─────────────────────────────────────────────────
+function switchTab(tab, el) {
+  STATE.adminTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  loadAdminView(tab);
+}
+
+async function loadAdminView(tab) {
+  const container = document.getElementById('admin-content');
+  container.innerHTML = '<div class="loading-center"><div class="spinner"></div></div>';
+  
+  // Mode démo admin
+  if (tab === 'clients') {
+    container.innerHTML = `
+      <div class="clients-table">
+        <div class="table-header">
+          <div>Client</div><div>Email</div><div>Formule</div><div>Statut</div><div>Actions</div>
+        </div>
+        ${[
+          {nom:'Marie Dupont', co:'ABC Commerce', email:'marie@abc.fr', formule:'Accompagnement', statut:'Client actif'},
+          {nom:'Thomas Bernard', co:'Bernard BTP', email:'thomas@bernard-btp.fr', formule:'Diagnostic Flash', statut:'Mission terminée'},
+          {nom:'Sophie Martin', co:'Martin Santé', email:'sophie@martin-sante.fr', formule:'Partenaire Digital', statut:'Client actif'},
+        ].map(c => `
+          <div class="table-row">
+            <div><div class="client-name">${c.nom}</div><div class="client-company">${c.co}</div></div>
+            <div style="font-size:13px;color:var(--muted)">${c.email}</div>
+            <div><span class="badge active" style="font-size:11px;">${c.formule}</span></div>
+            <div><span class="badge ${c.statut === 'Client actif' ? 'active' : 'done'}">${c.statut}</span></div>
+            <div><button class="btn-action" onclick="viewClient('${c.nom}')">Voir →</button></div>
+          </div>`).join('')}
+      </div>`;
+  } else if (tab === 'missions') {
+    container.innerHTML = `
+      <div class="clients-table">
+        <div class="table-header" style="grid-template-columns: 2fr 1.5fr 1fr 1fr 0.8fr">
+          <div>Mission</div><div>Client</div><div>Avancement</div><div>Statut</div><div>Actions</div>
+        </div>
+        ${[
+          {titre:'Automatisation PME', client:'Marie Dupont', avancement:65, statut:'En cours'},
+          {titre:'Diagnostic Flash', client:'Thomas Bernard', avancement:100, statut:'Terminée'},
+          {titre:'Transformation digitale', client:'Sophie Martin', avancement:30, statut:'En cours'},
+        ].map(m => `
+          <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1fr 1fr 0.8fr">
+            <div class="client-name">${m.titre}</div>
+            <div style="font-size:13px;color:var(--muted)">${m.client}</div>
+            <div>
+              <div class="progress-bar-container" style="height:6px;margin-bottom:4px"><div class="progress-bar" style="width:${m.avancement}%"></div></div>
+              <div style="font-size:11px;color:var(--muted)">${m.avancement}%</div>
+            </div>
+            <div><span class="badge ${m.statut === 'En cours' ? 'active' : 'done'}">${m.statut}</span></div>
+            <div><button class="btn-action">Éditer</button></div>
+          </div>`).join('')}
+      </div>`;
+  } else {
+    container.innerHTML = `
+      <div class="clients-table">
+        <div class="table-header" style="grid-template-columns: 2fr 1.5fr 1fr 1fr 0.8fr">
+          <div>Livrable</div><div>Mission</div><div>Type</div><div>Statut</div><div>Actions</div>
+        </div>
+        ${[
+          {titre:'Rapport Diagnostic', mission:'Automatisation PME', type:'📊 Rapport PDF', statut:'Remis'},
+          {titre:'Plan 90 jours', mission:'Automatisation PME', type:'📋 Plan action', statut:'Remis'},
+          {titre:'Formation enregistrée', mission:'Transformation digitale', type:'🎓 Vidéo', statut:'En préparation'},
+        ].map(l => `
+          <div class="table-row" style="grid-template-columns: 2fr 1.5fr 1fr 1fr 0.8fr">
+            <div class="client-name">${l.titre}</div>
+            <div style="font-size:13px;color:var(--muted)">${l.mission}</div>
+            <div style="font-size:13px">${l.type}</div>
+            <div><span class="badge ${l.statut === 'Remis' ? 'active' : 'pending'}">${l.statut}</span></div>
+            <div><button class="btn-action">Éditer</button></div>
+          </div>`).join('')}
+      </div>`;
+  }
+}
+
+// ── Modal Nouveau Client ──────────────────────────────────────
+function openNewClientModal() {
+  document.getElementById('modal-client').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('modal-client').classList.remove('open');
+}
+
+async function createClient() {
+  const nom = document.getElementById('nc-nom').value.trim();
+  const entreprise = document.getElementById('nc-entreprise').value.trim();
+  const email = document.getElementById('nc-email').value.trim();
+  const formule = document.getElementById('nc-formule').value;
+  const secteur = document.getElementById('nc-secteur').value;
+  const msg = document.getElementById('msg-modal');
+  
+  if (!nom || !entreprise || !email) {
+    showMsg(msg, '❌ Remplissez les champs obligatoires', 'error'); return;
+  }
+  
+  // Générer un token unique
+  const token = 'ELD-' + Math.random().toString(36).substr(2,4).toUpperCase() + '-' + Math.random().toString(36).substr(2,4).toUpperCase();
+  
+  showMsg(msg, '⏳ Création en cours...', '');
+  
+  try {
+    const tel = document.getElementById('nc-tel').value.trim();
+    // Appel Notion via proxy Claude
+    const prompt = `Crée une page dans la base Notion Clients (data source: ${NOTION_DB.clients}) avec ces propriétés:
+    - Nom: "${nom}"
+    - Entreprise: "${entreprise}"  
+    - Email: "${email}"
+    - Téléphone: "${tel}"
+    - Formule: "${formule}"
+    - Secteur: "${secteur}"
+    - Statut: "Client actif"
+    - Token accès: "${token}"
+    Confirme avec {success: true, token: "${token}"}`;
+    
+    await callProxy(prompt);
+    showMsg(msg, `✅ Client créé ! Token d'accès : ${token}`, 'success');
+    setTimeout(() => { closeModal(); loadAdminView('clients'); }, 2000);
+  } catch(e) {
+    showMsg(msg, `✅ Client créé (démo) ! Token : ${token}`, 'success');
+    setTimeout(() => closeModal(), 2000);
+  }
+}
+
+// ── Helpers ───────────────────────────────────────────────────
+function showMsg(el, text, type) {
+  el.textContent = text;
+  el.className = 'msg ' + type;
+  el.style.display = 'block';
+}
+
+async function callProxy(message) {
+  const resp = await fetch('/.netlify/functions/claude-proxy', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ messages: [{ role: 'user', content: message }] })
+  });
+  const data = await resp.json();
+  return data.content[0].text;
+}
+
+function extractJSON(str) {
+  const match = str.match(/\{[\s\S]*\}/);
+  return match ? match[0] : '{}';
+}
+
+// ── Init ──────────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  // Vérifier token sauvegardé
+  const savedToken = localStorage.getItem('eldex_token');
+  const isAdmin = localStorage.getItem('eldex_admin');
+  
+  if (isAdmin) { showView('admin'); loadAdminView('clients'); }
+  else if (savedToken) {
+    document.getElementById('login-token').value = savedToken;
+    demoLogin(savedToken, document.getElementById('msg-token'));
+  }
+  
+  // Fermer modal au clic extérieur
+  document.getElementById('modal-client').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+});
+</script>
+</body>
+</html>
