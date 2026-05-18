@@ -452,7 +452,7 @@
     <div style="text-align:center;margin-bottom:48px;">
       <div class="section-label">Gratuit · 10 minutes</div>
       <h2 style="margin-bottom:12px;">Votre Diagnostic Digital <em>personnalisé</em></h2>
-      <p style="font-size:16px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7;">En 16 questions, obtenez votre score de maturité, vos 3 priorités d'action et une estimation ROI — générés par IA, sans engagement.</p>
+      <p style="font-size:16px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7;">En 16 questions, obtenez votre score de maturité, vos 3 priorités d'action et une estimation ROI — générés par IA, sans engagement. Pour solo entrepreneurs, TPE et PME.</p>
     </div>
     <div id="diag-app" style="max-width:680px;margin:0 auto;"></div>
   </div>
@@ -557,17 +557,51 @@
 
     else if (state.step==="info") {
       html = '<div style="'+card+'">';
-      html += '<h3 style="font-family:Georgia,serif;font-size:18px;color:'+NAVY+';margin-bottom:6px;">Votre entreprise</h3>';
-      html += '<p style="font-size:13px;color:'+MUTED+';margin-bottom:18px;font-family:Arial,sans-serif;">Ces informations personnalisent votre rapport.</p>';
-      var fields = [{key:"name",label:"Nom de l entreprise",ph:"Ex : Dupont et Associes"},{key:"sector",label:"Secteur d activite",ph:"Ex : Conseil, Commerce, BTP..."},{key:"size",label:"Taille de l equipe",ph:"Ex : 5 personnes, 20 salaries..."},{key:"contact",label:"Votre nom (optionnel)",ph:"Ex : Marie Dupont"}];
-      fields.forEach(function(f){
-        html += '<div style="margin-bottom:14px;">';
-        html += '<label style="display:block;font-size:11px;color:'+MUTED+';margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-family:Arial,sans-serif;">'+f.label+'</label>';
-        html += '<input type="text" placeholder="'+f.ph+'" id="info_'+f.key+'" value="'+state.info[f.key]+'" ';
-        html += 'style="width:100%;background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:10px 12px;color:'+NAVY+';font-size:14px;font-family:Arial,sans-serif;outline:none;" ';
-        html += 'data-key="'+f.key+'" oninput="window.diagInfoUpdate(this.dataset.key,this.value)">';
-        html += '</div>';
+      html += '<h3 style="font-family:Georgia,serif;font-size:18px;color:'+NAVY+';margin-bottom:6px;">Votre activite</h3>';
+      html += '<p style="font-size:13px;color:'+MUTED+';margin-bottom:18px;font-family:Arial,sans-serif;">Ces informations personnalisent votre rapport — solo, TPE ou PME.</p>';
+
+      // Champ nom
+      html += '<div style="margin-bottom:14px;">';
+      html += '<label style="display:block;font-size:11px;color:'+MUTED+';margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-family:Arial,sans-serif;">Nom de votre activite / structure</label>';
+      html += '<input type="text" placeholder="Ex : Jean Martin Conseil, Studio Dupont..." id="info_name" value="'+state.info.name+'" ';
+      html += 'style="width:100%;background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:10px 12px;color:'+NAVY+';font-size:14px;font-family:Arial,sans-serif;outline:none;" ';
+      html += 'data-key="name" oninput="window.diagInfoUpdate(this.dataset.key,this.value)">';
+      html += '</div>';
+
+      // Champ secteur
+      html += '<div style="margin-bottom:14px;">';
+      html += '<label style="display:block;font-size:11px;color:'+MUTED+';margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-family:Arial,sans-serif;">Secteur / domaine d activite</label>';
+      html += '<input type="text" placeholder="Ex : Conseil, Artisan, E-commerce, Sante, BTP, Design..." id="info_sector" value="'+state.info.sector+'" ';
+      html += 'style="width:100%;background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:10px 12px;color:'+NAVY+';font-size:14px;font-family:Arial,sans-serif;outline:none;" ';
+      html += 'data-key="sector" oninput="window.diagInfoUpdate(this.dataset.key,this.value)">';
+      html += '</div>';
+
+      // Champ taille - SELECT avec solo entrepreneur
+      var sizeOptions = [
+        {val:"Solo entrepreneur (1 personne)",label:"Solo entrepreneur — 1 personne"},
+        {val:"TPE (2-5 personnes)",label:"TPE — 2 a 5 personnes"},
+        {val:"PME (6-20 personnes)",label:"PME — 6 a 20 personnes"},
+        {val:"PME (21-50 salaries)",label:"PME — 21 a 50 salaries"},
+        {val:"ETI (50+ salaries)",label:"ETI — 50 salaries et plus"}
+      ];
+      html += '<div style="margin-bottom:14px;">';
+      html += '<label style="display:block;font-size:11px;color:'+MUTED+';margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-family:Arial,sans-serif;">Taille de la structure</label>';
+      html += '<select id="info_size" data-key="size" onchange="window.diagInfoUpdate(this.dataset.key,this.value)" ';
+      html += 'style="width:100%;background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:10px 12px;color:'+NAVY+';font-size:14px;font-family:Arial,sans-serif;outline:none;cursor:pointer;">';
+      html += '<option value="" disabled '+(state.info.size?"":"selected")+'>Selectionnez votre situation...</option>';
+      sizeOptions.forEach(function(o){
+        html += '<option value="'+o.val+'" '+(state.info.size===o.val?"selected":"")+'>'+o.label+'</option>';
       });
+      html += '</select></div>';
+
+      // Champ contact
+      html += '<div style="margin-bottom:14px;">';
+      html += '<label style="display:block;font-size:11px;color:'+MUTED+';margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-family:Arial,sans-serif;">Votre prenom (optionnel)</label>';
+      html += '<input type="text" placeholder="Ex : Marie, Jean-Luc..." id="info_contact" value="'+state.info.contact+'" ';
+      html += 'style="width:100%;background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:10px 12px;color:'+NAVY+';font-size:14px;font-family:Arial,sans-serif;outline:none;" ';
+      html += 'data-key="contact" oninput="window.diagInfoUpdate(this.dataset.key,this.value)">';
+      html += '</div>';
+
       html += '<button style="'+btnNavy+';width:100%;margin-top:8px;" id="diag-next-btn">Commencer &rarr;</button>';
       html += '</div>';
     }
@@ -748,7 +782,14 @@
     }).join("\n\n");
 
     var info = state.info;
-    var prompt = "Tu es un expert en transformation digitale pour PME francaises. Voici les resultats du diagnostic digital de "+(info.name||"cette PME")+" (secteur: "+(info.sector||"non precise")+", taille: "+(info.size||"non precisee")+").\n\nScore global: "+getGlobalScore()+"/100\n\n"+summaryLines+"\n\nGenere une analyse avec EXACTEMENT ce format JSON (UNIQUEMENT du JSON brut, sans markdown ni backticks):\n{\"synthese\":\"2-3 phrases percutantes\",\"quickWins\":[{\"titre\":\"Titre\",\"description\":\"Description\",\"impact\":\"Gain\",\"difficulte\":\"Facile\",\"delai\":\"Delai\"}],\"roiEstimation\":{\"heuresGagneesParSemaine\":\"8\",\"gainAnnuelEstime\":\"15000-25000 euro\",\"delaiRetourInvestissement\":\"3-6 mois\"},\"recommandationMission\":{\"titre\":\"Titre\",\"description\":\"Description\",\"priorites\":[\"p1\",\"p2\",\"p3\"],\"dureeEstimee\":\"3 mois\",\"investissement\":\"2500-4500 euro/mois\"},\"pointsForts\":[\"fort 1\"],\"pointsVigilance\":[\"vigilance 1\"]}\n\nGenere exactement 3 quick wins. N\'utilise jamais le mot audit, utilise toujours diagnostic.";
+    var isSolo = (info.size||"").toLowerCase().indexOf("solo") !== -1;
+    var profileCtx = isSolo
+      ? "solo entrepreneur (1 personne, toutes activites confondues — consultant, artisan, freelance, independant, coach, prestataire de services, etc.)"
+      : "PME / TPE ("+( info.size||"taille non precisee")+")";
+    var roiCtx = isSolo
+      ? "Adapte le ROI a un profil solo : gains en heures personnelles liberees par semaine (objectif 5-10h), revenus supplementaires potentiels grace au temps recupere, couts reduits sur les outils. Investissement recommande coherent avec un budget solo : 500-1500 euro/mois max."
+      : "Adapte le ROI a une equipe : heures d equipe gagnees, gain annuel estime realiste, delai retour sur investissement.";
+    var prompt = "Tu es un expert en transformation digitale pour independants et PME francaises. Voici les resultats du diagnostic digital de "+(info.name||"cette structure")+" — profil : "+profileCtx+", secteur : "+(info.sector||"non precise")+".\n\nScore global : "+getGlobalScore()+"/100\n\n"+summaryLines+"\n\n"+roiCtx+"\n\nGenere une analyse avec EXACTEMENT ce format JSON (UNIQUEMENT du JSON brut, sans markdown ni backticks) :\n{\"synthese\":\"2-3 phrases percutantes adaptees au profil\",\"quickWins\":[{\"titre\":\"Titre\",\"description\":\"Description concrete\",\"impact\":\"Gain specifique\",\"difficulte\":\"Facile\",\"delai\":\"Delai\"}],\"roiEstimation\":{\"heuresGagneesParSemaine\":\"5\",\"gainAnnuelEstime\":\"selon profil\",\"delaiRetourInvestissement\":\"selon profil\"},\"recommandationMission\":{\"titre\":\"Titre\",\"description\":\"Description adaptee au profil\",\"priorites\":[\"p1\",\"p2\",\"p3\"],\"dureeEstimee\":\"duree adaptee\",\"investissement\":\"budget adapte au profil\"},\"pointsForts\":[\"fort 1\"],\"pointsVigilance\":[\"vigilance 1\"]}\n\nGenere exactement 3 quick wins concrets et actionnables. N\'utilise jamais le mot audit, utilise toujours diagnostic. Si solo entrepreneur : recommande des outils accessibles et low-cost, des automatisations simples a fort impact, et valorise le temps recupere comme levier de CA.";
 
     try {
       var response = await fetch("/.netlify/functions/claude-proxy", {
