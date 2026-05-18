@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les 5 outils IA qu'utilisent mes clients PME — Eric Leguéret</title>
+  <meta name="description" content="Le guide concret des 5 outils IA que j'installe chez mes clients PME en Hauts-de-France. Par Eric Leguéret, Directeur Digital Externalisé.">
+  <meta name="robots" content="noindex">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1B2A4A;
+      --gold: #C9A84C;
+      --cream: #F8F7F4;
+      --gold-light: #e8c97a;
+      --text: #2c2c2c;
+      --muted: #6b7280;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── Header ── */
+    .guide-header {
+      background: var(--navy);
+      color: #fff;
+      padding: 60px 24px 48px;
+      text-align: center;
+    }
+    .guide-header .badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .guide-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700;
+      line-height: 1.2;
+      max-width: 680px;
+      margin: 0 auto 16px;
+    }
+    .guide-header h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+    .guide-header .subtitle {
+      color: rgba(255,255,255,0.72);
+      font-size: 16px;
+      max-width: 520px;
+      margin: 0 auto 28px;
+    }
+    .guide-header .author {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+    .guide-header .author strong {
+      color: var(--gold);
+    }
+
+    /* ── Intro ── */
+    .guide-intro {
+      max-width: 720px;
+      margin: 48px auto;
+      padding: 0 24px;
+    }
+    .guide-intro p {
+      font-size: 17px;
+      color: #444;
+      margin-bottom: 16px;
+    }
+    .guide-intro .highlight {
+      background: var(--navy);
+      color: #fff;
+      border-left: 4px solid var(--gold);
+      padding: 18px 22px;
+      border-radius: 6px;
+      font-size: 15px;
+      margin: 28px 0;
+    }
+
+    /* ── Outils ── */
+    .guide-tools {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+    .tool-card {
+      background: #fff;
+      border: 1px solid #e8e4dc;
+      border-radius: 10px;
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: var(--gold);
+    }
+    .tool-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px; height: 36px;
+      background: var(--navy);
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 50%;
+      margin-bottom: 14px;
+    }
+    .tool-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .tool-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .tool-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(201,168,76,0.15);
+      color: #8a6d1e;
+    }
+    .tool-tagline {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+    .tool-body {
+      font-size: 15px;
+      color: #444;
+      margin-bottom: 16px;
+    }
+    .tool-usecases {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .tool-usecases li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 14px;
+      color: #333;
+    }
+    .tool-usecases li::before {
+      content: '→';
+      color: var(--gold);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .tool-result {
+      background: rgba(27,42,74,0.05);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--navy);
+    }
+    .tool-result strong {
+      color: var(--gold);
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .tool-price {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 12px;
+      background: #f0ede8;
+      color: var(--muted);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    /* ── Conclusion ── */
+    .guide-conclusion {
+      background: var(--navy);
+      color: #fff;
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .guide-conclusion h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .guide-conclusion h2 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+    .guide-conclusion p {
+      color: rgba(255,255,255,0.72);
+      font-size: 15px;
+      max-width: 520px;
+      margin: 0 auto 28px;
+    }
+    .btn-gold {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 30px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-gold:hover { opacity: 0.88; }
+
+    /* ── Footer ── */
+    .guide-footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .guide-footer a { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="guide-header">
+  <div class="badge">Guide offert — ELDEX Partners</div>
+  <h1>Les <em>5 outils IA</em> qu'utilisent mes clients PME</h1>
+  <p class="subtitle">Le guide concret. Ce que j'installe vraiment. Ce que ça change en pratique.</p>
+  <p class="author">Par <strong>Eric Leguéret</strong> — Directeur Digital Externalisé, Lille</p>
+</header>
+
+<!-- INTRO -->
+<div class="guide-intro">
+  <p>Depuis 3 ans, j'accompagne des PME en Hauts-de-France dans leur transformation digitale. Sur le terrain, j'ai testé des dizaines d'outils. La majorité sont du bruit.</p>
+  <p>Ce guide, c'est ce qui reste quand on enlève tout ce qui ne sert à rien : <strong>5 outils que j'installe systématiquement</strong>, avec le cas d'usage exact et le résultat observé chez mes clients.</p>
+  <div class="highlight">
+    Aucun de ces outils ne remplace votre équipe. Chacun libère 2 à 5h par semaine sur des tâches à faible valeur. L'objectif : que vous passiez votre temps sur ce que seul vous pouvez faire.
+  </div>
+</div>
+
+<!-- OUTILS -->
+<section class="guide-tools">
+
+  <!-- Outil 1 -->
+  <div class="tool-card">
+    <div class="tool-number">1</div>
+    <div class="tool-meta">
+      <span class="tool-name">Claude (Anthropic)</span>
+      <span class="tool-tag">Rédaction & Analyse</span>
+    </div>
+    <p class="tool-tagline">L'outil que j'utilise le plus. Et de loin.</p>
+    <p class="tool-body">Claude n'est pas un générateur de contenu générique. C'est un assistant de réflexion qui comprend le contexte long. Je l'utilise pour des tâches précises, avec des prompts construits — pas des questions vagues.</p>
+    <ul class="tool-usecases">
+      <li>Rédaction de propositions commerciales personnalisées (45 min → 12 min)</li>
+      <li>Analyse de documents longs : contrats, appels d'offres, rapports fournisseurs</li>
+      <li>Création de FAQ client ou de scripts de réponse SAV</li>
+      <li>Rédaction d'offres d'emploi et de fiches de poste</li>
+    </ul>
+    <div class="tool-result">
+      <strong>Résultat observé chez mes clients</strong>
+      Un gérant de PME industrielle (58 salariés, Hauts-de-France) rédige ses devis complexes 3× plus vite. Il a arrêté de sous-traiter la rédaction à une agence.
+    </div>
+    <span class="tool-price">Gratuit · Pro à 18€/mois · claude.ai</span>
+  </div>
+
+  <!-- Outil 2 -->
+  <div class="tool-card">
+    <div class="tool-number">2</div>
+    <div class="tool-meta">
+      <span class="tool-name">Make (ex-Integromat)</span>
+      <span class="tool-tag">Automatisation</span>
+    </div>
+    <p class="tool-tagline">Le chef d'orchestre. Il connecte tout le reste.</p>
+    <p class="tool-body">Make automatise les flux entre vos outils sans une ligne de code. Là où Zapier est limité et cher, Make est puissant et visuel. C'est l'outil sur lequel je passe le plus de temps en mission.</p>
+    <ul class="tool-usecases">
+      <li>Chaque formulaire de contact → email + CRM + notification Slack automatique</li>
+      <li>Facturation : validation commande → génération PDF + envoi client + archivage</li>
+      <li>Publication multi-canal : un article rédigé → posté sur LinkedIn + newsletter + site</li>
+      <li>Relances automatiques clients sans impliquer votre équipe commerciale</li>
+    </ul>
+    <div class="tool-result">
+      <strong>Résultat observé chez mes clients</strong>
+      Une agence immobilière lilloise a économisé 8h/semaine de saisie manuelle sur 3 mois. Zéro recrutement. ROI en 6 semaines.
+    </div>
+    <span class="tool-price">Gratuit (1000 opérations/mois) · Core à 9€/mois · make.com</span>
+  </div>
+
+  <!-- Outil 3 -->
+  <div class="tool-card">
+    <div class="tool-number">3</div>
+    <div class="tool-meta">
+      <span class="tool-name">Notion + IA</span>
+      <span class="tool-tag">Organisation & Base de données</span>
+    </div>
+    <p class="tool-tagline">La mémoire de votre entreprise. Enfin structurée.</p>
+    <p class="tool-body">Notion n'est pas un simple outil de notes. C'est une base de données relationnelle que votre équipe peut utiliser sans formation technique. L'IA intégrée répond sur vos propres données.</p>
+    <ul class="tool-usecases">
+      <li>Base clients centralisée : historique, contrats, contacts, statut — en 1 clic</li>
+      <li>Suivi de projets sans Excel : tableaux Kanban, timelines, assignation</li>
+      <li>Wiki interne : procédures, onboarding, FAQ — consultable par l'IA Notion</li>
+      <li>Pipeline commercial partagé avec l'équipe de vente</li>
+    </ul>
+    <div class="tool-result">
+      <strong>Résultat observé chez mes clients</strong>
+      Un cabinet de conseil en BTP (12 personnes) a remplacé 4 outils différents par Notion. Gain : 2h/semaine de réunions de coordination supprimées.
+    </div>
+    <span class="tool-price">Gratuit · Plus à 8€/mois/user · notion.so</span>
+  </div>
+
+  <!-- Outil 4 -->
+  <div class="tool-card">
+    <div class="tool-number">4</div>
+    <div class="tool-meta">
+      <span class="tool-name">Brevo (ex-Sendinblue)</span>
+      <span class="tool-tag">Email Marketing — RGPD</span>
+    </div>
+    <p class="tool-tagline">La solution email que je recommande à toutes mes PME françaises.</p>
+    <p class="tool-body">Brevo est français, RGPD natif, et s'intègre parfaitement avec Make. Contrairement à Mailchimp ou ActiveCampaign, vous payez à l'envoi — pas au nombre de contacts. Pour une PME, c'est souvent 3× moins cher.</p>
+    <ul class="tool-usecases">
+      <li>Séquences de bienvenue automatisées pour les nouveaux clients</li>
+      <li>Newsletters mensuelles avec segmentation par secteur ou statut client</li>
+      <li>Relances post-devis : 3 emails automatiques sur 14 jours</li>
+      <li>Alertes et notifications transactionnelles (commandes, rendez-vous)</li>
+    </ul>
+    <div class="tool-result">
+      <strong>Résultat observé chez mes clients</strong>
+      Un e-commerçant nordiste a récupéré 14% de paniers abandonnés avec une séquence de 3 emails Brevo configurée en 1 demi-journée.
+    </div>
+    <span class="tool-price">Gratuit (300 emails/jour) · Starter à 7€/mois · brevo.com</span>
+  </div>
+
+  <!-- Outil 5 -->
+  <div class="tool-card">
+    <div class="tool-number">5</div>
+    <div class="tool-meta">
+      <span class="tool-name">Perplexity AI</span>
+      <span class="tool-tag">Veille & Recherche</span>
+    </div>
+    <p class="tool-tagline">Google, mais qui vous répond vraiment.</p>
+    <p class="tool-body">Perplexity est un moteur de recherche IA qui cite ses sources en temps réel. Pour une PME, c'est l'outil de veille concurrentielle le plus rapide que j'aie trouvé. Il remplace 80% des recherches Google pour les questions business.</p>
+    <ul class="tool-usecases">
+      <li>Veille sur vos concurrents : "Quelles sont les offres actuelles de [concurrent] ?"</li>
+      <li>Préparation de rendez-vous : synthèse d'un prospect en 2 minutes</li>
+      <li>Veille réglementaire : nouvelles obligations légales dans votre secteur</li>
+      <li>Analyse de marché rapide avant une décision stratégique</li>
+    </ul>
+    <div class="tool-result">
+      <strong>Résultat observé chez mes clients</strong>
+      Un dirigeant prépare ses réunions CODIR en 20 minutes avec Perplexity là où il passait 1h30 sur Google. Résultats plus fiables, sources vérifiables.
+    </div>
+    <span class="tool-price">Gratuit · Pro à 17€/mois · perplexity.ai</span>
+  </div>
+
+</section>
+
+<!-- CONCLUSION CTA -->
+<div class="guide-conclusion">
+  <h2>Ces outils, c'est <em>30% du travail</em>.</h2>
+  <p>Les mettre en place correctement — avec les bons prompts, les bonnes automatisations, la bonne stack — c'est l'autre 70%. C'est ce que je fais pour mes clients.</p>
+  <a href="https://eldex-partners.netlify.app/#contact" class="btn-gold">Parlons de votre situation →</a>
+</div>
+
+<!-- FOOTER -->
+<div class="guide-footer">
+  <p>Guide rédigé par <a href="https://ericlegueret.com">Eric Leguéret</a> — Directeur Digital Externalisé, Lille, Hauts-de-France.<br>
+  © ELDEX Partners — <a href="https://eldex-partners.netlify.app">eldex-partners.netlify.app</a></p>
+</div>
+
+</body>
+</html>
