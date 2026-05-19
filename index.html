@@ -687,25 +687,123 @@
     ]}
   ];
 
+  // Questions solo par secteur (8 questions chacune)
+  var questionsSolo = {
+    "services": [
+      { section:"Organisation & Planning", icon:"📅", color:"#1B2A4A", items:[
+        {id:"s1",text:"Comment gerez-vous votre planning et la prise de RDV clients ?",options:["Agenda papier ou memoire","Agenda Google basique","Outil RDV en ligne (Calendly...)","Systeme automatise avec rappels SMS/email"],weight:[3,2,1,0]},
+        {id:"s2",text:"Combien de temps passez-vous sur des taches administratives chaque semaine ?",options:["Moins de 2h","2 a 5h","5 a 10h","Plus de 10h"],weight:[0,1,2,3]}
+      ]},
+      { section:"Communication Clients", icon:"💬", color:"#2A5C9A", items:[
+        {id:"s3",text:"Comment communiquez-vous avec vos clients au quotidien ?",options:["Appels uniquement","SMS/WhatsApp informel","Email + WhatsApp","Outil pro centralise (app, CRM...)"],weight:[3,2,1,0]},
+        {id:"s4",text:"Avez-vous un moyen de recueillir les avis et retours de vos clients ?",options:["Jamais systematiquement","Verbalement en fin de mission","Formulaire Google ponctuel","Systeme automatise post-prestation"],weight:[3,2,1,0]}
+      ]},
+      { section:"Visibilite & Acquisition", icon:"📡", color:"#1E6B4A", items:[
+        {id:"s5",text:"Comment de nouveaux clients vous trouvent-ils ?",options:["Uniquement bouche a oreille","Quelques reseaux sociaux","LinkedIn + site ou Google My Business","Strategie multicanal avec contenu regulier"],weight:[3,2,1,0]},
+        {id:"s6",text:"Avez-vous une presence en ligne professionnelle (site, Google My Business) ?",options:["Aucune presence","Profil LinkedIn basique","Site simple ou fiche Google","Site optimise + contenu actif"],weight:[3,2,1,0]}
+      ]},
+      { section:"Gestion & Outils IA", icon:"🤖", color:"#8B5A00", items:[
+        {id:"s7",text:"Utilisez-vous des outils IA pour gagner du temps au quotidien ?",options:["Jamais","J'ai essaye ChatGPT quelques fois","Regulierement pour certaines taches","Integre dans mon workflow quotidien"],weight:[3,2,1,0]},
+        {id:"s8",text:"Vos devis, factures et contrats sont-ils generes manuellement ?",options:["Tout a la main ou Word","Templates mais saisie manuelle","Semi-automatise","Generation automatique et envoi digital"],weight:[3,2,1,0]}
+      ]}
+    ],
+    "artisan": [
+      { section:"Organisation & Chantiers", icon:"🔨", color:"#1B2A4A", items:[
+        {id:"a1",text:"Comment planifiez-vous et suivez-vous vos chantiers ?",options:["Memoire + appels","Cahier et agenda papier","Tableur ou appli basique","Outil pro de gestion de chantier"],weight:[3,2,1,0]},
+        {id:"a2",text:"Combien de temps passez-vous sur l'administratif (devis, factures, relances) chaque semaine ?",options:["Moins de 2h","2 a 5h","5 a 10h","Plus de 10h"],weight:[0,1,2,3]}
+      ]},
+      { section:"Devis & Facturation", icon:"📋", color:"#2A5C9A", items:[
+        {id:"a3",text:"Comment creez-vous vos devis ?",options:["A la main ou a l'oral","Word/Excel manuel","Logiciel de devis basique","Logiciel connecte + envoi automatique"],weight:[3,2,1,0]},
+        {id:"a4",text:"Relancez-vous systematiquement les devis non signes ?",options:["Jamais","Parfois, quand j'y pense","Oui, manuellement","Relances automatiques programmees"],weight:[3,2,1,0]}
+      ]},
+      { section:"Visibilite & Recommandations", icon:"⭐", color:"#1E6B4A", items:[
+        {id:"a5",text:"Comment de nouveaux clients vous trouvent-ils ?",options:["Uniquement bouche a oreille","Annuaire ou Pages Jaunes","Google My Business + reseaux","Strategie locale active"],weight:[3,2,1,0]},
+        {id:"a6",text:"Collectez-vous les avis Google de vos clients satisfaits ?",options:["Jamais","Occasionnellement","Souvent, manuellement","Systeme automatise de demande d'avis"],weight:[3,2,1,0]}
+      ]},
+      { section:"Outils & IA", icon:"🤖", color:"#8B5A00", items:[
+        {id:"a7",text:"Utilisez-vous des outils numeriques pour communiquer avec vos clients ?",options:["SMS/appels uniquement","WhatsApp informel","Email + WhatsApp","Application pro ou portail client"],weight:[3,2,1,0]},
+        {id:"a8",text:"Avez-vous deja utilise l'IA pour gagner du temps (redaction, chiffrage...) ?",options:["Jamais","J'ai teste une fois","Occasionnellement","Regulierement"],weight:[3,2,1,0]}
+      ]}
+    ],
+    "conseil": [
+      { section:"Prospection & Pipeline", icon:"🎯", color:"#1B2A4A", items:[
+        {id:"c1",text:"Comment gerez-vous votre pipeline commercial ?",options:["Dans ma tete","Tableau Excel/Notion basique","CRM leger","CRM + automatisation suivi"],weight:[3,2,1,0]},
+        {id:"c2",text:"Combien de temps passez-vous sur la prospection chaque semaine ?",options:["Moins de 2h","2 a 5h","5 a 10h","Plus de 10h (trop, pas de systeme)"],weight:[0,1,2,3]}
+      ]},
+      { section:"Positionnement & Visibilite", icon:"📡", color:"#2A5C9A", items:[
+        {id:"c3",text:"Quelle est votre strategie de contenu sur LinkedIn ?",options:["Pas de strategie","Publications occasionnelles","Planning editorial basique","Contenu regulier + audience engagee"],weight:[3,2,1,0]},
+        {id:"c4",text:"Votre positionnement est-il clairement visible en ligne ?",options:["Pas vraiment","Profil LinkedIn sommaire","Bio claire + quelques articles","Marque personnelle forte et coherente"],weight:[3,2,1,0]}
+      ]},
+      { section:"Delivery & Operations", icon:"⚙️", color:"#1E6B4A", items:[
+        {id:"c5",text:"Comment delivrez-vous vos livrables clients ?",options:["Email avec PJ","Dossier Drive partage","Portail client basique","Espace client structure et automatise"],weight:[3,2,1,0]},
+        {id:"c6",text:"Utilisez-vous des templates ou outils pour accelerer votre delivery ?",options:["Tout from scratch","Quelques templates Word","Templates + outils specifiques","Systeme reproductible et scalable"],weight:[3,2,1,0]}
+      ]},
+      { section:"IA & Productivite", icon:"🤖", color:"#8B5A00", items:[
+        {id:"c7",text:"Utilisez-vous l'IA dans votre travail quotidien ?",options:["Jamais","Quelques essais","Regulierement (Claude, ChatGPT...)","Integre dans mon workflow complet"],weight:[3,2,1,0]},
+        {id:"c8",text:"Avez-vous automatise des taches repetitives dans votre activite ?",options:["Jamais","1 ou 2 automatisations simples","Plusieurs automatisations","Systeme Make/Zapier avance"],weight:[3,2,1,0]}
+      ]}
+    ],
+    "commerce": [
+      { section:"Ventes & Caisse", icon:"🛒", color:"#1B2A4A", items:[
+        {id:"m1",text:"Comment gerez-vous vos stocks et ventes ?",options:["Papier ou memoire","Tableur manuel","Logiciel de caisse basique","Systeme connecte (stock, ventes, analytics)"],weight:[3,2,1,0]},
+        {id:"m2",text:"Avez-vous une presence en ligne pour vendre ou vous faire connaitre ?",options:["Aucune","Page Facebook/Instagram","Site vitrine basique","E-commerce ou Click & Collect actif"],weight:[3,2,1,0]}
+      ]},
+      { section:"Clients & Fidelisation", icon:"🤝", color:"#2A5C9A", items:[
+        {id:"m3",text:"Avez-vous un programme de fidelite ou un moyen de recontacter vos clients ?",options:["Non","Carte de fidelite papier","Base email basique","CRM + sequences automatisees"],weight:[3,2,1,0]},
+        {id:"m4",text:"Comment recueillez-vous les avis de vos clients ?",options:["Jamais","Verbalement","Formulaire papier","Systeme digital automatise"],weight:[3,2,1,0]}
+      ]},
+      { section:"Communication Locale", icon:"📡", color:"#1E6B4A", items:[
+        {id:"m5",text:"Quelle est votre strategie de communication locale ?",options:["Bouche a oreille uniquement","Flyers ponctuels","Reseaux sociaux irreguliers","Strategie locale multicanal"],weight:[3,2,1,0]},
+        {id:"m6",text:"Votre fiche Google My Business est-elle optimisee et mise a jour ?",options:["Pas de fiche","Fiche basique non geree","Fiche complete mais inactive","Fiche optimisee + avis reguliers"],weight:[3,2,1,0]}
+      ]},
+      { section:"Outils & IA", icon:"🤖", color:"#8B5A00", items:[
+        {id:"m7",text:"Utilisez-vous des outils numeriques pour la gestion quotidienne ?",options:["Tres peu","Quelques apps isolees","Suite coherente mais manuelle","Outils connectes et automatises"],weight:[3,2,1,0]},
+        {id:"m8",text:"Avez-vous deja utilise l'IA dans votre commerce ?",options:["Jamais","J'ai teste","Pour quelques taches","Integre (descriptions, service client...)"],weight:[3,2,1,0]}
+      ]}
+    ]
+  };
+
+  var SOLO_SECTORS = [
+    {key:"services", label:"Services à la personne", desc:"Gouvernante, aide a domicile, garde d'enfants, soins...", icon:"🏠"},
+    {key:"artisan",  label:"Artisan & BTP",           desc:"Plombier, electricien, menuisier, peintre, maçon...", icon:"🔨"},
+    {key:"conseil",  label:"Conseil & Freelance",     desc:"Consultant, coach, formateur, designer, redacteur...", icon:"💼"},
+    {key:"commerce", label:"Commerce de proximite",   desc:"Boutique, restauration, epicerie, service local...", icon:"🛒"}
+  ];
+
+  function getActiveQuestions() {
+    if (state.profile === "solo" && state.soloSector && questionsSolo[state.soloSector]) {
+      return questionsSolo[state.soloSector];
+    }
+    return questions;
+  }
+
+  function getAllQ() {
+    var aq = getActiveQuestions();
+    var flat = [];
+    aq.forEach(function(s){ s.items.forEach(function(i){ flat.push(Object.assign({},i,{section:s.section,sectionColor:s.color,sectionIcon:s.icon})); }); });
+    return flat;
+  }
+
   var allQ = [];
   questions.forEach(function(s){ s.items.forEach(function(i){ allQ.push(Object.assign({},i,{section:s.section,sectionColor:s.color,sectionIcon:s.icon})); }); });
 
-  var state = { step:"intro", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:""}, results:null, loadingText:"Analyse en cours..." };
+  var state = { step:"profile", profile:"", soloSector:"", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:""}, results:null, loadingText:"Analyse en cours..." };
   var loadingMsgs = ["Analyse de vos reponses...","Calcul du score de maturite...","Identification des quick wins...","Estimation du ROI...","Generation de la recommandation...","Finalisation du rapport..."];
 
   function getSectionScores() {
-    return questions.map(function(s){
+    var aq = getActiveQuestions();
+    return aq.map(function(s){
       var raw = s.items.reduce(function(acc,item){ return acc + (state.answers[item.id]!==undefined ? item.weight[state.answers[item.id]] : 0); },0);
       return { section:s.section, icon:s.icon, color:s.color, score:Math.round(((s.items.length*3-raw)/(s.items.length*3))*100) };
     });
   }
 
   function getGlobalScore() {
-    var totalRaw = Object.keys(state.answers).reduce(function(acc,id){
-      var q = allQ.find(function(q){return q.id===id;});
-      return acc + (q ? q.weight[state.answers[id]] : 0);
+    var flat = getAllQ();
+    var totalRaw = flat.reduce(function(acc,q){
+      return acc + (state.answers[q.id]!==undefined ? q.weight[state.answers[q.id]] : 0);
     },0);
-    return Math.round(((allQ.length*3-totalRaw)/(allQ.length*3))*100);
+    return Math.round(((flat.length*3-totalRaw)/(flat.length*3))*100);
   }
 
   var card = "background:#fff;border:1px solid "+BORDER+";border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(27,42,74,0.06);";
@@ -721,18 +819,55 @@
   function render() {
     var el = document.getElementById("diag-app");
     if (!el) return;
-    var progress = Math.round((Object.keys(state.answers).length / allQ.length)*100);
-    var cq = allQ[state.currentQ];
-    var si = questions.findIndex(function(s){return cq && s.section===cq.section;});
+    var activeAllQ = getAllQ();
+    var progress = activeAllQ.length > 0 ? Math.round((Object.keys(state.answers).length / activeAllQ.length)*100) : 0;
+    var cq = activeAllQ[state.currentQ];
+    var aqSections = getActiveQuestions();
+    var si = aqSections.findIndex(function(s){return cq && s.section===cq.section;});
     var html = "";
 
-    if (state.step==="intro") {
+    // ── STEP: PROFILE (PME vs Solo) ──
+    if (state.step==="profile") {
+      html = '<div style="'+card+'">';
+      html += '<div style="font-size:11px;color:'+GOLD+';letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:14px;font-family:Arial,sans-serif;">Diagnostic Maturite Digitale</div>';
+      html += '<h3 style="font-family:Georgia,serif;font-size:22px;color:'+NAVY+';margin-bottom:10px;">Revelez le potentiel digital de votre activite</h3>';
+      html += '<p style="font-size:14px;color:'+MUTED+';line-height:1.7;margin-bottom:24px;font-family:Arial,sans-serif;">Rapport IA personnalise · Gratuit · Resultats instantanes</p>';
+      html += '<p style="font-size:12px;font-weight:700;color:'+NAVY+';text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-family:Arial,sans-serif;">Vous etes...</p>';
+      html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;">';
+      html += '<button onclick="window.diagSetProfile(\'pme\')" style="'+btnNavy+';padding:20px 14px;border-radius:12px;text-align:center;line-height:1.4;font-size:14px;">🏢<br><strong>PME / ETI</strong><br><span style=\"font-size:11px;opacity:0.7;\">2 personnes et plus</span></button>';
+      html += '<button onclick="window.diagSetProfile(\'solo\')" style="background:linear-gradient(135deg,'+GOLD+','+GOLDL+');color:'+NAVY+';border:none;border-radius:12px;padding:20px 14px;text-align:center;line-height:1.4;cursor:pointer;font-size:14px;font-weight:700;font-family:Arial,sans-serif;">🧑‍💻<br><strong>Solo entrepreneur</strong><br><span style=\"font-size:11px;opacity:0.7;\">Independant, freelance, 1 personne</span></button>';
+      html += '</div>';
+      html += '</div>';
+    }
+
+    // ── STEP: SECTOR (solo uniquement) ──
+    else if (state.step==="sector") {
+      html = '<div style="'+card+'">';
+      html += '<div style="font-size:11px;color:'+GOLD+';letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:14px;font-family:Arial,sans-serif;">Votre secteur</div>';
+      html += '<h3 style="font-family:Georgia,serif;font-size:20px;color:'+NAVY+';margin-bottom:8px;">Dans quel domaine exercez-vous ?</h3>';
+      html += '<p style="font-size:13px;color:'+MUTED+';margin-bottom:20px;font-family:Arial,sans-serif;">Vos questions et recommandations seront adaptees a votre secteur.</p>';
+      html += '<div style="display:flex;flex-direction:column;gap:10px;">';
+      SOLO_SECTORS.forEach(function(s){
+        html += '<button onclick="window.diagSetSector(\''+s.key+'\')" style="background:'+CREAM2+';border:1.5px solid '+BORDER+';border-radius:10px;padding:14px 16px;text-align:left;cursor:pointer;font-family:Arial,sans-serif;transition:border-color 0.2s;display:flex;gap:12px;align-items:center;">';
+        html += '<span style="font-size:22px;">'+s.icon+'</span>';
+        html += '<div><div style="font-size:14px;font-weight:700;color:'+NAVY+';">'+s.label+'</div>';
+        html += '<div style="font-size:12px;color:'+MUTED+';">'+s.desc+'</div></div>';
+        html += '</button>';
+      });
+      html += '</div>';
+      html += '<button onclick="window.diagNav(\'profile\')" style="'+btnGhost+';margin-top:14px;">&larr; Retour</button>';
+      html += '</div>';
+    }
+
+    else if (state.step==="intro") {
       html = '<div style="'+card+'">';
       html += '<div style="font-size:11px;color:'+GOLD+';letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:14px;font-family:Arial,sans-serif;">Diagnostic Maturite Digitale</div>';
       html += '<h3 style="font-family:Georgia,serif;font-size:22px;color:'+NAVY+';margin-bottom:10px;">Revelez le potentiel digital de votre entreprise</h3>';
-      html += '<p style="font-size:14px;color:'+MUTED+';line-height:1.7;margin-bottom:20px;font-family:Arial,sans-serif;">16 questions · 10 minutes · Rapport IA personnalise · Gratuit</p>';
+      var qcount = state.profile==="solo" ? "8" : "16";
+      var tcount = state.profile==="solo" ? "8 minutes" : "10 minutes";
+      html += '<p style="font-size:14px;color:'+MUTED+';line-height:1.7;margin-bottom:20px;font-family:Arial,sans-serif;">'+qcount+' questions · '+tcount+' · Rapport IA personnalise · Gratuit</p>';
       html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">';
-      questions.forEach(function(s){
+      aqSections.forEach(function(s){
         html += '<div style="background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:12px;display:flex;gap:8px;">';
         html += '<span style="font-size:16px;">'+s.icon+'</span>';
         html += '<div><div style="font-size:12px;font-weight:600;color:'+NAVY+';font-family:Arial,sans-serif;">'+s.section+'</div>';
@@ -744,7 +879,8 @@
         html += '<span style="font-size:12px;color:'+MUTED+';font-family:Arial,sans-serif;">'+item[0]+' '+item[1]+'</span>';
       });
       html += '</div>';
-      html += '<button style="'+btnGold+'" id="diag-start-btn">Demarrer le diagnostic &rarr;</button>';
+      html += '<button style="'+btnGold+'" id="diag-start-btn">Demarrer &rarr;</button>';
+      html += '<button onclick="window.diagNav(\'profile\')" style="'+btnGhost+';margin-left:10px;">&larr; Retour</button>';
       html += '</div>';
     }
 
@@ -802,7 +938,7 @@
     else if (state.step==="questions") {
       html += '<div style="margin-bottom:18px;">';
       html += '<div style="display:flex;justify-content:space-between;margin-bottom:6px;">';
-      html += '<span style="font-size:12px;color:'+MUTED+';font-family:Arial,sans-serif;">Question '+(state.currentQ+1)+' / '+allQ.length+'</span>';
+      html += '<span style="font-size:12px;color:'+MUTED+';font-family:Arial,sans-serif;">Question '+(state.currentQ+1)+' / '+activeAllQ.length+'</span>';
       html += '<span style="font-size:12px;color:'+GOLD+';font-weight:600;font-family:Arial,sans-serif;">'+progress+'%</span>';
       html += '</div>';
       html += '<div style="height:3px;background:'+BORDER+';border-radius:2px;overflow:hidden;">';
@@ -810,7 +946,7 @@
       html += '</div></div>';
 
       html += '<div style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;">';
-      questions.forEach(function(s,i){
+      aqSections.forEach(function(s,i){
         var active = i===si;
         html += '<div style="flex-shrink:0;padding:4px 10px;border-radius:100px;background:'+(active?NAVY:CREAM2)+';border:1px solid '+(active?NAVY:BORDER)+';font-size:11px;color:'+(active?"#fff":DIMMED)+';font-weight:'+(active?"600":"400")+';white-space:nowrap;font-family:Arial,sans-serif;">'+s.icon+' '+s.section+'</div>';
       });
@@ -829,9 +965,9 @@
 
       html += '<div style="display:flex;gap:10px;justify-content:space-between;align-items:center;">';
       html += '<button style="'+btnGhost+'" onclick="window.diagPrev()">← Precedent</button>';
-      if (Object.keys(state.answers).length===allQ.length) {
+      if (Object.keys(state.answers).length===activeAllQ.length) {
         html += '<button style="'+btnGold+'" onclick="window.diagGenerate()">Generer mon rapport ✨</button>';
-      } else if (state.currentQ < allQ.length-1 && state.answers[cq.id]!==undefined) {
+      } else if (state.currentQ < activeAllQ.length-1 && state.answers[cq.id]!==undefined) {
         html += '<button style="'+btnNavy+'" onclick="window.diagGoTo(null)">Suivant &rarr;</button>';
       }
       html += '</div>';
@@ -935,9 +1071,31 @@
     el.innerHTML = html;
   }
 
+  window.diagNav = function(step) { state.step = step; render(); };
+  window.diagSetProfile = function(p) {
+    state.profile = p;
+    state.answers = {};
+    state.currentQ = 0;
+    if (p === "pme") {
+      state.info.size = "";
+      state.step = "intro";
+    } else {
+      state.step = "sector";
+    }
+    render();
+  };
+  window.diagSetSector = function(sector) {
+    state.soloSector = sector;
+    var sectorLabel = SOLO_SECTORS.find(function(s){return s.key===sector;});
+    if (sectorLabel) state.info.sector = sectorLabel.label;
+    state.info.size = "Solo entrepreneur (1 personne)";
+    state.step = "intro";
+    render();
+  };
   window.diagGoTo = function(s) {
+    var aq = getAllQ();
     if (s) state.step = s;
-    else if (state.currentQ < allQ.length-1) state.currentQ++;
+    else if (state.currentQ < aq.length-1) state.currentQ++;
     render();
   };
   window.diagPrev = function() {
@@ -945,12 +1103,13 @@
   };
   window.diagInfoUpdate = function(k,v) { state.info[k]=v; };
   window.diagAnswer = function(idx) {
-    state.answers[allQ[state.currentQ].id] = idx;
-    if (state.currentQ < allQ.length-1) { state.currentQ++; }
+    var aq = getAllQ();
+    state.answers[aq[state.currentQ].id] = idx;
+    if (state.currentQ < aq.length-1) { state.currentQ++; }
     render();
   };
   window.diagReset = function() {
-    state = { step:"intro", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:""}, results:null, loadingText:"Analyse en cours..." };
+    state = { step:"profile", profile:"", soloSector:"", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:""}, results:null, loadingText:"Analyse en cours..." };
     render();
   };
 
@@ -964,8 +1123,9 @@
       if (t) t.textContent = loadingMsgs[msgIdx];
     }, 1400);
 
+    var aqSections = getActiveQuestions();
     var ss = getSectionScores();
-    var summaryLines = questions.map(function(section){
+    var summaryLines = aqSections.map(function(section){
       var sData = ss.find(function(s){return s.section===section.section;});
       return "## "+section.section+" (Score: "+(sData?sData.score:0)+"/100)\n"
         + section.items.map(function(item){
@@ -975,10 +1135,11 @@
     }).join("\n\n");
 
     var info = state.info;
-    var isSolo = (info.size||"").toLowerCase().indexOf("solo") !== -1;
+    var isSolo = state.profile === "solo" || (info.size||"").toLowerCase().indexOf("solo") !== -1;
+    var sectorName = state.soloSector ? (SOLO_SECTORS.find(function(s){return s.key===state.soloSector;})||{}).label : (info.sector||"");
     var profileCtx = isSolo
-      ? "solo entrepreneur (1 personne, toutes activites confondues — consultant, artisan, freelance, independant, coach, prestataire de services, etc.)"
-      : "PME / TPE ("+( info.size||"taille non precisee")+")";
+      ? "solo entrepreneur, secteur : "+(sectorName||info.sector||"non precise")
+      : "PME / TPE ("+(info.size||"taille non precisee")+")";
     var roiCtx = isSolo
       ? "Adapte le ROI a un profil solo : gains en heures personnelles liberees par semaine (objectif 5-10h), revenus supplementaires potentiels grace au temps recupere, couts reduits sur les outils. Investissement recommande coherent avec un budget solo : 500-1500 euro/mois max."
       : "Adapte le ROI a une equipe : heures d equipe gagnees, gain annuel estime realiste, delai retour sur investissement.";
