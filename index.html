@@ -1159,6 +1159,25 @@
       state.results = parsed;
       state.step = "results";
       render();
+      // Envoi rapport par email via Make
+      try {
+        var rapportTexte = '';
+        if (parsed.synthese) rapportTexte += parsed.synthese + '\n\n';
+        if (parsed.quickWins) parsed.quickWins.forEach(function(qw,i){ rapportTexte += (i+1)+'. '+qw.titre+' : '+qw.description+' ('+qw.impact+')\n'; });
+        if (parsed.roiEstimation) rapportTexte += '\nROI estimé : '+parsed.roiEstimation.heuresGagneesParSemaine+'h/semaine · '+parsed.roiEstimation.gainAnnuelEstime;
+        fetch('https://hook.eu2.make.com/au64jug7xs6q7tvp5k58pge2ieht1dax', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nom: state.info.name || 'Non renseigné',
+            email: state.info.contact || '',
+            secteur: state.info.sector || state.soloSector || 'Non précisé',
+            score: getGlobalScore(),
+            rapport: rapportTexte
+          }),
+          mode: 'no-cors'
+        });
+      } catch(e) {}
     } catch(e) {
       clearInterval(interval);
       state.step = "error";
