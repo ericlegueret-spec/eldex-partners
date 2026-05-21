@@ -35,9 +35,8 @@
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(248,247,244,0.95);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(248,247,244,0.92);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 0 40px;
     display: flex; align-items: center; justify-content: space-between;
@@ -53,225 +52,130 @@
   .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--navy); }
   .nav-cta {
-    background: var(--navy); color: #fff !important;
+    background: var(--navy); color: #fff;
     padding: 9px 20px; border-radius: 6px;
     font-size: 13px; font-weight: 600; text-decoration: none;
     transition: background 0.2s;
   }
-  .nav-cta:hover { background: var(--navy2) !important; }
-
-  /* Hamburger */
-  .nav-burger {
-    display: none; flex-direction: column; gap: 5px; cursor: pointer;
-    padding: 6px; border: none; background: transparent;
-  }
-  .nav-burger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s; }
-  .nav-mobile {
-    display: none; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
-    background: rgba(248,247,244,0.98); backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border); padding: 20px 24px;
-    flex-direction: column; gap: 16px;
-  }
-  .nav-mobile.open { display: flex; }
-  .nav-mobile a { font-size: 16px; color: var(--navy); text-decoration: none; padding: 8px 0; border-bottom: 1px solid var(--border); font-weight: 500; }
-  .nav-mobile a:last-child { border-bottom: none; }
+  .nav-cta:hover { background: var(--navy2); }
 
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
     display: flex; align-items: center;
-    padding: 100px 40px 60px;
+    padding: 100px 40px 80px;
     position: relative; overflow: hidden;
   }
   .hero::before {
     content: '';
     position: absolute; top: -200px; right: -100px;
     width: 700px; height: 700px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
     pointer-events: none;
   }
-  .hero::after {
-    content: '';
-    position: absolute; bottom: -150px; left: -150px;
-    width: 500px; height: 500px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(27,42,74,0.04) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-inner {
-    max-width: 1100px; margin: 0 auto; width: 100%;
-    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center;
-  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);
     padding: 6px 14px; border-radius: 100px; margin-bottom: 24px;
-    font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase;
+    font-size: 12px; font-weight: 600; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase;
   }
-  .hero-badge::before {
-    content: ''; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--gold); animation: pulse 2s infinite; flex-shrink: 0;
-  }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.8);} }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
 
-  .hero-h1 {
+  h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4.5vw, 58px);
-    font-weight: 700; line-height: 1.08; letter-spacing: -0.5px;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 700; line-height: 1.1; letter-spacing: -0.5px;
     color: var(--navy); margin-bottom: 20px;
   }
-  .hero-h1 em { color: var(--gold); font-style: normal; }
+  h1 em { color: var(--gold); font-style: normal; }
   .hero-sub {
-    font-size: 16px; color: var(--muted); line-height: 1.75;
-    max-width: 460px; margin-bottom: 32px;
+    font-size: 17px; color: var(--muted); line-height: 1.7;
+    max-width: 480px; margin-bottom: 36px;
   }
-  .hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 32px; }
-  .hero-trust {
-    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-    padding-top: 20px; border-top: 1px solid var(--border);
-  }
-  .hero-trust-item { font-size: 12px; color: var(--dimmed); display: flex; align-items: center; gap: 5px; }
-  .hero-trust-item strong { color: var(--navy); font-size: 13px; }
-
+  .hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
   .btn-gold {
     background: linear-gradient(135deg, var(--gold), var(--gold2));
     color: var(--navy); font-weight: 700; font-size: 14px;
     padding: 14px 28px; border-radius: 8px; text-decoration: none;
     box-shadow: 0 4px 20px rgba(201,168,76,0.3);
     transition: transform 0.2s, box-shadow 0.2s;
-    display: inline-block;
   }
-  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,0.45); }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,0.4); }
   .btn-outline {
     border: 1.5px solid var(--border); color: var(--navy); font-size: 14px;
-    padding: 13px 22px; border-radius: 8px; text-decoration: none;
-    transition: border-color 0.2s, background 0.2s; display: inline-block;
+    padding: 13px 24px; border-radius: 8px; text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
   }
   .btn-outline:hover { border-color: var(--navy); background: var(--cream2); }
 
-  /* Hero card — glass morphism */
+  /* Hero card */
   .hero-card {
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.9);
-    border-radius: 20px; padding: 28px;
-    box-shadow: 0 24px 60px rgba(27,42,74,0.1), 0 1px 0 rgba(255,255,255,0.8) inset;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px;
+    box-shadow: 0 20px 60px rgba(27,42,74,0.08);
     position: relative;
   }
   .hero-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    border-radius: 20px 20px 0 0;
-    background: linear-gradient(90deg, var(--navy), var(--gold), var(--gold2));
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    border-radius: 16px 16px 0 0;
+    background: linear-gradient(90deg, var(--navy), var(--gold));
   }
-  .card-label { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 18px; }
+  .card-label { font-size: 10px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 20px; }
   .score-circle {
-    width: 80px; height: 80px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--navy), var(--navy2));
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center; margin: 0 auto 14px;
-    box-shadow: 0 8px 24px rgba(27,42,74,0.25);
+    width: 88px; height: 88px; border-radius: 50%;
+    background: var(--navy); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; margin: 0 auto 16px;
   }
-  .score-circle span { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: #fff; line-height: 1; }
+  .score-circle span { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 700; color: #fff; line-height: 1; }
   .score-circle small { font-size: 10px; color: var(--gold); }
-  .score-label { text-align: center; font-size: 10px; font-weight: 700; color: #C02A2A; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 18px; }
-  .mini-bars { display: flex; flex-direction: column; gap: 9px; margin-bottom: 18px; }
-  .mini-bar label { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+  .score-label { text-align: center; font-size: 11px; font-weight: 700; color: #C02A2A; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+  .mini-bars { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .mini-bar label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
   .mini-bar label span { font-weight: 600; color: var(--navy); }
-  .bar-track { height: 3px; background: var(--cream2); border-radius: 2px; }
-  .bar-fill { height: 3px; border-radius: 2px; transition: width 1s ease; }
+  .bar-track { height: 4px; background: var(--cream2); border-radius: 2px; }
+  .bar-fill { height: 4px; border-radius: 2px; }
   .card-cta {
     width: 100%; background: linear-gradient(135deg, var(--gold), var(--gold2));
     color: var(--navy); font-weight: 700; font-size: 13px;
     padding: 12px; border-radius: 8px; text-align: center;
-    text-decoration: none; display: block; transition: opacity 0.2s, transform 0.2s;
+    text-decoration: none; display: block; transition: opacity 0.2s;
   }
-  .card-cta:hover { opacity: 0.9; transform: translateY(-1px); }
-
-  /* ── STATS STRIP ── */
-  .stats-strip {
-    background: var(--navy);
-    padding: 28px 40px;
-  }
-  .stats-inner {
-    max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 0; border-radius: 0;
-  }
-  .stat-item {
-    text-align: center; padding: 16px 20px;
-    border-right: 1px solid rgba(255,255,255,0.08);
-  }
-  .stat-item:last-child { border-right: none; }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(30px, 3vw, 44px);
-    font-weight: 700; color: var(--gold); line-height: 1;
-    margin-bottom: 4px;
-  }
-  .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.4; }
+  .card-cta:hover { opacity: 0.9; }
 
   /* ── SECTIONS ── */
-  section { padding: 88px 40px; }
+  section { padding: 96px 40px; }
   .section-inner { max-width: 1100px; margin: 0 auto; }
   .section-label { font-size: 11px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; font-weight: 600; margin-bottom: 12px; }
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 4vw, 48px); font-weight: 700; line-height: 1.15; color: var(--navy); margin-bottom: 16px; }
+  h2 em { color: var(--gold); font-style: normal; }
+  .section-sub { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 560px; margin-bottom: 56px; }
 
-  /* Scope h2 to sections only — bug fix */
-  .section-inner h2,
-  section > h2,
-  .diag-section h2,
-  .hero h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 3.5vw, 44px);
-    font-weight: 700; line-height: 1.15;
-    color: var(--navy); margin-bottom: 16px;
-  }
-  .section-inner h2 em { color: var(--gold); font-style: normal; }
-  .section-sub {
-    font-size: 16px; color: var(--muted); line-height: 1.7;
-    max-width: 560px; margin-bottom: 48px;
-  }
-  .section-sub.centered { margin-left: auto; margin-right: auto; }
-
-  /* ── PAIN POINTS — bento grid ── */
+  /* ── PAIN POINTS ── */
   .pain-section { background: var(--navy); }
   .pain-section .section-label { color: var(--gold); }
-  .pain-section h2 { color: #fff !important; }
+  .pain-section h2 { color: #fff; }
   .pain-section .section-sub { color: rgba(255,255,255,0.6); }
-  .pain-bento {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 16px;
-  }
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .pain-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px; padding: 28px;
-    transition: background 0.25s, transform 0.25s;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 28px;
+    transition: background 0.2s;
   }
-  .pain-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-2px); }
-  .pain-card.wide { grid-column: span 1; }
-  .pain-card.tall { grid-row: span 2; display: flex; flex-direction: column; justify-content: space-between; }
-  .pain-icon {
-    width: 44px; height: 44px; border-radius: 12px;
-    background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.2);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 18px; font-size: 20px;
-  }
+  .pain-card:hover { background: rgba(255,255,255,0.08); }
+  .pain-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(201,168,76,0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 20px; }
   .pain-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 10px; }
-  .pain-card p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.65; }
-  .pain-stat { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
-  .pain-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; color: var(--gold); line-height: 1; }
-  .pain-stat-label { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+  .pain-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.65; }
 
   /* ── OFFRES ── */
-  .offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .offer-card {
     background: #fff; border: 1px solid var(--border);
-    border-radius: 16px; padding: 28px; position: relative;
-    transition: transform 0.25s, box-shadow 0.25s;
-    display: flex; flex-direction: column;
+    border-radius: 14px; padding: 32px; position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .offer-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(27,42,74,0.1); }
+  .offer-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(27,42,74,0.1); }
   .offer-card.featured {
     border-color: var(--gold); border-width: 2px;
     box-shadow: 0 8px 32px rgba(201,168,76,0.15);
@@ -279,118 +183,97 @@
   .offer-badge {
     position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
     background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 700;
-    padding: 4px 16px; border-radius: 100px; letter-spacing: 1px; text-transform: uppercase;
-    white-space: nowrap; box-shadow: 0 2px 8px rgba(201,168,76,0.4);
+    padding: 4px 14px; border-radius: 100px; letter-spacing: 1px; text-transform: uppercase;
+    white-space: nowrap;
   }
-  .offer-icon { font-size: 28px; margin-bottom: 14px; }
-  .offer-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
-  .offer-card .offer-sub { font-size: 11px; color: var(--gold); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
-  .offer-card > p { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 18px; flex-grow: 1; }
-  .offer-features { list-style: none; margin-bottom: 20px; }
-  .offer-features li { font-size: 13px; color: var(--navy); padding: 6px 0; border-bottom: 1px solid var(--cream2); display: flex; align-items: center; gap: 8px; }
-  .offer-features li::before { content: '→'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+  .offer-icon { font-size: 28px; margin-bottom: 16px; }
+  .offer-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .offer-card .offer-sub { font-size: 12px; color: var(--gold); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+  .offer-card p { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+  .offer-features { list-style: none; margin-bottom: 24px; }
+  .offer-features li { font-size: 13px; color: var(--navy); padding: 5px 0; border-bottom: 1px solid var(--cream2); display: flex; align-items: center; gap: 8px; }
+  .offer-features li::before { content: '→'; color: var(--gold); font-weight: 700; }
   .offer-price { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-  .offer-price small { font-size: 13px; font-family: 'DM Sans', sans-serif; color: var(--muted); font-weight: 400; }
+  .offer-price small { font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--muted); font-weight: 400; }
 
-  /* CDI anchor — bug fix (no conflicting margins) */
-  .cdi-anchor {
-    background: var(--navy); color: #F8F7F4;
-    border-left: 4px solid var(--gold);
-    padding: 20px 28px; margin: 0 auto 40px;
-    border-radius: 8px;
-    max-width: 700px;
-  }
-  .cdi-anchor-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); margin-bottom: 8px; }
-  .cdi-anchor p { font-size: 16px; line-height: 1.7; color: #F8F7F4; }
-  .cdi-anchor strong { color: var(--gold); }
-
-  /* ── DIAGNOSTIC ── */
+  /* ── DIAGNOSTIC CTA ── */
   .diag-section { background: var(--cream2); }
+  .diag-inner {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 20px; padding: 64px 56px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .diag-inner::after {
+    content: 'EL'; position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif; font-size: 200px; font-weight: 700;
+    color: rgba(201,168,76,0.04); pointer-events: none; line-height: 1;
+  }
+  .diag-items { display: flex; flex-direction: column; gap: 16px; }
+  .diag-item { display: flex; align-items: flex-start; gap: 14px; }
+  .diag-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 5px; }
+  .diag-item p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .diag-item strong { color: var(--navy); font-weight: 600; }
 
   /* ── PORTAIL ── */
   .portail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-  .portail-features { display: flex; flex-direction: column; gap: 18px; }
+  .portail-features { display: flex; flex-direction: column; gap: 20px; }
   .portail-feature { display: flex; gap: 16px; align-items: flex-start; }
   .portail-feature-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(27,42,74,0.06); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
   .portail-feature h4 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
   .portail-feature p { font-size: 13px; color: var(--muted); line-height: 1.6; }
   .portail-mockup {
-    background: var(--navy); border-radius: 20px; padding: 28px;
-    box-shadow: 0 32px 80px rgba(27,42,74,0.22), 0 1px 0 rgba(255,255,255,0.06) inset;
+    background: var(--navy); border-radius: 16px; padding: 28px;
+    box-shadow: 0 24px 60px rgba(27,42,74,0.2);
   }
   .pm-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
   .pm-title { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; }
   .pm-badge { font-size: 10px; background: rgba(201,168,76,0.2); color: var(--gold); padding: 3px 10px; border-radius: 100px; font-weight: 600; }
-  .pm-client { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+  .pm-client { background: rgba(255,255,255,0.06); border-radius: 10px; padding: 16px; margin-bottom: 12px; }
   .pm-client-name { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 4px; }
   .pm-client-sub { font-size: 12px; color: rgba(255,255,255,0.4); }
   .pm-progress { margin-top: 10px; }
   .pm-progress-label { display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 5px; }
-  .pm-bar { height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; }
-  .pm-bar-fill { height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold2)); border-radius: 2px; }
+  .pm-bar { height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+  .pm-bar-fill { height: 3px; background: var(--gold); border-radius: 2px; }
   .pm-docs { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
-  .pm-doc { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
-  .pm-doc:hover { background: rgba(255,255,255,0.06); }
+  .pm-doc { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
   .pm-doc-name { font-size: 12px; color: rgba(255,255,255,0.7); }
   .pm-doc-tag { font-size: 10px; color: var(--gold); font-weight: 600; }
 
-  /* ── BOUCLE ── */
+  /* ── BOUCLE CRÉDIBILITÉ ── */
   .boucle-section { background: var(--navy); }
-  .boucle-section h2 { color: #fff !important; }
+  .boucle-section h2 { color: #fff; }
   .boucle-section .section-sub { color: rgba(255,255,255,0.55); }
   .boucle-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center; }
   .boucle-card {
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px; padding: 28px;
-    transition: background 0.2s;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px; padding: 28px;
   }
-  .boucle-card:hover { background: rgba(255,255,255,0.07); }
   .boucle-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #fff; margin-bottom: 8px; }
   .boucle-card p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.6; margin-bottom: 16px; }
   .boucle-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .boucle-tag { font-size: 11px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.18); color: var(--gold); padding: 4px 12px; border-radius: 100px; }
+  .boucle-tag { font-size: 12px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: var(--gold); padding: 4px 12px; border-radius: 100px; }
   .boucle-arrow { text-align: center; color: var(--gold); font-size: 28px; }
-
-  /* ── STICKY MOBILE CTA ── */
-  .sticky-cta {
-    display: none;
-    position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
-    background: var(--navy); border-top: 1px solid rgba(201,168,76,0.3);
-    padding: 12px 20px;
-  }
-  .sticky-cta a {
-    display: block; text-align: center;
-    background: linear-gradient(135deg, var(--gold), var(--gold2));
-    color: var(--navy); font-weight: 700; font-size: 15px;
-    padding: 14px; border-radius: 8px; text-decoration: none;
-  }
 
   /* ── FOOTER ── */
   footer {
-    background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06);
+    background: var(--navy); border-top: 1px solid rgba(255,255,255,0.08);
     padding: 56px 40px 32px;
   }
   .footer-inner { max-width: 1100px; margin: 0 auto; }
   .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 48px; }
-  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 12px; }
   .footer-brand span { color: var(--gold); }
-  .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.35); font-style: italic; line-height: 1.6; }
+  .footer-tagline { font-size: 14px; color: rgba(255,255,255,0.4); font-style: italic; line-height: 1.6; }
   .footer-col h4 { font-size: 11px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 16px; }
-  .footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+  .footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
   .footer-col a:hover { color: #fff; }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
-  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
   .footer-made { font-size: 12px; color: var(--gold); font-style: italic; }
 
-  /* ── SCROLL ANIMATIONS ── */
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-d1 { transition-delay: 0.08s; }
-  .reveal-d2 { transition-delay: 0.18s; }
-  .reveal-d3 { transition-delay: 0.28s; }
-  .reveal-d4 { transition-delay: 0.38s; }
-
-  /* Hero stays CSS-animated (above fold) */
+  /* ── ANIMATIONS ── */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
   .anim { opacity: 0; animation: fadeUp 0.7s ease forwards; }
   .anim-1 { animation-delay: 0.1s; }
@@ -398,37 +281,15 @@
   .anim-3 { animation-delay: 0.4s; }
   .anim-4 { animation-delay: 0.55s; }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 1024px) {
-    .offers-grid { grid-template-columns: 1fr 1fr; }
-    .hero-inner { gap: 48px; }
-  }
-
   @media (max-width: 900px) {
-    .hero-inner, .portail-grid { grid-template-columns: 1fr; }
-    .pain-bento { grid-template-columns: 1fr; }
-    .pain-card.tall { grid-row: span 1; }
+    .hero-inner, .portail-grid, .diag-inner { grid-template-columns: 1fr; }
+    .pain-grid, .offers-grid { grid-template-columns: 1fr; }
     .boucle-grid { grid-template-columns: 1fr; }
     .footer-top { grid-template-columns: 1fr; gap: 32px; }
     .boucle-arrow { transform: rotate(90deg); }
     nav { padding: 0 20px; }
     .nav-links { display: none; }
-    .nav-burger { display: flex; }
     section, .hero { padding-left: 20px; padding-right: 20px; }
-    section { padding-top: 64px; padding-bottom: 64px; }
-    .stats-strip { padding: 0 20px; }
-    .stats-inner { grid-template-columns: repeat(2, 1fr); }
-    .stat-item:nth-child(2) { border-right: none; }
-    .stat-item { border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .stat-item:nth-child(3), .stat-item:nth-child(4) { border-bottom: none; }
-    .sticky-cta { display: block; }
-    .hero { padding-bottom: 100px; }
-    footer { padding-bottom: 80px; }
-  }
-
-  @media (max-width: 600px) {
-    .offers-grid { grid-template-columns: 1fr; }
-    .stats-inner { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
@@ -443,38 +304,22 @@
     <a href="#portail">Espace client</a>
     <a href="#contact" class="nav-cta">Prendre contact</a>
   </div>
-  <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
-<div class="nav-mobile" id="nav-mobile">
-  <a href="#offres" onclick="toggleMenu()">Offres</a>
-  <a href="#diagnostic" onclick="toggleMenu()">Diagnostic gratuit</a>
-  <a href="#portail" onclick="toggleMenu()">Espace client</a>
-  <a href="#contact" onclick="toggleMenu()" style="color:var(--gold);font-weight:600;">Prendre contact →</a>
-</div>
-<script>function toggleMenu(){document.getElementById('nav-mobile').classList.toggle('open');}</script>
 
 <!-- HERO -->
 <section class="hero" id="accueil">
   <div class="hero-inner">
     <div>
-      <div class="hero-badge anim anim-1">⚡ 2 créneaux disponibles · Hauts-de-France & Remote</div>
-      <h1 class="hero-h1 anim anim-2">Votre digital piloté.<br><em>Vos résultats mesurés.</em></h1>
-      <p class="hero-sub anim anim-3">ELDEX Partners structure, automatise et pilote votre transformation digitale — sans CDI, sans agence, sans jargon. Opérationnel en 48h.</p>
+      <div class="hero-badge anim anim-1">Directeur Digital Externalisé PME & ETI</div>
+      <h1 class="anim anim-2">Moins de friction,<br><em>plus de croissance.</em></h1>
+      <p class="hero-sub anim anim-3">ELDEX Partners accompagne les PME & ETI dans leur transformation digitale. Automatisation, pilotage, et stratégie opérationnelle — sans les coûts d'un CDO à temps plein.</p>
       <div class="hero-actions anim anim-4">
         <a href="#diagnostic" class="btn-gold">Démarrer votre diagnostic →</a>
-        <a href="#offres" class="btn-outline">Voir les offres</a>
+        <a href="#offres" class="btn-outline">Découvrir les offres</a>
       </div>
-      <div class="hero-trust anim anim-4">
-        <div class="hero-trust-item"><strong>20 ans</strong> digital grands comptes, PME & TPE</div>
-        <div class="hero-trust-item" style="color:var(--border);">·</div>
-        <div class="hero-trust-item"><strong>48h</strong> opérationnel</div>
-        <div class="hero-trust-item" style="color:var(--border);">·</div>
-        <div class="hero-trust-item"><strong>30j</strong> résiliation</div>
-        <div class="hero-trust-item" style="color:var(--border);">·</div>
-        <div class="hero-trust-item">Fondé par <strong>Éric Leguéret</strong></div>
-      </div>
+      <p style="margin-top:28px;font-size:13px;color:var(--dimmed);" class="anim anim-4">
+        Fondé par <strong style="color:var(--navy);">Éric Legueret</strong> — ericlegueret.com
+      </p>
     </div>
     <div class="hero-card anim anim-3">
       <div class="card-label">Aperçu — Diagnostic Digital</div>
@@ -482,7 +327,7 @@
         <span>34</span>
         <small>/100</small>
       </div>
-      <div class="score-label">Potentiel non exploité</div>
+      <div class="score-label">À transformer</div>
       <div class="mini-bars">
         <div class="mini-bar">
           <label>⚙️ Processus & Opérations <span>22%</span></label>
@@ -506,65 +351,27 @@
   </div>
 </section>
 
-<!-- STATS STRIP -->
-<div class="stats-strip">
-  <div class="stats-inner">
-    <div class="stat-item reveal reveal-d1">
-      <div class="stat-num">20</div>
-      <div class="stat-label">ans de digital<br>grands comptes, PME & TPE</div>
-    </div>
-    <div class="stat-item reveal reveal-d2">
-      <div class="stat-num">5</div>
-      <div class="stat-label">clients max simultanés<br>disponibilité réelle</div>
-    </div>
-    <div class="stat-item reveal reveal-d3">
-      <div class="stat-num">48h</div>
-      <div class="stat-label">pour être opérationnel<br>après signature</div>
-    </div>
-    <div class="stat-item reveal reveal-d4">
-      <div class="stat-num">30j</div>
-      <div class="stat-label">résiliation sans<br>justification</div>
-    </div>
-  </div>
-</div>
-
 <!-- PAIN POINTS -->
 <section class="pain-section" id="problemes">
   <div class="section-inner">
     <div class="section-label">Vous reconnaissez-vous ?</div>
     <h2 style="color:#fff;margin-bottom:12px;">Les freins que rencontrent<br>la plupart des PME</h2>
     <p class="section-sub">Sans Directeur Digital dédié, les mêmes blocages reviennent — coûteux en temps et en opportunités.</p>
-    <div class="pain-bento">
-      <div class="pain-card tall reveal">
-        <div>
-          <div class="pain-icon">⏳</div>
-          <h3>Tâches répétitives &amp; manuelles</h3>
-          <p>Vos équipes passent des heures sur des saisies, relances et copier-coller qui pourraient être automatisés en quelques jours.</p>
-        </div>
-        <div class="pain-stat">
-          <div class="pain-stat-num">−8h</div>
-          <div class="pain-stat-label">gagnées/semaine en moyenne<br>après automatisation Make</div>
-        </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">⏳</div>
+        <h3>Tâches répétitives & manuelles</h3>
+        <p>Vos équipes passent des heures sur des saisies, relances et copier-coller qui pourraient être automatisés en quelques jours.</p>
       </div>
-      <div class="pain-card reveal reveal-d1">
+      <div class="pain-card">
         <div class="pain-icon">🔌</div>
         <h3>Outils déconnectés</h3>
         <p>CRM, comptabilité, marketing, support… chaque outil vit dans son silo. L'information se perd, les erreurs s'accumulent.</p>
       </div>
-      <div class="pain-card reveal reveal-d2">
+      <div class="pain-card">
         <div class="pain-icon">📊</div>
         <h3>Pilotage dans le flou</h3>
-        <p>Impossible de voir en temps réel la performance commerciale et marketing. Les décisions se prennent trop tard.</p>
-      </div>
-      <div class="pain-card reveal reveal-d3">
-        <div class="pain-icon">🤖</div>
-        <h3>IA non exploitée</h3>
-        <p>Vos concurrents automatisent déjà. Vous testez des outils en solo, sans méthode ni résultats mesurables.</p>
-      </div>
-      <div class="pain-card reveal reveal-d4">
-        <div class="pain-icon">💸</div>
-        <h3>Budget digital mal orienté</h3>
-        <p>Agences, abonnements, freelances… les coûts s'accumulent sans vision claire du retour sur investissement réel.</p>
+        <p>Impossible de voir en temps réel la performance commerciale, opérationnelle et marketing. Les décisions se prennent trop tard.</p>
       </div>
     </div>
   </div>
@@ -576,12 +383,6 @@
     <div class="section-label">Nos offres</div>
     <h2>Une formule <em>adaptée</em><br>à votre situation</h2>
     <p class="section-sub">Du diagnostic flash à l'accompagnement continu, chaque formule est conçue pour créer un impact mesurable rapidement.</p>
-
-    <div class="cdi-anchor reveal">
-      <p class="cdi-anchor-label">Repère budgétaire</p>
-      <p>Un DDEx senior en CDI : <strong>65 000 €/an chargé</strong>, contrat annuel, préavis 3 mois.<br>ELDEX Partners : à partir de <strong>1 188 € TTC</strong> — résiliation 30 jours, opérationnel en 48h.</p>
-    </div>
-
     <div class="offers-grid">
       <div class="offer-card">
         <div class="offer-icon">🔍</div>
@@ -645,7 +446,7 @@
     <div style="text-align:center;margin-bottom:48px;">
       <div class="section-label">Gratuit · 10 minutes</div>
       <h2 style="margin-bottom:12px;">Votre Diagnostic Digital <em>personnalisé</em></h2>
-      <p style="font-size:16px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7;">En 16 questions, obtenez votre score de maturité, vos 3 priorités d'action et une estimation ROI — générés par IA, sans engagement. Pour solo entrepreneurs, TPE et PME.</p>
+      <p style="font-size:16px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7;">En 16 questions, obtenez votre score de maturité, vos 3 priorités d'action et une estimation ROI — générés par IA, sans engagement.</p>
     </div>
     <div id="diag-app" style="max-width:680px;margin:0 auto;"></div>
   </div>
@@ -659,6 +460,35 @@
   var SUCCESS="#1E7A4E", SUCCESSBG="#EBF7F0";
   var WARN="#B86A00", WARNBG="#FFF4E0";
   var DANGER="#C02A2A", DANGERBG="#FDEAEA";
+
+  var questionsSolo = [
+    { section:"Visibilite & Personal Brand", icon:"🎯", color:"#1B2A4A", items:[
+      {id:"s1",text:"Comment vos prospects vous trouvent-ils aujourd'hui ?",options:["Bouche-a-oreille uniquement","Reseaux sociaux ponctuels","LinkedIn actif","Systeme de contenu ou SEO"],weight:[3,2,1,0]},
+      {id:"s2",text:"Avez-vous un positionnement clair et differentiant ?",options:["Non, c'est flou pour moi aussi","Je sais ce que je fais mais pas comment le dire","Positionnement defini mais mal communique","Message clair, differentiant et compris"],weight:[3,2,1,0]},
+      {id:"s3",text:"Publiez-vous du contenu professionnel regulierement ?",options:["Jamais","De temps en temps sans strategie","1-2 fois par semaine","Systeme editorial avec recycling"],weight:[3,2,1,0]},
+      {id:"s4",text:"Votre site/profil communique-t-il vos resultats concrets ?",options:["Pas de site ou profil incomplet","Presence mais aucun resultat chiffre","Quelques temoignages","Cas clients before/after chiffres"],weight:[3,2,1,0]}
+    ]},
+    { section:"Pipeline & Prospection", icon:"📈", color:"#2A5C9A", items:[
+      {id:"s5",text:"Comment gerez-vous votre pipeline commercial ?",options:["Pas de pipeline","Suivi mental ou post-its","Tableau Excel/Notion basique","CRM avec relances automatisees"],weight:[3,2,1,0]},
+      {id:"s6",text:"Avez-vous un processus de prospection regulier ?",options:["J'attends les inbounds","Je prospecte quand j'ai besoin","Prospection irreguliere","Systeme de prospection hebdomadaire"],weight:[3,2,1,0]},
+      {id:"s7",text:"Quelle est votre frequence de relance des prospects ?",options:["Je ne relance pas","Relance occasionnelle","Relance manuelle reguliere","Sequences de relance automatisees"],weight:[3,2,1,0]},
+      {id:"s8",text:"Combien de temps passez-vous par semaine sur le commercial ?",options:["Moins d'1h","1 a 3h","3 a 6h","Plus de 6h structures"],weight:[3,2,1,0]}
+    ]},
+    { section:"Outils & Productivite", icon:"🛠️", color:"#1E6B4A", items:[
+      {id:"s9",text:"Quels outils utilisez-vous pour livrer vos missions ?",options:["Email et documents basiques","Suite Google ou Office","Outils specialises mais isoles","Stack integree et partiellement automatisee"],weight:[3,2,1,0]},
+      {id:"s10",text:"Combien d'heures par semaine perdez-vous en taches administratives ?",options:["Moins de 2h","2 a 5h","5 a 10h","Plus de 10h"],weight:[0,1,2,3]},
+      {id:"s11",text:"Utilisez-vous l'IA dans votre travail quotidien ?",options:["Jamais","Occasionnellement","Regulierement pour certaines taches","IA integree dans la majorite de mes process"],weight:[3,2,1,0]},
+      {id:"s12",text:"Avez-vous automatise des taches repetitives ?",options:["Non, tout est manuel","J'y pense mais pas encore","1 ou 2 automatisations","Plusieurs automatisations actives"],weight:[3,2,1,0]}
+    ]},
+    { section:"Offre & Tarification", icon:"💼", color:"#8B4513", items:[
+      {id:"s13",text:"Vos offres sont-elles clairement packagisees ?",options:["Je facture au temps passe","Quelques formules vagues","Offres definies mais pas differenciees","Offres packagisees avec valeur percue claire"],weight:[3,2,1,0]},
+      {id:"s14",text:"Comment fixez-vous vos tarifs ?",options:["En dessous du marche par securite","A la valeur percue sans methode","Benchmark concurrents","Tarification a la valeur avec plancher fixe"],weight:[3,2,1,0]},
+      {id:"s15",text:"Avez-vous des revenus recurrents (retainers, abonnements) ?",options:["Non, tout est ponctuel","1 client recurrent","2-3 clients recurrents","Plus de 50% de CA recurrent"],weight:[3,2,1,0]}
+    ]},
+    { section:"Resilience & Scalabilite", icon:"🛡️", color:"#6B3A7D", items:[
+      {id:"s16",text:"Etes-vous en situation de dependance vis-a-vis d'un seul client ?",options:["1 client = plus de 60% du CA","1 client = 40-60% du CA","Aucun client > 30% du CA","Portefeuille equilibre et diversifie"],weight:[3,2,1,0]}
+    ]}
+  ];
 
   var questions = [
     { section:"Processus & Operations", icon:"⚙️", color:"#1B2A4A", items:[
@@ -687,123 +517,27 @@
     ]}
   ];
 
-  // Questions solo par secteur (8 questions chacune)
-  var questionsSolo = {
-    "services": [
-      { section:"Organisation & Planning", icon:"📅", color:"#1B2A4A", items:[
-        {id:"s1",text:"Comment gerez-vous votre planning et la prise de RDV clients ?",options:["Agenda papier ou memoire","Agenda Google basique","Outil RDV en ligne (Calendly...)","Systeme automatise avec rappels SMS/email"],weight:[3,2,1,0]},
-        {id:"s2",text:"Combien de temps passez-vous sur des taches administratives chaque semaine ?",options:["Moins de 2h","2 a 5h","5 a 10h","Plus de 10h"],weight:[0,1,2,3]}
-      ]},
-      { section:"Communication Clients", icon:"💬", color:"#2A5C9A", items:[
-        {id:"s3",text:"Comment communiquez-vous avec vos clients au quotidien ?",options:["Appels uniquement","SMS/WhatsApp informel","Email + WhatsApp","Outil pro centralise (app, CRM...)"],weight:[3,2,1,0]},
-        {id:"s4",text:"Avez-vous un moyen de recueillir les avis et retours de vos clients ?",options:["Jamais systematiquement","Verbalement en fin de mission","Formulaire Google ponctuel","Systeme automatise post-prestation"],weight:[3,2,1,0]}
-      ]},
-      { section:"Visibilite & Acquisition", icon:"📡", color:"#1E6B4A", items:[
-        {id:"s5",text:"Comment de nouveaux clients vous trouvent-ils ?",options:["Uniquement bouche a oreille","Quelques reseaux sociaux","LinkedIn + site ou Google My Business","Strategie multicanal avec contenu regulier"],weight:[3,2,1,0]},
-        {id:"s6",text:"Avez-vous une presence en ligne professionnelle (site, Google My Business) ?",options:["Aucune presence","Profil LinkedIn basique","Site simple ou fiche Google","Site optimise + contenu actif"],weight:[3,2,1,0]}
-      ]},
-      { section:"Gestion & Outils IA", icon:"🤖", color:"#8B5A00", items:[
-        {id:"s7",text:"Utilisez-vous des outils IA pour gagner du temps au quotidien ?",options:["Jamais","J'ai essaye ChatGPT quelques fois","Regulierement pour certaines taches","Integre dans mon workflow quotidien"],weight:[3,2,1,0]},
-        {id:"s8",text:"Vos devis, factures et contrats sont-ils generes manuellement ?",options:["Tout a la main ou Word","Templates mais saisie manuelle","Semi-automatise","Generation automatique et envoi digital"],weight:[3,2,1,0]}
-      ]}
-    ],
-    "artisan": [
-      { section:"Organisation & Chantiers", icon:"🔨", color:"#1B2A4A", items:[
-        {id:"a1",text:"Comment planifiez-vous et suivez-vous vos chantiers ?",options:["Memoire + appels","Cahier et agenda papier","Tableur ou appli basique","Outil pro de gestion de chantier"],weight:[3,2,1,0]},
-        {id:"a2",text:"Combien de temps passez-vous sur l'administratif (devis, factures, relances) chaque semaine ?",options:["Moins de 2h","2 a 5h","5 a 10h","Plus de 10h"],weight:[0,1,2,3]}
-      ]},
-      { section:"Devis & Facturation", icon:"📋", color:"#2A5C9A", items:[
-        {id:"a3",text:"Comment creez-vous vos devis ?",options:["A la main ou a l'oral","Word/Excel manuel","Logiciel de devis basique","Logiciel connecte + envoi automatique"],weight:[3,2,1,0]},
-        {id:"a4",text:"Relancez-vous systematiquement les devis non signes ?",options:["Jamais","Parfois, quand j'y pense","Oui, manuellement","Relances automatiques programmees"],weight:[3,2,1,0]}
-      ]},
-      { section:"Visibilite & Recommandations", icon:"⭐", color:"#1E6B4A", items:[
-        {id:"a5",text:"Comment de nouveaux clients vous trouvent-ils ?",options:["Uniquement bouche a oreille","Annuaire ou Pages Jaunes","Google My Business + reseaux","Strategie locale active"],weight:[3,2,1,0]},
-        {id:"a6",text:"Collectez-vous les avis Google de vos clients satisfaits ?",options:["Jamais","Occasionnellement","Souvent, manuellement","Systeme automatise de demande d'avis"],weight:[3,2,1,0]}
-      ]},
-      { section:"Outils & IA", icon:"🤖", color:"#8B5A00", items:[
-        {id:"a7",text:"Utilisez-vous des outils numeriques pour communiquer avec vos clients ?",options:["SMS/appels uniquement","WhatsApp informel","Email + WhatsApp","Application pro ou portail client"],weight:[3,2,1,0]},
-        {id:"a8",text:"Avez-vous deja utilise l'IA pour gagner du temps (redaction, chiffrage...) ?",options:["Jamais","J'ai teste une fois","Occasionnellement","Regulierement"],weight:[3,2,1,0]}
-      ]}
-    ],
-    "conseil": [
-      { section:"Prospection & Pipeline", icon:"🎯", color:"#1B2A4A", items:[
-        {id:"c1",text:"Comment gerez-vous votre pipeline commercial ?",options:["Dans ma tete","Tableau Excel/Notion basique","CRM leger","CRM + automatisation suivi"],weight:[3,2,1,0]},
-        {id:"c2",text:"Combien de temps passez-vous sur la prospection chaque semaine ?",options:["Moins de 2h","2 a 5h","5 a 10h","Plus de 10h (trop, pas de systeme)"],weight:[0,1,2,3]}
-      ]},
-      { section:"Positionnement & Visibilite", icon:"📡", color:"#2A5C9A", items:[
-        {id:"c3",text:"Quelle est votre strategie de contenu sur LinkedIn ?",options:["Pas de strategie","Publications occasionnelles","Planning editorial basique","Contenu regulier + audience engagee"],weight:[3,2,1,0]},
-        {id:"c4",text:"Votre positionnement est-il clairement visible en ligne ?",options:["Pas vraiment","Profil LinkedIn sommaire","Bio claire + quelques articles","Marque personnelle forte et coherente"],weight:[3,2,1,0]}
-      ]},
-      { section:"Delivery & Operations", icon:"⚙️", color:"#1E6B4A", items:[
-        {id:"c5",text:"Comment delivrez-vous vos livrables clients ?",options:["Email avec PJ","Dossier Drive partage","Portail client basique","Espace client structure et automatise"],weight:[3,2,1,0]},
-        {id:"c6",text:"Utilisez-vous des templates ou outils pour accelerer votre delivery ?",options:["Tout from scratch","Quelques templates Word","Templates + outils specifiques","Systeme reproductible et scalable"],weight:[3,2,1,0]}
-      ]},
-      { section:"IA & Productivite", icon:"🤖", color:"#8B5A00", items:[
-        {id:"c7",text:"Utilisez-vous l'IA dans votre travail quotidien ?",options:["Jamais","Quelques essais","Regulierement (Claude, ChatGPT...)","Integre dans mon workflow complet"],weight:[3,2,1,0]},
-        {id:"c8",text:"Avez-vous automatise des taches repetitives dans votre activite ?",options:["Jamais","1 ou 2 automatisations simples","Plusieurs automatisations","Systeme Make/Zapier avance"],weight:[3,2,1,0]}
-      ]}
-    ],
-    "commerce": [
-      { section:"Ventes & Caisse", icon:"🛒", color:"#1B2A4A", items:[
-        {id:"m1",text:"Comment gerez-vous vos stocks et ventes ?",options:["Papier ou memoire","Tableur manuel","Logiciel de caisse basique","Systeme connecte (stock, ventes, analytics)"],weight:[3,2,1,0]},
-        {id:"m2",text:"Avez-vous une presence en ligne pour vendre ou vous faire connaitre ?",options:["Aucune","Page Facebook/Instagram","Site vitrine basique","E-commerce ou Click & Collect actif"],weight:[3,2,1,0]}
-      ]},
-      { section:"Clients & Fidelisation", icon:"🤝", color:"#2A5C9A", items:[
-        {id:"m3",text:"Avez-vous un programme de fidelite ou un moyen de recontacter vos clients ?",options:["Non","Carte de fidelite papier","Base email basique","CRM + sequences automatisees"],weight:[3,2,1,0]},
-        {id:"m4",text:"Comment recueillez-vous les avis de vos clients ?",options:["Jamais","Verbalement","Formulaire papier","Systeme digital automatise"],weight:[3,2,1,0]}
-      ]},
-      { section:"Communication Locale", icon:"📡", color:"#1E6B4A", items:[
-        {id:"m5",text:"Quelle est votre strategie de communication locale ?",options:["Bouche a oreille uniquement","Flyers ponctuels","Reseaux sociaux irreguliers","Strategie locale multicanal"],weight:[3,2,1,0]},
-        {id:"m6",text:"Votre fiche Google My Business est-elle optimisee et mise a jour ?",options:["Pas de fiche","Fiche basique non geree","Fiche complete mais inactive","Fiche optimisee + avis reguliers"],weight:[3,2,1,0]}
-      ]},
-      { section:"Outils & IA", icon:"🤖", color:"#8B5A00", items:[
-        {id:"m7",text:"Utilisez-vous des outils numeriques pour la gestion quotidienne ?",options:["Tres peu","Quelques apps isolees","Suite coherente mais manuelle","Outils connectes et automatises"],weight:[3,2,1,0]},
-        {id:"m8",text:"Avez-vous deja utilise l'IA dans votre commerce ?",options:["Jamais","J'ai teste","Pour quelques taches","Integre (descriptions, service client...)"],weight:[3,2,1,0]}
-      ]}
-    ]
-  };
-
-  var SOLO_SECTORS = [
-    {key:"services", label:"Services à la personne", desc:"Gouvernante, aide a domicile, garde d'enfants, soins...", icon:"🏠"},
-    {key:"artisan",  label:"Artisan & BTP",           desc:"Plombier, electricien, menuisier, peintre, maçon...", icon:"🔨"},
-    {key:"conseil",  label:"Conseil & Freelance",     desc:"Consultant, coach, formateur, designer, redacteur...", icon:"💼"},
-    {key:"commerce", label:"Commerce de proximite",   desc:"Boutique, restauration, epicerie, service local...", icon:"🛒"}
-  ];
-
-  function getActiveQuestions() {
-    if (state.profile === "solo" && state.soloSector && questionsSolo[state.soloSector]) {
-      return questionsSolo[state.soloSector];
-    }
-    return questions;
-  }
-
-  function getAllQ() {
-    var aq = getActiveQuestions();
-    var flat = [];
-    aq.forEach(function(s){ s.items.forEach(function(i){ flat.push(Object.assign({},i,{section:s.section,sectionColor:s.color,sectionIcon:s.icon})); }); });
-    return flat;
-  }
-
   var allQ = [];
-  questions.forEach(function(s){ s.items.forEach(function(i){ allQ.push(Object.assign({},i,{section:s.section,sectionColor:s.color,sectionIcon:s.icon})); }); });
+  getActiveQuestions().forEach(function(s){ s.items.forEach(function(i){ allQ.push(Object.assign({},i,{section:s.section,sectionColor:s.color,sectionIcon:s.icon})); }); });
 
-  var state = { step:"profile", profile:"", soloSector:"", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:""}, results:null, loadingText:"Analyse en cours..." };
+  var state = { step:"intro", profile:"pme", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:""}, results:null, loadingText:"Analyse en cours..." };
+  function getActiveQuestions() { return state.profile === 'solo' ? questionsSolo : questions; }
+  window.diagSetProfile = function(p) { state.profile = p; renderDiag(); };
   var loadingMsgs = ["Analyse de vos reponses...","Calcul du score de maturite...","Identification des quick wins...","Estimation du ROI...","Generation de la recommandation...","Finalisation du rapport..."];
 
   function getSectionScores() {
-    var aq = getActiveQuestions();
-    return aq.map(function(s){
+    return getActiveQuestions().map(function(s){
       var raw = s.items.reduce(function(acc,item){ return acc + (state.answers[item.id]!==undefined ? item.weight[state.answers[item.id]] : 0); },0);
       return { section:s.section, icon:s.icon, color:s.color, score:Math.round(((s.items.length*3-raw)/(s.items.length*3))*100) };
     });
   }
 
   function getGlobalScore() {
-    var flat = getAllQ();
-    var totalRaw = flat.reduce(function(acc,q){
-      return acc + (state.answers[q.id]!==undefined ? q.weight[state.answers[q.id]] : 0);
+    var totalRaw = Object.keys(state.answers).reduce(function(acc,id){
+      var q = allQ.find(function(q){return q.id===id;});
+      return acc + (q ? q.weight[state.answers[id]] : 0);
     },0);
-    return Math.round(((flat.length*3-totalRaw)/(flat.length*3))*100);
+    return Math.round(((allQ.length*3-totalRaw)/(allQ.length*3))*100);
   }
 
   var card = "background:#fff;border:1px solid "+BORDER+";border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(27,42,74,0.06);";
@@ -819,118 +553,60 @@
   function render() {
     var el = document.getElementById("diag-app");
     if (!el) return;
-    var activeAllQ = getAllQ();
-    var progress = activeAllQ.length > 0 ? Math.round((Object.keys(state.answers).length / activeAllQ.length)*100) : 0;
-    var cq = activeAllQ[state.currentQ];
-    var aqSections = getActiveQuestions();
-    var si = aqSections.findIndex(function(s){return cq && s.section===cq.section;});
+    var progress = Math.round((Object.keys(state.answers).length / allQ.length)*100);
+    var cq = allQ[state.currentQ];
+    var si = getActiveQuestions().findIndex(function(s){return cq && s.section===cq.section;});
     var html = "";
 
-    // ── STEP: PROFILE (PME vs Solo) ──
-    if (state.step==="profile") {
+    if (state.step==="intro") {
       html = '<div style="'+card+'">';
       html += '<div style="font-size:11px;color:'+GOLD+';letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:14px;font-family:Arial,sans-serif;">Diagnostic Maturite Digitale</div>';
-      html += '<h3 style="font-family:Georgia,serif;font-size:22px;color:'+NAVY+';margin-bottom:10px;">Revelez le potentiel digital de votre activite</h3>';
-      html += '<p style="font-size:14px;color:'+MUTED+';line-height:1.7;margin-bottom:24px;font-family:Arial,sans-serif;">Rapport IA personnalise · Gratuit · Resultats instantanes</p>';
-      html += '<p style="font-size:12px;font-weight:700;color:'+NAVY+';text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-family:Arial,sans-serif;">Vous etes...</p>';
-      html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;">';
-      html += '<button onclick="window.diagSetProfile(\'pme\')" style="'+btnNavy+';padding:20px 14px;border-radius:12px;text-align:center;line-height:1.4;font-size:14px;">🏢<br><strong>PME / ETI</strong><br><span style=\"font-size:11px;opacity:0.7;\">2 personnes et plus</span></button>';
-      html += '<button onclick="window.diagSetProfile(\'solo\')" style="background:linear-gradient(135deg,'+GOLD+','+GOLDL+');color:'+NAVY+';border:none;border-radius:12px;padding:20px 14px;text-align:center;line-height:1.4;cursor:pointer;font-size:14px;font-weight:700;font-family:Arial,sans-serif;">🧑‍💻<br><strong>Solo entrepreneur</strong><br><span style=\"font-size:11px;opacity:0.7;\">Independant, freelance, 1 personne</span></button>';
+      html += '<h3 style="font-family:Georgia,serif;font-size:22px;color:'+NAVY+';margin-bottom:16px;">Revelons votre potentiel digital</h3>';
+      html += '<p style="font-size:13px;color:'+MUTED+';margin-bottom:14px;font-family:Arial,sans-serif;font-weight:600;">Vous etes :</p>';
+      var profilePME = state.profile === \'pme\';
+      var profileSolo = state.profile === \'solo\';
+      html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">';
+      html += '<div onclick="window.diagSetProfile(\'pme\')" style="cursor:pointer;padding:18px 14px;border-radius:12px;border:2px solid '+(profilePME?NAVY:BORDER)+';background:'+(profilePME?NAVY:\'white\')+';text-align:center;transition:all 0.2s;">';
+      html += '<div style="font-size:28px;margin-bottom:8px;">🏢</div>';
+      html += '<div style="font-size:14px;font-weight:700;color:'+(profilePME?\'white\':NAVY)+';font-family:Arial,sans-serif;margin-bottom:4px;">PME / ETI</div>';
+      html += '<div style="font-size:11px;color:'+(profilePME?\'rgba(255,255,255,0.6)\'':MUTED)+';font-family:Arial,sans-serif;">Equipe de 5 a 200 personnes</div>';
+      html += '</div>';
+      html += '<div onclick="window.diagSetProfile(\'solo\')" style="cursor:pointer;padding:18px 14px;border-radius:12px;border:2px solid '+(profileSolo?GOLD:BORDER)+';background:'+(profileSolo?NAVY:\'white\')+';text-align:center;transition:all 0.2s;">';
+      html += '<div style="font-size:28px;margin-bottom:8px;">🚀</div>';
+      html += '<div style="font-size:14px;font-weight:700;color:'+(profileSolo?GOLD:NAVY)+';font-family:Arial,sans-serif;margin-bottom:4px;">Solo entrepreneur</div>';
+      html += '<div style="font-size:11px;color:'+(profileSolo?\'rgba(255,255,255,0.6)\'':MUTED)+';font-family:Arial,sans-serif;">Freelance, consultant, independant</div>';
       html += '</div>';
       html += '</div>';
-    }
-
-    // ── STEP: SECTOR (solo uniquement) ──
-    else if (state.step==="sector") {
-      html = '<div style="'+card+'">';
-      html += '<div style="font-size:11px;color:'+GOLD+';letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:14px;font-family:Arial,sans-serif;">Votre secteur</div>';
-      html += '<h3 style="font-family:Georgia,serif;font-size:20px;color:'+NAVY+';margin-bottom:8px;">Dans quel domaine exercez-vous ?</h3>';
-      html += '<p style="font-size:13px;color:'+MUTED+';margin-bottom:20px;font-family:Arial,sans-serif;">Vos questions et recommandations seront adaptees a votre secteur.</p>';
-      html += '<div style="display:flex;flex-direction:column;gap:10px;">';
-      SOLO_SECTORS.forEach(function(s){
-        html += '<button onclick="window.diagSetSector(\''+s.key+'\')" style="background:'+CREAM2+';border:1.5px solid '+BORDER+';border-radius:10px;padding:14px 16px;text-align:left;cursor:pointer;font-family:Arial,sans-serif;transition:border-color 0.2s;display:flex;gap:12px;align-items:center;">';
-        html += '<span style="font-size:22px;">'+s.icon+'</span>';
-        html += '<div><div style="font-size:14px;font-weight:700;color:'+NAVY+';">'+s.label+'</div>';
-        html += '<div style="font-size:12px;color:'+MUTED+';">'+s.desc+'</div></div>';
-        html += '</button>';
-      });
-      html += '</div>';
-      html += '<button onclick="window.diagNav(\'profile\')" style="'+btnGhost+';margin-top:14px;">&larr; Retour</button>';
-      html += '</div>';
-    }
-
-    else if (state.step==="intro") {
-      html = '<div style="'+card+'">';
-      html += '<div style="font-size:11px;color:'+GOLD+';letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:14px;font-family:Arial,sans-serif;">Diagnostic Maturite Digitale</div>';
-      html += '<h3 style="font-family:Georgia,serif;font-size:22px;color:'+NAVY+';margin-bottom:10px;">Revelez le potentiel digital de votre entreprise</h3>';
-      var qcount = state.profile==="solo" ? "8" : "16";
-      var tcount = state.profile==="solo" ? "8 minutes" : "10 minutes";
-      html += '<p style="font-size:14px;color:'+MUTED+';line-height:1.7;margin-bottom:20px;font-family:Arial,sans-serif;">'+qcount+' questions · '+tcount+' · Rapport IA personnalise · Gratuit</p>';
+      html += '<p style="font-size:12px;color:'+MUTED+';line-height:1.6;margin-bottom:16px;font-family:Arial,sans-serif;">16 questions · 10 minutes · Rapport IA personnalise · Gratuit</p>';
       html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">';
-      aqSections.forEach(function(s){
-        html += '<div style="background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:12px;display:flex;gap:8px;">';
-        html += '<span style="font-size:16px;">'+s.icon+'</span>';
-        html += '<div><div style="font-size:12px;font-weight:600;color:'+NAVY+';font-family:Arial,sans-serif;">'+s.section+'</div>';
-        html += '<div style="font-size:11px;color:'+DIMMED+';font-family:Arial,sans-serif;">'+s.items.length+' questions</div></div></div>';
+      var qSet = getActiveQuestions();
+      qSet.forEach(function(s){
+        html += '<div style="background:'+CREAM2+';border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px;"><span style="font-size:18px;">'+s.icon+'</span><div><div style="font-size:12px;font-weight:600;color:'+NAVY+';font-family:Arial,sans-serif;">'+s.section+'</div><div style="font-size:11px;color:'+DIMMED+';font-family:Arial,sans-serif;">'+s.items.length+' questions</div></div></div>';
       });
       html += '</div>';
-      html += '<div style="background:'+CREAM2+';border-radius:8px;padding:12px;margin-bottom:20px;display:flex;gap:20px;flex-wrap:wrap;">';
-      [["🎯","Score maturite"],["⚡","Quick wins"],["💰","ROI estime"],["🗺️","Plan action"]].forEach(function(item){
-        html += '<span style="font-size:12px;color:'+MUTED+';font-family:Arial,sans-serif;">'+item[0]+' '+item[1]+'</span>';
-      });
+      html += '<button style="'+btnGold+';width:100%;" id="diag-start-btn">Demarrer le diagnostic &rarr;</button>';
       html += '</div>';
-      html += '<button style="'+btnGold+'" id="diag-start-btn">Demarrer &rarr;</button>';
-      html += '<button onclick="window.diagNav(\'profile\')" style="'+btnGhost+';margin-left:10px;">&larr; Retour</button>';
-      html += '</div>';
-    }
+}
 
     else if (state.step==="info") {
       html = '<div style="'+card+'">';
-      html += '<h3 style="font-family:Georgia,serif;font-size:18px;color:'+NAVY+';margin-bottom:6px;">Votre activite</h3>';
-      html += '<p style="font-size:13px;color:'+MUTED+';margin-bottom:18px;font-family:Arial,sans-serif;">Ces informations personnalisent votre rapport — solo, TPE ou PME.</p>';
-
-      // Champ nom
-      html += '<div style="margin-bottom:14px;">';
-      html += '<label style="display:block;font-size:11px;color:'+MUTED+';margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-family:Arial,sans-serif;">Nom de votre activite / structure</label>';
-      html += '<input type="text" placeholder="Ex : Jean Martin Conseil, Studio Dupont..." id="info_name" value="'+state.info.name+'" ';
-      html += 'style="width:100%;background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:10px 12px;color:'+NAVY+';font-size:14px;font-family:Arial,sans-serif;outline:none;" ';
-      html += 'data-key="name" oninput="window.diagInfoUpdate(this.dataset.key,this.value)">';
-      html += '</div>';
-
-      // Champ secteur
-      html += '<div style="margin-bottom:14px;">';
-      html += '<label style="display:block;font-size:11px;color:'+MUTED+';margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-family:Arial,sans-serif;">Secteur / domaine d activite</label>';
-      html += '<input type="text" placeholder="Ex : Conseil, Artisan, E-commerce, Sante, BTP, Design..." id="info_sector" value="'+state.info.sector+'" ';
-      html += 'style="width:100%;background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:10px 12px;color:'+NAVY+';font-size:14px;font-family:Arial,sans-serif;outline:none;" ';
-      html += 'data-key="sector" oninput="window.diagInfoUpdate(this.dataset.key,this.value)">';
-      html += '</div>';
-
-      // Champ taille - SELECT avec solo entrepreneur
-      var sizeOptions = [
-        {val:"Solo entrepreneur (1 personne)",label:"Solo entrepreneur — 1 personne"},
-        {val:"TPE (2-5 personnes)",label:"TPE — 2 a 5 personnes"},
-        {val:"PME (6-20 personnes)",label:"PME — 6 a 20 personnes"},
-        {val:"PME (21-50 salaries)",label:"PME — 21 a 50 salaries"},
-        {val:"ETI (50+ salaries)",label:"ETI — 50 salaries et plus"}
+      html += '<h3 style="font-family:Georgia,serif;font-size:18px;color:'+NAVY+';margin-bottom:6px;">Votre entreprise</h3>';
+      html += '<p style="font-size:13px;color:'+MUTED+';margin-bottom:18px;font-family:Arial,sans-serif;">Ces informations personnalisent votre rapport.</p>';
+      var isSolo = state.profile === 'solo';
+      var fields = [
+        {key:"name",label:isSolo?"Votre nom ou marque":"Nom de l entreprise",ph:isSolo?"Ex : Marie Dupont Consultante":"Ex : Dupont et Associes"},
+        {key:"sector",label:"Secteur d activite",ph:isSolo?"Ex : Conseil, Coaching, Marketing":"Ex : Conseil, Commerce, BTP"},
+        {key:"size",label:isSolo?"Annees d experience":"Taille de l equipe",ph:isSolo?"Ex : 3 ans independant":"Ex : 5 personnes, 20 salaries"},
+        {key:"contact",label:"Email (optionnel)",ph:"Ex : marie@exemple.fr"}
       ];
-      html += '<div style="margin-bottom:14px;">';
-      html += '<label style="display:block;font-size:11px;color:'+MUTED+';margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-family:Arial,sans-serif;">Taille de la structure</label>';
-      html += '<select id="info_size" data-key="size" onchange="window.diagInfoUpdate(this.dataset.key,this.value)" ';
-      html += 'style="width:100%;background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:10px 12px;color:'+NAVY+';font-size:14px;font-family:Arial,sans-serif;outline:none;cursor:pointer;">';
-      html += '<option value="" disabled '+(state.info.size?"":"selected")+'>Selectionnez votre situation...</option>';
-      sizeOptions.forEach(function(o){
-        html += '<option value="'+o.val+'" '+(state.info.size===o.val?"selected":"")+'>'+o.label+'</option>';
+      fields.forEach(function(f){
+        html += '<div style="margin-bottom:14px;">';
+        html += '<label style="display:block;font-size:11px;color:'+MUTED+';margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-family:Arial,sans-serif;">'+f.label+'</label>';
+        html += '<input type="text" placeholder="'+f.ph+'" id="info_'+f.key+'" value="'+state.info[f.key]+'" ';
+        html += 'style="width:100%;background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:10px 12px;color:'+NAVY+';font-size:14px;font-family:Arial,sans-serif;outline:none;" ';
+        html += 'data-key="'+f.key+'" oninput="window.diagInfoUpdate(this.dataset.key,this.value)">';
+        html += '</div>';
       });
-      html += '</select></div>';
-
-      // Champ contact
-      html += '<div style="margin-bottom:14px;">';
-      html += '<label style="display:block;font-size:11px;color:'+MUTED+';margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-family:Arial,sans-serif;">Votre prenom (optionnel)</label>';
-      html += '<input type="text" placeholder="Ex : Marie, Jean-Luc..." id="info_contact" value="'+state.info.contact+'" ';
-      html += 'style="width:100%;background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:10px 12px;color:'+NAVY+';font-size:14px;font-family:Arial,sans-serif;outline:none;" ';
-      html += 'data-key="contact" oninput="window.diagInfoUpdate(this.dataset.key,this.value)">';
-      html += '</div>';
-
       html += '<button style="'+btnNavy+';width:100%;margin-top:8px;" id="diag-next-btn">Commencer &rarr;</button>';
       html += '</div>';
     }
@@ -938,7 +614,7 @@
     else if (state.step==="questions") {
       html += '<div style="margin-bottom:18px;">';
       html += '<div style="display:flex;justify-content:space-between;margin-bottom:6px;">';
-      html += '<span style="font-size:12px;color:'+MUTED+';font-family:Arial,sans-serif;">Question '+(state.currentQ+1)+' / '+activeAllQ.length+'</span>';
+      html += '<span style="font-size:12px;color:'+MUTED+';font-family:Arial,sans-serif;">Question '+(state.currentQ+1)+' / '+allQ.length+'</span>';
       html += '<span style="font-size:12px;color:'+GOLD+';font-weight:600;font-family:Arial,sans-serif;">'+progress+'%</span>';
       html += '</div>';
       html += '<div style="height:3px;background:'+BORDER+';border-radius:2px;overflow:hidden;">';
@@ -946,7 +622,7 @@
       html += '</div></div>';
 
       html += '<div style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;">';
-      aqSections.forEach(function(s,i){
+      getActiveQuestions().forEach(function(s,i){
         var active = i===si;
         html += '<div style="flex-shrink:0;padding:4px 10px;border-radius:100px;background:'+(active?NAVY:CREAM2)+';border:1px solid '+(active?NAVY:BORDER)+';font-size:11px;color:'+(active?"#fff":DIMMED)+';font-weight:'+(active?"600":"400")+';white-space:nowrap;font-family:Arial,sans-serif;">'+s.icon+' '+s.section+'</div>';
       });
@@ -965,9 +641,9 @@
 
       html += '<div style="display:flex;gap:10px;justify-content:space-between;align-items:center;">';
       html += '<button style="'+btnGhost+'" onclick="window.diagPrev()">← Precedent</button>';
-      if (Object.keys(state.answers).length===activeAllQ.length) {
+      if (Object.keys(state.answers).length===allQ.length) {
         html += '<button style="'+btnGold+'" onclick="window.diagGenerate()">Generer mon rapport ✨</button>';
-      } else if (state.currentQ < activeAllQ.length-1 && state.answers[cq.id]!==undefined) {
+      } else if (state.currentQ < allQ.length-1 && state.answers[cq.id]!==undefined) {
         html += '<button style="'+btnNavy+'" onclick="window.diagGoTo(null)">Suivant &rarr;</button>';
       }
       html += '</div>';
@@ -1071,31 +747,9 @@
     el.innerHTML = html;
   }
 
-  window.diagNav = function(step) { state.step = step; render(); };
-  window.diagSetProfile = function(p) {
-    state.profile = p;
-    state.answers = {};
-    state.currentQ = 0;
-    if (p === "pme") {
-      state.info.size = "";
-      state.step = "intro";
-    } else {
-      state.step = "sector";
-    }
-    render();
-  };
-  window.diagSetSector = function(sector) {
-    state.soloSector = sector;
-    var sectorLabel = SOLO_SECTORS.find(function(s){return s.key===sector;});
-    if (sectorLabel) state.info.sector = sectorLabel.label;
-    state.info.size = "Solo entrepreneur (1 personne)";
-    state.step = "intro";
-    render();
-  };
   window.diagGoTo = function(s) {
-    var aq = getAllQ();
     if (s) state.step = s;
-    else if (state.currentQ < aq.length-1) state.currentQ++;
+    else if (state.currentQ < allQ.length-1) state.currentQ++;
     render();
   };
   window.diagPrev = function() {
@@ -1103,13 +757,12 @@
   };
   window.diagInfoUpdate = function(k,v) { state.info[k]=v; };
   window.diagAnswer = function(idx) {
-    var aq = getAllQ();
-    state.answers[aq[state.currentQ].id] = idx;
-    if (state.currentQ < aq.length-1) { state.currentQ++; }
+    state.answers[allQ[state.currentQ].id] = idx;
+    if (state.currentQ < allQ.length-1) { state.currentQ++; }
     render();
   };
   window.diagReset = function() {
-    state = { step:"profile", profile:"", soloSector:"", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:""}, results:null, loadingText:"Analyse en cours..." };
+    state = { step:"intro", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:""}, results:null, loadingText:"Analyse en cours..." };
     render();
   };
 
@@ -1123,9 +776,8 @@
       if (t) t.textContent = loadingMsgs[msgIdx];
     }, 1400);
 
-    var aqSections = getActiveQuestions();
     var ss = getSectionScores();
-    var summaryLines = aqSections.map(function(section){
+    var summaryLines = questions.map(function(section){
       var sData = ss.find(function(s){return s.section===section.section;});
       return "## "+section.section+" (Score: "+(sData?sData.score:0)+"/100)\n"
         + section.items.map(function(item){
@@ -1135,15 +787,9 @@
     }).join("\n\n");
 
     var info = state.info;
-    var isSolo = state.profile === "solo" || (info.size||"").toLowerCase().indexOf("solo") !== -1;
-    var sectorName = state.soloSector ? (SOLO_SECTORS.find(function(s){return s.key===state.soloSector;})||{}).label : (info.sector||"");
-    var profileCtx = isSolo
-      ? "solo entrepreneur, secteur : "+(sectorName||info.sector||"non precise")
-      : "PME / TPE ("+(info.size||"taille non precisee")+")";
-    var roiCtx = isSolo
-      ? "Adapte le ROI a un profil solo : gains en heures personnelles liberees par semaine (objectif 5-10h), revenus supplementaires potentiels grace au temps recupere, couts reduits sur les outils. Investissement recommande coherent avec un budget solo : 500-1500 euro/mois max."
-      : "Adapte le ROI a une equipe : heures d equipe gagnees, gain annuel estime realiste, delai retour sur investissement.";
-    var prompt = "Tu es un expert en transformation digitale pour independants et PME francaises. Voici les resultats du diagnostic digital de "+(info.name||"cette structure")+" — profil : "+profileCtx+", secteur : "+(info.sector||"non precise")+".\n\nScore global : "+getGlobalScore()+"/100\n\n"+summaryLines+"\n\n"+roiCtx+"\n\nGenere une analyse avec EXACTEMENT ce format JSON (UNIQUEMENT du JSON brut, sans markdown ni backticks) :\n{\"synthese\":\"2-3 phrases percutantes adaptees au profil\",\"quickWins\":[{\"titre\":\"Titre\",\"description\":\"Description concrete\",\"impact\":\"Gain specifique\",\"difficulte\":\"Facile\",\"delai\":\"Delai\"}],\"roiEstimation\":{\"heuresGagneesParSemaine\":\"5\",\"gainAnnuelEstime\":\"selon profil\",\"delaiRetourInvestissement\":\"selon profil\"},\"recommandationMission\":{\"titre\":\"Titre\",\"description\":\"Description adaptee au profil\",\"priorites\":[\"p1\",\"p2\",\"p3\"],\"dureeEstimee\":\"duree adaptee\",\"investissement\":\"budget adapte au profil\"},\"pointsForts\":[\"fort 1\"],\"pointsVigilance\":[\"vigilance 1\"]}\n\nGenere exactement 3 quick wins concrets et actionnables. N\'utilise jamais le mot audit, utilise toujours diagnostic. Si solo entrepreneur : recommande des outils accessibles et low-cost, des automatisations simples a fort impact, et valorise le temps recupere comme levier de CA.";
+    var isSoloProfile = state.profile === 'solo';
+    var promptSolo = "Tu es un expert en strategie digitale pour freelances et solo entrepreneurs francais. Voici les resultats du diagnostic de "+(info.name||"ce freelance")+" (secteur: "+(info.sector||"non precise")+", experience: "+(info.size||"non precisee")+").\n\nScore global: "+getGlobalScore()+"/100\n\n"+summaryLines+"\n\nGenere une analyse avec EXACTEMENT ce format JSON (UNIQUEMENT du JSON brut, sans markdown ni backticks):\n{\"synthese\":\"2-3 phrases percutantes sur la maturite digitale de ce solo entrepreneur\",\"quickWins\":[{\"titre\":\"Titre\",\"description\":\"Description\",\"impact\":\"Gain\",\"difficulte\":\"Facile\",\"delai\":\"Delai\"}],\"roiEstimation\":{\"heuresGagneesParSemaine\":\"5\",\"gainAnnuelEstime\":\"8000-15000 euro\",\"delaiRetourInvestissement\":\"2-4 mois\"},\"recommandationMission\":{\"titre\":\"Diagnostic Flash Solo\",\"description\":\"Mission de 5 jours pour structurer votre positionnement digital, vos outils et votre pipeline\",\"priorites\":[\"p1\",\"p2\",\"p3\"],\"dureeEstimee\":\"5 jours\",\"investissement\":\"1188 euro TTC\"},\"pointsForts\":[\"fort 1\"],\"pointsVigilance\":[\"vigilance 1\"]}\n\nGenere exactement 3 quick wins axes sur visibilite, pipeline ou automatisation. Utilise toujours diagnostic jamais audit.";
+    var prompt = isSoloProfile ? promptSolo : "Tu es un expert en transformation digitale pour PME francaises. Voici les resultats du diagnostic digital de "+(info.name||"cette PME")+" (secteur: "+(info.sector||"non precise")+", taille: "+(info.size||"non precisee")+").\n\nScore global: "+getGlobalScore()+"/100\n\n"+summaryLines+"\n\nGenere une analyse avec EXACTEMENT ce format JSON (UNIQUEMENT du JSON brut, sans markdown ni backticks):\n{\"synthese\":\"2-3 phrases percutantes\",\"quickWins\":[{\"titre\":\"Titre\",\"description\":\"Description\",\"impact\":\"Gain\",\"difficulte\":\"Facile\",\"delai\":\"Delai\"}],\"roiEstimation\":{\"heuresGagneesParSemaine\":\"8\",\"gainAnnuelEstime\":\"15000-25000 euro\",\"delaiRetourInvestissement\":\"3-6 mois\"},\"recommandationMission\":{\"titre\":\"Titre\",\"description\":\"Description\",\"priorites\":[\"p1\",\"p2\",\"p3\"],\"dureeEstimee\":\"3 mois\",\"investissement\":\"2500-4500 euro/mois\"},\"pointsForts\":[\"fort 1\"],\"pointsVigilance\":[\"vigilance 1\"]}\n\nGenere exactement 3 quick wins. N\'utilise jamais le mot audit, utilise toujours diagnostic.");
 
     try {
       var response = await fetch("/.netlify/functions/claude-proxy", {
@@ -1159,25 +805,6 @@
       state.results = parsed;
       state.step = "results";
       render();
-      // Envoi rapport par email via Make
-      try {
-        var rapportTexte = '';
-        if (parsed.synthese) rapportTexte += parsed.synthese + '\n\n';
-        if (parsed.quickWins) parsed.quickWins.forEach(function(qw,i){ rapportTexte += (i+1)+'. '+qw.titre+' : '+qw.description+' ('+qw.impact+')\n'; });
-        if (parsed.roiEstimation) rapportTexte += '\nROI estimé : '+parsed.roiEstimation.heuresGagneesParSemaine+'h/semaine · '+parsed.roiEstimation.gainAnnuelEstime;
-        fetch('/.netlify/functions/make-notify', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            nom: state.info.name || 'Non renseigné',
-            email: state.info.contact || '',
-            secteur: state.info.sector || state.soloSector || 'Non précisé',
-            score: getGlobalScore(),
-            rapport: rapportTexte
-          }),
-    
-        });
-      } catch(e) {}
     } catch(e) {
       clearInterval(interval);
       state.step = "error";
@@ -1394,11 +1021,11 @@ async function submitContact() {
   };
 
   try {
-    await fetch('/.netlify/functions/make-notify', {
+    await fetch('https://hook.eu2.make.com/6xwhlm49li449aicj371qoqe51ksr9ta', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
-
+      mode: 'no-cors'
     });
     document.getElementById('contact-form').style.display = 'none';
     document.getElementById('contact-success').style.display = 'block';
@@ -1440,30 +1067,6 @@ async function submitContact() {
     </div>
   </div>
 </footer>
-<!-- STICKY MOBILE CTA -->
-<div class="sticky-cta" id="sticky-cta">
-  <a href="#diagnostic">Diagnostic gratuit — 10 min →</a>
-</div>
-
-<!-- SCROLL ANIMATIONS -->
-<script>
-(function(){
-  var observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
-
-  // Hide sticky CTA when contact section is visible
-  var contactObs = new IntersectionObserver(function(entries){
-    var sticky = document.getElementById('sticky-cta');
-    if(sticky) sticky.style.display = entries[0].isIntersecting ? 'none' : '';
-  }, { threshold: 0.2 });
-  var contactEl = document.getElementById('contact');
-  if(contactEl) contactObs.observe(contactEl);
-})();
-</script>
 
 </body>
 </html>
