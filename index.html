@@ -559,35 +559,40 @@
     var html = "";
 
     if (state.step==="intro") {
+      var profilePME = state.profile === 'pme';
+      var profileSolo = state.profile === 'solo';
+      var qSet = getActiveQuestions();
+      var cardPME = 'cursor:pointer;padding:18px 14px;border-radius:12px;border:2px solid ' + (profilePME ? NAVY : BORDER) + ';background:' + (profilePME ? NAVY : 'white') + ';text-align:center;transition:all 0.2s;';
+      var cardSolo = 'cursor:pointer;padding:18px 14px;border-radius:12px;border:2px solid ' + (profileSolo ? GOLD : BORDER) + ';background:' + (profileSolo ? NAVY : 'white') + ';text-align:center;transition:all 0.2s;';
+      var titlePME = 'font-size:14px;font-weight:700;color:' + (profilePME ? 'white' : NAVY) + ';font-family:Arial,sans-serif;margin-bottom:4px;';
+      var titleSolo = 'font-size:14px;font-weight:700;color:' + (profileSolo ? GOLD : NAVY) + ';font-family:Arial,sans-serif;margin-bottom:4px;';
+      var subPME = 'font-size:11px;color:' + (profilePME ? 'rgba(255,255,255,0.6)' : MUTED) + ';font-family:Arial,sans-serif;';
+      var subSolo = 'font-size:11px;color:' + (profileSolo ? 'rgba(255,255,255,0.6)' : MUTED) + ';font-family:Arial,sans-serif;';
       html = '<div style="'+card+'">';
       html += '<div style="font-size:11px;color:'+GOLD+';letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:14px;font-family:Arial,sans-serif;">Diagnostic Maturite Digitale</div>';
       html += '<h3 style="font-family:Georgia,serif;font-size:22px;color:'+NAVY+';margin-bottom:16px;">Revelons votre potentiel digital</h3>';
       html += '<p style="font-size:13px;color:'+MUTED+';margin-bottom:14px;font-family:Arial,sans-serif;font-weight:600;">Vous etes :</p>';
-      var profilePME = state.profile === \'pme\';
-      var profileSolo = state.profile === \'solo\';
       html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">';
-      html += '<div onclick="window.diagSetProfile(\'pme\')" style="cursor:pointer;padding:18px 14px;border-radius:12px;border:2px solid '+(profilePME?NAVY:BORDER)+';background:'+(profilePME?NAVY:\'white\')+';text-align:center;transition:all 0.2s;">';
-      html += '<div style="font-size:28px;margin-bottom:8px;">🏢</div>';
-      html += '<div style="font-size:14px;font-weight:700;color:'+(profilePME?\'white\':NAVY)+';font-family:Arial,sans-serif;margin-bottom:4px;">PME / ETI</div>';
-      html += '<div style="font-size:11px;color:'+(profilePME?\'rgba(255,255,255,0.6)\'':MUTED)+';font-family:Arial,sans-serif;">Equipe de 5 a 200 personnes</div>';
+      html += '<div onclick="window.diagSetProfile(\'pme\')" style="'+cardPME+'">';
+      html += '<div style="font-size:28px;margin-bottom:8px;">&#127970;</div>';
+      html += '<div style="'+titlePME+'">PME / ETI</div>';
+      html += '<div style="'+subPME+'">Equipe de 5 a 200 personnes</div>';
       html += '</div>';
-      html += '<div onclick="window.diagSetProfile(\'solo\')" style="cursor:pointer;padding:18px 14px;border-radius:12px;border:2px solid '+(profileSolo?GOLD:BORDER)+';background:'+(profileSolo?NAVY:\'white\')+';text-align:center;transition:all 0.2s;">';
-      html += '<div style="font-size:28px;margin-bottom:8px;">🚀</div>';
-      html += '<div style="font-size:14px;font-weight:700;color:'+(profileSolo?GOLD:NAVY)+';font-family:Arial,sans-serif;margin-bottom:4px;">Solo entrepreneur</div>';
-      html += '<div style="font-size:11px;color:'+(profileSolo?\'rgba(255,255,255,0.6)\'':MUTED)+';font-family:Arial,sans-serif;">Freelance, consultant, independant</div>';
+      html += '<div onclick="window.diagSetProfile(\'solo\')" style="'+cardSolo+'">';
+      html += '<div style="font-size:28px;margin-bottom:8px;">&#128640;</div>';
+      html += '<div style="'+titleSolo+'">Solo entrepreneur</div>';
+      html += '<div style="'+subSolo+'">Freelance, consultant, independant</div>';
       html += '</div>';
       html += '</div>';
       html += '<p style="font-size:12px;color:'+MUTED+';line-height:1.6;margin-bottom:16px;font-family:Arial,sans-serif;">16 questions · 10 minutes · Rapport IA personnalise · Gratuit</p>';
       html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">';
-      var qSet = getActiveQuestions();
       qSet.forEach(function(s){
         html += '<div style="background:'+CREAM2+';border-radius:8px;padding:12px;display:flex;align-items:center;gap:10px;"><span style="font-size:18px;">'+s.icon+'</span><div><div style="font-size:12px;font-weight:600;color:'+NAVY+';font-family:Arial,sans-serif;">'+s.section+'</div><div style="font-size:11px;color:'+DIMMED+';font-family:Arial,sans-serif;">'+s.items.length+' questions</div></div></div>';
       });
       html += '</div>';
       html += '<button style="'+btnGold+';width:100%;" id="diag-start-btn">Demarrer le diagnostic &rarr;</button>';
       html += '</div>';
-}
-
+    }
     else if (state.step==="info") {
       html = '<div style="'+card+'">';
       html += '<h3 style="font-family:Georgia,serif;font-size:18px;color:'+NAVY+';margin-bottom:6px;">Votre entreprise</h3>';
