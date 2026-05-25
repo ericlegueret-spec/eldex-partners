@@ -1,3 +1,5 @@
+const https = require('https');
+
 exports.handler = async function(event, context) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -20,24 +22,37 @@ exports.handler = async function(event, context) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON' }) };
   }
 
-  try {
-    const makeResp = await fetch('https://hook.eu2.make.com/au64jug7xs6q7tvp5k58pge2ieht1dax', {
+  const data = JSON.stringify(payload);
+
+  return new Promise((resolve) => {
+    const options = {
+      hostname: 'hook.eu2.make.com',
+      path: '/au64jug7xs6q7tvp5k58pge2ieht1dax',
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(data)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      resolve({
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ success: true, status: res.statusCode })
+      });
     });
 
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({ success: true, status: makeResp.status })
-    };
-  } catch (err) {
-    console.error('make-notify error:', err);
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({ error: 'Failed to notify Make' })
-    };
-  }
+    req.on('error', (err) => {
+      console.error('make-notify error:', err);
+      resolve({
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: 'Failed to notify Make' })
+      });
+    });
+
+    req.write(data);
+    req.end();
+  });
 };
