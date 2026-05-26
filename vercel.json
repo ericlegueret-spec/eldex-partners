@@ -1,13 +1,8 @@
 {
-  "version": 2,
-  "functions": {
-    "api/*.js": {
-      "runtime": "@vercel/node@3.0.0"
-    }
-  },
-  "routes": [
-    { "src": "/.netlify/functions/(.*)", "dest": "/api/$1" },
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)", "dest": "/$1" }
+  "rewrites": [
+    { "source": "/.netlify/functions/make-notify", "destination": "/api/make-notify" },
+    { "source": "/.netlify/functions/lead-magnet", "destination": "/api/lead-magnet" },
+    { "source": "/.netlify/functions/claude-proxy", "destination": "/api/claude-proxy" },
+    { "source": "/.netlify/functions/notion-proxy", "destination": "/api/notion-proxy" }
   ]
 }
