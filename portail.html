@@ -817,7 +817,7 @@ function showMsg(el, text, type) {
 
 // ── API Notion via proxy sécurisé ─────────────────────────────────────
 async function notionAPI(action, payload) {
-  const resp = await fetch('/.netlify/functions/notion-proxy', {
+  const resp = await fetch('/api/notion-proxy', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({ action, payload })
