@@ -1,4 +1,5 @@
 {
+  "outputDirectory": ".",
   "rewrites": [
     { "source": "/.netlify/functions/make-notify", "destination": "/api/make-notify" },
     { "source": "/.netlify/functions/lead-magnet", "destination": "/api/lead-magnet" },
