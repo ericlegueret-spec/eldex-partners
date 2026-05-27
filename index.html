@@ -759,15 +759,75 @@
       { section:"Outils & IA", icon:"🤖", color:"#8B5A00", items:[
         {id:"m7",text:"Utilisez-vous des outils numeriques pour la gestion quotidienne ?",options:["Tres peu","Quelques apps isolees","Suite coherente mais manuelle","Outils connectes et automatises"],weight:[3,2,1,0]},
         {id:"m8",text:"Avez-vous deja utilise l'IA dans votre commerce ?",options:["Jamais","J'ai teste","Pour quelques taches","Integre (descriptions, service client...)"],weight:[3,2,1,0]}
+      ]},
+    "comptable": [
+      { section:"Conformite & Outils Metier", icon:"📋", color:"#1B2A4A", items:[
+        {id:"c1",text:"Votre logiciel comptable est-il certifie NF et conforme aux obligations legales ?",options:["Non certifie ou inconnu","En cours de mise a jour","Certifie mais non optimise","Certifie et pleinement exploite"],weight:[3,2,1,0]},
+        {id:"c2",text:"Avez-vous mis en place un protocole RGPD pour les donnees financieres de vos clients ?",options:["Aucun protocole","Reflexion en cours","Protocole partiel","Conforme RGPD avec DPD designe"],weight:[3,2,1,0]},
+        {id:"c3",text:"Comment gerez-vous la cybersecurite de vos donnees sensibles ?",options:["Aucune mesure","Antivirus basique","Chiffrement partiel","Securite renforcee + sauvegardes chiffrees"],weight:[3,2,1,0]},
+        {id:"c4",text:"Utilisez-vous la signature electronique et la dematerialisation des actes ?",options:["Tout papier","Scan PDF uniquement","Signature electronique simple","Signature qualifiee et GED"],weight:[3,2,1,0]}
+      ]},
+      { section:"Acquisition & Relation Client", icon:"🤝", color:"#2A5C9A", items:[
+        {id:"c5",text:"Avez-vous un portail client securise pour l'echange de documents ?",options:["Pas de portail","Email uniquement","Espace partagé basique","Portail securise dedie"],weight:[3,2,1,0]},
+        {id:"c6",text:"Automatisez-vous des taches comme la saisie ou les relances de pieces manquantes ?",options:["Tout manuel","Quelques modeles","Semi-automatise","Automatisation significative"],weight:[3,2,1,0]},
+        {id:"c7",text:"Votre presence digitale respecte-t-elle les regles deontologiques de la profession ?",options:["Pas de presence","Presence non conforme","Presence conforme basique","Presence optimisee et conforme"],weight:[3,2,1,0]},
+        {id:"c8",text:"Assurez-vous une veille sur les evolutions reglementaires digitales ?",options:["Aucune veille","Ponctuelle","Abonnements pro","Veille systematique et formation"],weight:[3,2,1,0]}
+      ]}
+    ],
+    "avocat": [
+      { section:"Securite & Conformite Juridique", icon:"⚖️", color:"#1B2A4A", items:[
+        {id:"a1",text:"Utilisez-vous le RPVA et des outils de communication securises ?",options:["Non ou rarement","RPVA seul","RPVA + messagerie chiffree","Ecosysteme securise complet"],weight:[3,2,1,0]},
+        {id:"a2",text:"Comment gerez-vous la confidentialite et le secret professionnel numerique ?",options:["Mesures insuffisantes","Protocoles basiques","Chiffrement des echanges","Politique complete de confidentialite"],weight:[3,2,1,0]},
+        {id:"a3",text:"Votre cabinet est-il conforme RGPD pour les donnees clients ?",options:["Non conforme","En cours","Partiellement conforme","Pleinement conforme + DPD"],weight:[3,2,1,0]},
+        {id:"a4",text:"Avez-vous mis en place la dematerialisation et la signature electronique qualifiee ?",options:["Tout papier","Scan PDF","Signature simple","Signature qualifiee eIDAS"],weight:[3,2,1,0]}
+      ]},
+      { section:"Acquisition & Gestion Cabinet", icon:"📈", color:"#2A5C9A", items:[
+        {id:"a5",text:"Votre presence digitale respecte-t-elle les regles deontologiques du Barreau ?",options:["Pas de presence","Presence non conforme","Conforme basique","Optimisee et conforme RIN"],weight:[3,2,1,0]},
+        {id:"a6",text:"Comment gerez-vous votre GED (Gestion Electronique des Documents) ?",options:["Classeurs papier","Dossiers informatiques basiques","GED simple","GED integree et securisee"],weight:[3,2,1,0]},
+        {id:"a7",text:"Automatisez-vous le suivi des echeances et la gestion des agendas ?",options:["Agenda papier ou basique","Calendrier digital simple","Logiciel metier","Automatisation des rappels"],weight:[3,2,1,0]},
+        {id:"a8",text:"Utilisez-vous l'IA pour la recherche juridique ou la redaction d'actes ?",options:["Jamais","J'ai teste","Pour certaines recherches","Integre dans le workflow"],weight:[3,2,1,0]}
+      ]}
+    ],
+    "immo": [
+      { section:"Conformite & Outils Metier", icon:"🏢", color:"#1B2A4A", items:[
+        {id:"i1",text:"Votre logiciel de gestion immobiliere integre-t-il la conformite loi Hoguet et RGPD ?",options:["Non conforme","Partiellement","Conforme mais sous-exploite","Pleinement conforme et optimise"],weight:[3,2,1,0]},
+        {id:"i2",text:"Utilisez-vous la signature electronique pour les mandats et compromis ?",options:["Signature papier uniquement","Scan uniquement","Signature electronique simple","Signature qualifiee eIDAS"],weight:[3,2,1,0]},
+        {id:"i3",text:"Comment gerez-vous les donnees RGPD de vos prospects et clients ?",options:["Aucune gestion","Registre basique","Protocole partiel","Conforme RGPD + consentements"],weight:[3,2,1,0]},
+        {id:"i4",text:"Avez-vous des visites virtuelles et un marketing digital pour vos biens ?",options:["Photos basiques","Photos pro","Visites virtuelles ponctuelles","Visites 3D systematiques + video"],weight:[3,2,1,0]}
+      ]},
+      { section:"Acquisition & Automatisation", icon:"🤝", color:"#2A5C9A", items:[
+        {id:"i5",text:"Automatisez-vous le suivi des prospects et les relances ?",options:["Manuel uniquement","Tableur basique","CRM simple","CRM avec sequences automatisees"],weight:[3,2,1,0]},
+        {id:"i6",text:"Votre site web genere-t-il des leads vendeurs et acheteurs automatiquement ?",options:["Site vitrine sans lead","Formulaire basique","Formulaires + alertes","Tunnel de conversion optimise"],weight:[3,2,1,0]},
+        {id:"i7",text:"Comment gerez-vous la conformite documentaire des transactions ?",options:["Manuel et chronophage","Checklist papier","Outils numeriques basiques","GED integree et conforme"],weight:[3,2,1,0]},
+        {id:"i8",text:"Utilisez-vous l'IA pour les descriptions de biens ou l'estimation de prix ?",options:["Jamais","J'ai teste","Pour certains biens","Integre systematiquement"],weight:[3,2,1,0]}
+      ]}
+    ],
+    "vape": [
+      { section:"Conformite Reglementaire Digitale", icon:"⚡", color:"#1B2A4A", items:[
+        {id:"v1",text:"Votre site web respecte-t-il les restrictions publicitaires (interdiction pub tabac adaptee) ?",options:["Incertain sur la conformite","Conformite partielle","Verifie par juridique","Pleinement conforme + CGV adaptees"],weight:[3,2,1,0]},
+        {id:"v2",text:"Avez-vous mis en place une verification d'age efficace sur votre site ?",options:["Aucune verification","Case a cocher basique","Verification declarative","Systeme robuste conforme"],weight:[3,2,1,0]},
+        {id:"v3",text:"Votre strategie reseaux sociaux respecte-t-elle les restrictions plateformes ?",options:["Pas de strategie adaptee","Quelques adaptations","Strategie conforme basique","Strategie conforme et optimisee"],weight:[3,2,1,0]},
+        {id:"v4",text:"Comment gerez-vous le RGPD et les donnees de vos clients en ligne ?",options:["Non conforme","En cours","Partiellement conforme","Pleinement conforme + DPD"],weight:[3,2,1,0]}
+      ]},
+      { section:"Acquisition & E-commerce", icon:"🛒", color:"#2A5C9A", items:[
+        {id:"v5",text:"Votre e-commerce respecte-t-il les obligations de vente en ligne pour la vape ?",options:["Non conforme","Partiellement","Conforme mais non optimise","Conforme et performant"],weight:[3,2,1,0]},
+        {id:"v6",text:"Votre SEO est-il adapte aux restrictions (termes interdits, landing pages) ?",options:["SEO non adapte","Quelques ajustements","SEO conforme basique","SEO conforme et optimise"],weight:[3,2,1,0]},
+        {id:"v7",text:"Automatisez-vous la fidelisation clients dans le respect des regles marketing ?",options:["Aucune automation","Email ponctuel","Programme fidelite basique","Sequences conformes automatisees"],weight:[3,2,1,0]},
+        {id:"v8",text:"Assurez-vous une veille reglementaire sur l'evolution des lois vape/tabac ?",options:["Aucune veille","Ponctuelle","Alertes automatiques","Veille systematique + adaptation rapide"],weight:[3,2,1,0]}
       ]}
     ]
   };
+  };
 
   var SOLO_SECTORS = [
-    {key:"services", label:"Services à la personne", desc:"Gouvernante, aide a domicile, garde d'enfants, soins...", icon:"🏠"},
-    {key:"artisan",  label:"Artisan & BTP",           desc:"Plombier, electricien, menuisier, peintre, maçon...", icon:"🔨"},
-    {key:"conseil",  label:"Conseil & Freelance",     desc:"Consultant, coach, formateur, designer, redacteur...", icon:"💼"},
-    {key:"commerce", label:"Commerce de proximite",   desc:"Boutique, restauration, epicerie, service local...", icon:"🛒"}
+    {key:"services",  label:"Services à la personne", desc:"Gouvernante, aide a domicile, garde d'enfants, soins...", icon:"🏠"},
+    {key:"artisan",   label:"Artisan & BTP",           desc:"Plombier, electricien, menuisier, peintre, maçon...", icon:"🔨"},
+    {key:"conseil",   label:"Conseil & Freelance",     desc:"Consultant, coach, formateur, designer, redacteur...", icon:"💼"},
+    {key:"commerce",  label:"Commerce de proximite",   desc:"Boutique, restauration, epicerie, service local...", icon:"🛒"},
+    {key:"comptable", label:"Expert-comptable",        desc:"Cabinet comptable, expertise, commissariat aux comptes...", icon:"📊"},
+    {key:"avocat",    label:"Avocat & Juriste",        desc:"Avocat, juriste, conseil juridique, notaire...", icon:"⚖️"},
+    {key:"immo",      label:"Agence Immobiliere",      desc:"Transaction, gestion locative, syndic, promotion...", icon:"🏢"},
+    {key:"vape",      label:"Vape & Cigarette Elec.",  desc:"Boutique vape, e-liquides, CBD, tabac alternatif...", icon:"⚡"}
   ];
 
   function getActiveQuestions() {
