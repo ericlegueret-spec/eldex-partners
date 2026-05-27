@@ -517,15 +517,15 @@
     ]}
   ];
 
+  var state = { step:"intro", profile:"pme", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:""}, results:null, loadingText:"Analyse en cours..." };
+  function getActiveQuestions() { return state.profile === 'solo' ? questionsSolo : questions; }
+
   var allQ = [];
   function rebuildAllQ() {
     allQ = [];
     getActiveQuestions().forEach(function(s){ s.items.forEach(function(i){ allQ.push(Object.assign({},i,{section:s.section,sectionColor:s.color,sectionIcon:s.icon})); }); });
   }
   rebuildAllQ();
-
-  var state = { step:"intro", profile:"pme", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:""}, results:null, loadingText:"Analyse en cours..." };
-  function getActiveQuestions() { return state.profile === 'solo' ? questionsSolo : questions; }
   window.diagSetProfile = function(p) { state.profile = p; state.currentQ = 0; state.answers = {}; rebuildAllQ(); render(); };
   var loadingMsgs = ["Analyse de vos reponses...","Calcul du score de maturite...","Identification des quick wins...","Estimation du ROI...","Generation de la recommandation...","Finalisation du rapport..."];
 
