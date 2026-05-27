@@ -818,13 +818,16 @@
   style.textContent = "@keyframes diagSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}";
   document.head.appendChild(style);
 
-  render();
-
-  // Event delegation - no inline string params needed
   document.addEventListener('click', function(e) {
     if (e.target && e.target.id === 'diag-start-btn') { window.diagGoTo('info'); }
     if (e.target && e.target.id === 'diag-next-btn') { window.diagGoTo('questions'); }
   });
+
+  if (document.getElementById('diag-app')) {
+    render();
+  } else {
+    document.addEventListener('DOMContentLoaded', render);
+  }
 })();
 </script>
 
