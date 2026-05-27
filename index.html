@@ -823,11 +823,10 @@
     if (e.target && e.target.id === 'diag-next-btn') { window.diagGoTo('questions'); }
   });
 
-  if (document.getElementById('diag-app')) {
+  setTimeout(function() {
+    if (!document.getElementById('diag-app')) return;
     render();
-  } else {
-    document.addEventListener('DOMContentLoaded', render);
-  }
+  }, 50);
 })();
 </script>
 
@@ -1075,4 +1074,3 @@ async function submitContact() {
 
 </body>
 </html>
-<!-- cache bust Wed May 27 11:49:42 UTC 2026 -->
