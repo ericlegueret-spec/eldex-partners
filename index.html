@@ -1023,12 +1023,12 @@ async function submitContact() {
   };
 
   try {
-    await fetch('https://hook.eu2.make.com/6xwhlm49li449aicj371qoqe51ksr9ta', {
+    var resp = await fetch('/api/make-notify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      mode: 'no-cors'
+      body: JSON.stringify(payload)
     });
+    if (!resp.ok) throw new Error('Erreur serveur');
     document.getElementById('contact-form').style.display = 'none';
     document.getElementById('contact-success').style.display = 'block';
   } catch(e) {
