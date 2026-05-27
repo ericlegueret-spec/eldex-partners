@@ -823,10 +823,7 @@
     if (e.target && e.target.id === 'diag-next-btn') { window.diagGoTo('questions'); }
   });
 
-  setTimeout(function() {
-    if (!document.getElementById('diag-app')) return;
-    render();
-  }, 50);
+  render();
 })();
 </script>
 
