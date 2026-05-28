@@ -900,7 +900,7 @@
   var allQ = [];
   questions.forEach(function(s){ s.items.forEach(function(i){ allQ.push(Object.assign({},i,{section:s.section,sectionColor:s.color,sectionIcon:s.icon})); }); });
 
-  var state = { step:"profile", profile:"", soloSector:"", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:""}, results:null, loadingText:"Analyse en cours..." };
+  var state = { step:"profile", profile:"", soloSector:"", currentQ:0, answers:{}, info:{name:"",sector:"",size:"",contact:"",email:"",rgpd:false,newsletter:false}, results:null, loadingText:"Analyse en cours..." };
   var loadingMsgs = ["Analyse de vos reponses...","Calcul du score de maturite...","Identification des quick wins...","Estimation du ROI...","Generation de la recommandation...","Finalisation du rapport..."];
 
   function getSectionScores() {
@@ -1036,15 +1036,40 @@
       });
       html += '</select></div>';
 
-      // Champ contact
+      // Champ email
       html += '<div style="margin-bottom:14px;">';
+      html += '<label style="display:block;font-size:11px;color:'+MUTED+';margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-family:Arial,sans-serif;">Email <span style="color:#e55;">*</span></label>';
+      html += '<input type="email" placeholder="votre@email.com" id="info_email" value="'+state.info.email+'" ';
+      html += 'style="width:100%;background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:10px 12px;color:'+NAVY+';font-size:14px;font-family:Arial,sans-serif;outline:none;" ';
+      html += 'data-key="email" oninput="window.diagInfoUpdate(this.dataset.key,this.value)">';
+      html += '</div>';
+
+      // Champ contact (prenom)
+      html += '<div style="margin-bottom:16px;">';
       html += '<label style="display:block;font-size:11px;color:'+MUTED+';margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-family:Arial,sans-serif;">Votre prenom (optionnel)</label>';
       html += '<input type="text" placeholder="Ex : Marie, Jean-Luc..." id="info_contact" value="'+state.info.contact+'" ';
       html += 'style="width:100%;background:'+CREAM2+';border:1px solid '+BORDER+';border-radius:8px;padding:10px 12px;color:'+NAVY+';font-size:14px;font-family:Arial,sans-serif;outline:none;" ';
       html += 'data-key="contact" oninput="window.diagInfoUpdate(this.dataset.key,this.value)">';
       html += '</div>';
 
-      html += '<button style="'+btnNavy+';width:100%;margin-top:8px;" id="diag-next-btn">Commencer &rarr;</button>';
+      // Cases RGPD
+      html += '<div style="background:'+CREAM2+';border-radius:10px;padding:14px 16px;margin-bottom:16px;display:flex;flex-direction:column;gap:10px;">';
+      html += '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">';
+      html += '<input type="checkbox" id="info_rgpd" '+(state.info.rgpd?'checked':'')+' onchange="window.diagInfoUpdate(\'rgpd\',this.checked)" ';
+      html += 'style="margin-top:2px;width:16px;height:16px;accent-color:'+NAVY+';flex-shrink:0;">';
+      html += '<span style="font-size:13px;color:'+NAVY+';line-height:1.5;"><strong>J\'accepte de recevoir mon rapport par email</strong> et que mes données soient utilisées pour personnaliser cet échange. <a href="https://eldex-partners.vercel.app" style="color:'+GOLD+';text-decoration:underline;" target="_blank">Politique de confidentialité</a> <span style="color:#e55;">*</span></span>';
+      html += '</label>';
+      html += '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">';
+      html += '<input type="checkbox" id="info_newsletter" '+(state.info.newsletter?'checked':'')+' onchange="window.diagInfoUpdate(\'newsletter\',this.checked)" ';
+      html += 'style="margin-top:2px;width:16px;height:16px;accent-color:'+GOLD+';flex-shrink:0;">';
+      html += '<span style="font-size:13px;color:'+MUTED+';line-height:1.5;">Je souhaite recevoir la newsletter ELDEX — conseils digitaux et IA pour PME (1 email/mois max)</span>';
+      html += '</label>';
+      html += '</div>';
+
+      // Validation message
+      html += '<div id="diag-info-error" style="display:none;color:#e55;font-size:13px;margin-bottom:10px;font-family:Arial,sans-serif;">Merci de renseigner votre email et d\'accepter les conditions.</div>';
+
+      html += '<button style="'+btnNavy+';width:100%;margin-top:4px;" onclick="window.diagInfoValidate()">Commencer mon diagnostic &rarr;</button>';
       html += '</div>';
     }
 
@@ -1214,7 +1239,22 @@
   window.diagPrev = function() {
     if (state.currentQ > 0) { state.currentQ--; render(); }
   };
-  window.diagInfoUpdate = function(k,v) { state.info[k]=v; };
+  window.diagInfoUpdate = function(k,v) { 
+    state.info[k]=v;
+    var err=document.getElementById('diag-info-error');
+    if(err) err.style.display='none';
+  };
+  window.diagInfoValidate = function() {
+    var email = state.info.email||'';
+    var rgpd = state.info.rgpd;
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!emailOk||!rgpd){
+      var err=document.getElementById('diag-info-error');
+      if(err) err.style.display='block';
+      return;
+    }
+    window.diagGoTo('questions');
+  };
   window.diagAnswer = function(idx) {
     var aq = getAllQ();
     state.answers[aq[state.currentQ].id] = idx;
@@ -1272,6 +1312,26 @@
       state.results = parsed;
       state.step = "results";
       render();
+      // Envoi rapport + notification
+      try {
+        var rapportTexte = '';
+        if(parsed.synthese) rapportTexte += parsed.synthese + '\n\n';
+        if(parsed.quickWins) parsed.quickWins.forEach(function(qw,i){ rapportTexte += (i+1)+'. '+qw.titre+' : '+qw.description+' ('+qw.impact+')\n'; });
+        if(parsed.roiEstimation) rapportTexte += '\nROI estimé : '+parsed.roiEstimation.heuresGagneesParSemaine+'h/semaine · '+parsed.roiEstimation.gainAnnuelEstime;
+        fetch('/api/make-notify', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            nom: (state.info.contact||state.info.name||'Non renseigné'),
+            email: state.info.email||'',
+            secteur: sectorName||info.sector||'Non précisé',
+            score: getGlobalScore(),
+            rapport: rapportTexte,
+            newsletter: state.info.newsletter||false,
+            source: 'ELDEX - Diagnostic'
+          })
+        });
+      } catch(e2) {}
     } catch(e) {
       clearInterval(interval);
       state.step = "error";
