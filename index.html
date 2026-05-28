@@ -355,6 +355,32 @@
   .boucle-arrow { text-align: center; color: var(--gold); font-size: 28px; }
 
   /* ── STICKY MOBILE CTA ── */
+
+  .offer-problem {
+    font-size: 13px;
+    color: var(--gold);
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    background: rgba(201,168,76,0.08);
+    border-radius: 8px;
+    border-left: 3px solid var(--gold);
+  }
+  .offer-result {
+    font-size: 13px;
+    color: var(--navy);
+    background: rgba(27,42,74,0.06);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 16px 0;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .offer-card.featured .offer-result {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+  }
   .sticky-cta {
     display: none;
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
@@ -576,64 +602,78 @@
 <!-- OFFRES -->
 <section id="offres">
   <div class="section-inner">
-    <div class="section-label">Nos offres</div>
-    <h2>Une formule <em>adaptée</em><br>à votre situation</h2>
-    <p class="section-sub">Du diagnostic flash à l'accompagnement continu, chaque formule est conçue pour créer un impact mesurable rapidement.</p>
+    <div class="section-label">3 problèmes. 3 réponses.</div>
+    <h2>Votre situation,<br><em>votre formule.</em></h2>
+    <p class="section-sub">Chaque offre répond à un vrai problème de dirigeant. Pas de jargon, pas de cases à cocher — des résultats mesurables dès le premier mois.</p>
 
     <div class="cdi-anchor reveal">
       <p class="cdi-anchor-label">Repère budgétaire</p>
-      <p>Un DDEx senior en CDI : <strong>65 000 €/an chargé</strong>, contrat annuel, préavis 3 mois.<br>ELDEX Partners : à partir de <strong>1 188 € TTC</strong> — résiliation 30 jours, opérationnel en 48h.</p>
+      <p>Un chargé marketing digital junior en CDI : <strong>2 917 €/mois chargé</strong>, contrat annuel, 3 mois de préavis.<br>ELDEX Partners : à partir de <strong>1 490 €/mois</strong> — profil senior, résiliation 30 jours, opérationnel en 48h.</p>
     </div>
 
     <div class="offers-grid">
+
+      <!-- OFFRE 1 : CAP DIGITAL -->
       <div class="offer-card">
-        <div class="offer-icon">🔍</div>
-        <h3>Diagnostic Flash</h3>
-        <div class="offer-sub">One-shot · 5 jours · Sur mesure</div>
-        <p>Le diagnostic en ligne vous donne une première lecture. Le Diagnostic Flash va bien plus loin : Éric analyse votre entreprise en profondeur et vous remet un plan d'action opérationnel.</p>
+        <div class="offer-icon">🧭</div>
+        <div class="offer-problem">"Je sais que je dois agir, mais je ne sais pas par où commencer."</div>
+        <h3>Cap Digital</h3>
+        <div class="offer-sub">Entrée · 1 490 €/mois · Sans engagement</div>
+        <p>Vous avez des outils, des idées, peut-être des outils IA déjà en place. Mais pas de cap clair. En 30 jours, vous savez exactement quoi faire et dans quel ordre.</p>
         <ul class="offer-features">
-          <li>Entretien approfondi de 2h avec Éric</li>
-          <li>Analyse de vos outils & processus existants</li>
-          <li>Rapport PDF premium personnalisé</li>
-          <li>Plan d'action priorisé sur 90 jours</li>
-          <li>3 quick wins chiffrés & actionnables</li>
-          <li>30 jours de suivi post-diagnostic inclus</li>
+          <li>Diagnostic de maturité digitale complet</li>
+          <li>Feuille de route 90 jours priorisée</li>
+          <li>1 quick win opérationnel dès le 1er mois</li>
+          <li>2 points mensuels de pilotage</li>
+          <li>Cartographie de vos agents IA existants</li>
+          <li>Résiliation 30 jours, opérationnel en 48h</li>
         </ul>
-        <div class="offer-price">1 188 € <small>TTC · one-shot</small></div>
-        <a href="#contact" class="btn-gold" style="display:block;text-align:center;margin-top:16px;">Démarrer →</a>
+        <div class="offer-result">✓ Résultat J+30 : vous avez un plan clair et 1 action qui change votre quotidien</div>
+        <div class="offer-price">1 490 € <small>HT/mois</small></div>
+        <a href="#contact" class="btn-outline" style="display:block;text-align:center;margin-top:16px;">Démarrer →</a>
       </div>
+
+      <!-- OFFRE 2 : CO-PILOTE DIGITAL ⭐ -->
       <div class="offer-card featured">
-        <div class="offer-badge">⭐ Recommandé</div>
+        <div class="offer-badge">⭐ Le plus choisi</div>
         <div class="offer-icon">🚀</div>
-        <h3>Accompagnement</h3>
-        <div class="offer-sub">3 mois · Transformation</div>
-        <p>Mise en place complète : CRM, automatisations prioritaires, tableau de bord. Vous et vos équipes opèrent dès la fin.</p>
+        <div class="offer-problem">"Je veux que quelqu'un pilote vraiment mon digital — sans que j'aie à tout gérer."</div>
+        <h3>Co-Pilote Digital</h3>
+        <div class="offer-sub">Croissance · 2 490 €/mois · Sans engagement</div>
+        <p>Vous avez un Directeur Digital senior à temps partagé. Il pilote votre stratégie, déploie vos outils IA, automatise ce qui peut l'être — et vous rend compte en chiffres chaque mois.</p>
         <ul class="offer-features">
-          <li>Diagnostic + plan de transformation</li>
-          <li>Déploiement CRM & intégrations</li>
-          <li>3 automatisations clés (Make/Zapier)</li>
-          <li>Tableau de bord de pilotage</li>
-          <li>Formation équipes incluse</li>
-          <li>Accès portail client dédié</li>
+          <li>Pilotage mensuel de la stratégie digitale</li>
+          <li>Déploiement et coordination des outils IA</li>
+          <li>Automatisations Make/n8n (gain de temps réel)</li>
+          <li>Gouvernance des agents IA dans vos SaaS</li>
+          <li>Rapport ROI mensuel avec KPI actionnables</li>
+          <li>Réunion mensuelle + accès email prioritaire</li>
         </ul>
-        <div class="offer-price">3 000 € <small>TTC/mois · 3 mois</small></div>
+        <div class="offer-result">✓ Équivalent CDI junior : 2 917 €/mois chargé — sans les charges, sans le préavis</div>
+        <div class="offer-price">2 490 € <small>HT/mois</small></div>
         <a href="#contact" class="btn-gold" style="display:block;text-align:center;margin-top:16px;">Démarrer →</a>
       </div>
+
+      <!-- OFFRE 3 : PARTENAIRE DE CROISSANCE -->
       <div class="offer-card">
         <div class="offer-icon">🤝</div>
-        <h3>Partenaire Digital</h3>
-        <div class="offer-sub">Ongoing · CDO externalisé</div>
-        <p>Votre Directeur Digital à temps partagé. Stratégie, pilotage, veille et évolution continue de votre infrastructure.</p>
+        <div class="offer-problem">"Je veux un partenaire qui s'engage sur des résultats mesurables avec moi."</div>
+        <h3>Partenaire de Croissance</h3>
+        <div class="offer-sub">Performance · 3 990 €/mois · 5 clients max</div>
+        <p>Pour les PME et ETI qui veulent aller vite et loin. Objectifs co-définis, résultats engagés, accès direct. Vous ne gérez plus votre digital — vous pilotez votre croissance.</p>
         <ul class="offer-features">
-          <li>2 jours/mois de présence dédiée</li>
-          <li>Comité de pilotage mensuel</li>
-          <li>Veille IA & automation continue</li>
-          <li>Évolutions & nouvelles automatisations</li>
-          <li>Accès portail client premium</li>
+          <li>Tout Co-Pilote Digital inclus</li>
+          <li>Audit mensuel des agents IA en place</li>
+          <li>Définition des garde-fous et prompts systèmes</li>
+          <li>Pilotage équipes ou prestataires digitaux</li>
+          <li>Objectifs trimestriels co-définis + suivi KPI</li>
+          <li>Accès direct WhatsApp · Réactivité 48h garantie</li>
         </ul>
-        <div class="offer-price">2 160 € <small>TTC/mois</small></div>
+        <div class="offer-result">✓ Engagement sur des objectifs mesurables — si les résultats ne sont pas là, on en parle</div>
+        <div class="offer-price">3 990 € <small>HT/mois</small></div>
         <a href="#contact" class="btn-gold" style="display:block;text-align:center;margin-top:16px;">Démarrer →</a>
       </div>
+
     </div>
   </div>
 </section>
