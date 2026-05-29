@@ -1,9 +1,25 @@
 {
   "outputDirectory": ".",
   "rewrites": [
-    { "source": "/.netlify/functions/make-notify", "destination": "/api/make-notify" },
-    { "source": "/.netlify/functions/lead-magnet", "destination": "/api/lead-magnet" },
-    { "source": "/.netlify/functions/claude-proxy", "destination": "/api/claude-proxy" },
-    { "source": "/.netlify/functions/notion-proxy", "destination": "/api/notion-proxy" }
+    {
+      "source": "/.netlify/functions/make-notify",
+      "destination": "/api/make-notify"
+    },
+    {
+      "source": "/.netlify/functions/lead-magnet",
+      "destination": "/api/lead-magnet"
+    },
+    {
+      "source": "/.netlify/functions/claude-proxy",
+      "destination": "/api/claude-proxy"
+    },
+    {
+      "source": "/.netlify/functions/notion-proxy",
+      "destination": "/api/notion-proxy"
+    },
+    {
+      "source": "/politique-confidentialite",
+      "destination": "/politique-confidentialite.html"
+    }
   ]
 }
